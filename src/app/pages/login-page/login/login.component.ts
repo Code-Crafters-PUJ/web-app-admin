@@ -26,6 +26,8 @@ export class LoginComponent {
     const email = document.getElementById('username') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
 
+    let role: any;
+
 
     if(!email.value || !password.value){
       alert('Por favor ingrese email y contraseña');
@@ -39,15 +41,16 @@ export class LoginComponent {
       next: (response: any) => {
 
         this.storageService.saveAccount(response.account);
-
-        const role = this.storageService.getSavedAccount()?.role
+        role = this.storageService.getSavedAccount()?.role;
 
       },
       error: (error: any) => {
         alert('Usuario incorrecto');
       }
-      
+
     });
+
+
     
   }
 }
