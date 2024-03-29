@@ -38,59 +38,61 @@
     </div>
     <button class="create-button">Nuevo</button>
   </div>
-  <table class="table">
-    <thead>
-      <tr class="row">
-        <th>Nombre</th>
-        <th>Correo electrónico</th>
-        <th>Roles</th>
-        <th>Última hora de creación</th>
-        <th>Último reporte</th>
-        <th class="edit-row"></th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (account of accounts; track account.documentNumber) {
-      <tr class="row">
-        <td>{{ account.name }}</td>
-        <td>{{ account.lastName }}</td>
-        <td>{{ account.roles }}</td>
-        <td>{{ account.lastConected.toLocaleString() }}</td>
-        <td>{{ account.lastReport.toLocaleString() }}</td>
-        <td class="edit-cell">
-          <input
-            id="{{ 'toggle-' + account.documentNumber }}"
-            class="toggle"
-            (click)="setSelectedEditAccount(account)"
-          />
-          <label
-            for="{{ 'toggle-' + account.documentNumber }}"
-            class="edit-button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr class="row">
+          <th>Nombre</th>
+          <th>Correo electrónico</th>
+          <th>Roles</th>
+          <th>Última hora de creación</th>
+          <th>Último reporte</th>
+          <th class="edit-row"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (account of accounts; track account.documentNumber) {
+        <tr class="row">
+          <td>{{ account.name }}</td>
+          <td>{{ account.lastName }}</td>
+          <td>{{ account.roles }}</td>
+          <td>{{ account.lastConected.toLocaleString() }}</td>
+          <td>{{ account.lastReport.toLocaleString() }}</td>
+          <td class="edit-cell">
+            <input
+              id="{{ 'toggle-' + account.documentNumber }}"
+              class="toggle"
+              (click)="setSelectedEditAccount(account)"
+            />
+            <label
+              for="{{ 'toggle-' + account.documentNumber }}"
+              class="edit-button"
             >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-            @if (account.documentNumber === selectedEditAccount?.documentNumber)
-            {
-            <div class="edit-options">
-              <button class="options-buttons">modificar</button>
-              <button class="options-buttons">eliminar</button>
-            </div>
-            }
-          </label>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+              @if (account.documentNumber ===
+              selectedEditAccount?.documentNumber) {
+              <div class="edit-options">
+                <button class="options-buttons">modificar</button>
+                <button class="options-buttons">eliminar</button>
+              </div>
+              }
+            </label>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
