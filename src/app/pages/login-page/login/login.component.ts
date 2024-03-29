@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AuthService} from '../../../services/auth.service';
 import { Credential } from '../../../models/credential';
+import { StorageService } from '../../../services/storage.service';
+
 
 @Component({
   selector: 'app-login',
@@ -12,9 +14,11 @@ import { Credential } from '../../../models/credential';
 export class LoginComponent {
 
   private authService: AuthService
+  private storageService: StorageService
 
   constructor(){
     this.authService = inject(AuthService)
+    this.storageService = inject(StorageService)
   }
 
   onSubmit(){
@@ -30,14 +34,16 @@ export class LoginComponent {
 
     let credential = { email: email.value, password: password.value } as Credential;
 
-    this.authService.login(credential).subscribe(
-      (response: any) => {
-        console.log("Token de ingreso:", response.token);
-        console.log("Cuenta de ingreso:", response.account);
+    this.authService.login(credential).subscribe({
+      next: (response: any) => {
+
+        this.storageService.saveAccount(response.account);
+
       },
-      (error: any) => {
+      error: (error: any) => {
         alert('Usuario incorrecto');
       }
-    );
+    });
+    
   }
 }
