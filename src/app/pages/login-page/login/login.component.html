@@ -4,7 +4,7 @@
     <img src="/../assets/login/main-logo.png" alt="logo-company">
 
     <!-- Login form -->
-    <form>
+    <form (submit)="onSubmit()">
 
         <!-- Username input -->
         <label for="username" class="main-label">Usuario</label>
@@ -15,7 +15,7 @@
         <input type="password" id="password" class="main-input" name="password">
       
         <!-- Login button -->
-        <button type="submit" id="btn-login" (ngSubmit)="onSubmit()">INICIAR SESIÓN</button>
+        <button type="submit" id="btn-login">INICIAR SESIÓN</button>
         
         <!-- Remember me checkbox -->
         <div id="rememberMe-container">

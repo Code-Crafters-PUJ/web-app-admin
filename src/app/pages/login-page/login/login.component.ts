@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { Component, inject } from '@angular/core';
+import { AuthService} from '../../../services/auth.service';
 import { Credential } from '../../../models/credential';
 
 @Component({
@@ -11,15 +11,19 @@ import { Credential } from '../../../models/credential';
 })
 export class LoginComponent {
 
-  constructor(
-    private authService: AuthService
-  ){}
+  private authService: AuthService
+
+  constructor(){
+    this.authService = inject(AuthService)
+  }
 
   onSubmit(){
+    
     const email = document.getElementById('username') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
 
-    if(!email || !password){
+
+    if(!email.value || !password.value){
       alert('Por favor ingrese email y contraseña');
       return
     }
