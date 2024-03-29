@@ -12,7 +12,6 @@ export class StorageService {
 
   constructor() { }
 
-
   saveAccount(account : Account){
     window.localStorage.removeItem(USER_KEY);
     window.localStorage.setItem(USER_KEY, JSON.stringify(account));

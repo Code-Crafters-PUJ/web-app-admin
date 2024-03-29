@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Credential } from '../models/credential';
 
-const AUTH_URL = "http://.../user/"
+const AUTH_URL = "http://.../admin/user/"
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   constructor(private http: HttpClient) { }
