@@ -18,7 +18,7 @@ export class LoginComponent {
   }
 
   onSubmit(){
-    
+
     const email = document.getElementById('username') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
 
@@ -31,8 +31,9 @@ export class LoginComponent {
     let credential = { email: email.value, password: password.value } as Credential;
 
     this.authService.login(credential).subscribe(
-      (response: string) => {
-        console.log("Token de ingreso:", response);
+      (response: any) => {
+        console.log("Token de ingreso:", response.token);
+        console.log("Cuenta de ingreso:", response.account);
       },
       (error: any) => {
         alert('Usuario incorrecto');
