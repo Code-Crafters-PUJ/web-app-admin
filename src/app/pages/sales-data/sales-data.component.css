@@ -1,0 +1,48 @@
+
+h2 {
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+.general-info-container {
+  border: 1px solid rgba(217, 217, 217, 1);
+  padding: 10px;
+  border-radius: 2px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.invoice {
+  font-size: x-small;
+  margin-top: 3%;
+}
+
+.plan-section {
+  background-color: rgba(217, 217, 217, 0.5);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.billing-hist {
+padding: 10px;
+  border-radius: 2px;
+  margin-top: 20px;
+  font-family: 'Roboto SanS', sans-serif;
+}
+
+
+.date {
+  position: absolute;
+  left: 80%;
+  font-size: small;
+  align-items: center;
+  margin-top: 0.5%;
+}
