@@ -1,0 +1,68 @@
+.rectanguloBusqueda {
+  left: 12.7vw;
+  top: 11vh;
+  width: 87vw;
+  height: 8vh;
+  background-color: #ffffff;
+  position: absolute;
+  align-items: center;
+  display: flex;
+}
+
+.rectanguloBusqueda img {
+  width: 3vw;
+  height: auto;
+  display: block;
+}
+
+.rectanguloBusqueda>div {
+  font-weight: bold;
+  font-family: 'Radio Canada';
+  font-size: 2vw;
+  left: 0.2vw
+}
+
+.search-bar {
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  margin-left: 14vw;
+}
+
+.input-with-image {
+  background-image: url('../../assets/icons/lupa.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-left: 2vw;
+  border: 0.1vw solid #ccc;
+  border-radius: 0.14vw;
+  width: 32vw;
+  height: 4vh;
+  box-sizing: border-box;
+  font-size: 1vw;
+}
+
+.Divtable {
+  left: 12.7vw;
+  top: 20vh;
+  width: 87vw;
+  height: 8vh;
+  background-color: #ffffff;
+  position: absolute;
+  border-collapse: collapse;
+}
+
+.Divtable th,
+.Divtable td {
+  font-weight: bold;
+  font-family: 'Radio Canada';
+  font-size: 1vw;
+  padding: 0.5vw 1vw;
+  text-align: center;
+}
+.Divtable tr{
+  border-bottom: 0.15vw solid #D9D9D9;
+}
+.Divtable thead {
+  background-color: #D9D9D9;
+}
