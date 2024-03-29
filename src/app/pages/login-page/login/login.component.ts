@@ -35,14 +35,18 @@ export class LoginComponent {
     let credential = { email: email.value, password: password.value } as Credential;
 
     this.authService.login(credential).subscribe({
+
       next: (response: any) => {
 
         this.storageService.saveAccount(response.account);
+
+        const role = this.storageService.getSavedAccount()?.role
 
       },
       error: (error: any) => {
         alert('Usuario incorrecto');
       }
+      
     });
     
   }
