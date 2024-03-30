@@ -22,7 +22,7 @@ import {NgIf} from "@angular/common";
 })
 export class GeneralPageComponent implements OnInit {
 
-  url: 'accounts' | 'general' | 'manageaccount' = 'accounts';
+  url: 'accounts' | 'general' | 'manage-account' = 'accounts';
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -34,7 +34,7 @@ export class GeneralPageComponent implements OnInit {
     switch (lastSegment) {
       case 'general':
       case 'accounts':
-      case 'manageaccount':
+      case 'manage-account':
         this.url = lastSegment;
         break;
       default:

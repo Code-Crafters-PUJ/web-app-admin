@@ -8,7 +8,7 @@ export const routes: Routes = [
     children: [
       { path: 'general', component: GeneralPageComponent },
       { path: 'accounts', component: GeneralPageComponent },
-      { path: 'manageaccount', component: GeneralPageComponent },
+      { path: 'manage-account', component: GeneralPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
     ]
   },
