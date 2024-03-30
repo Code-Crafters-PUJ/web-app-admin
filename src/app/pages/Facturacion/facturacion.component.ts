@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MenuComponent } from '../global/menu/menu.component';
 import { SubscriptionService } from '../services/subscription/subscription.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -9,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-Facturacion',
   standalone: true,
-  imports: [MenuComponent, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './facturacion.component.html',
   styleUrls: ['./facturacion.component.css']
 })
