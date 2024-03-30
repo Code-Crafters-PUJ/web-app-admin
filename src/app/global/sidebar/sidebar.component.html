@@ -4,10 +4,10 @@
   <div id="sidebar-wrapper" class="d-flex flex-column" style="margin-bottom: 200px;">
     <ul class="sidebar-nav mt-4 mb-auto">
       <li>
-        <img src="assets/images/logo.svg" alt="Logo" width="200">
+        <img ngSrc="assets/images/logo.svg" alt="Logo" width="200" height="57">
       </li>
-      <li><a href="" class="fw-bold mt-5">Panel General</a></li>
-      <li><a href="" class="fw-bold">Cuentas Monitoreo</a></li>
+      <li><a routerLink="/home/admin/general" class="fw-bold mt-5">Panel General</a></li>
+      <li><a routerLink="/home/admin/accounts" class="fw-bold">Cuentas Monitoreo</a></li>
     </ul>
     <ul class="sidebar-nav">
       <li style="margin-top: auto;"><a href="" class="fw-regular">Cerrar Sesión</a></li>
@@ -18,7 +18,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
-          <a href="" class="btn" id="menu-toggle"><i class="fas fa-bars"></i></a>
+          <a routerLink="/home" class="btn" id="menu-toggle"><i class="fas fa-bars"></i></a>
         </div>
       </div>
     </div>

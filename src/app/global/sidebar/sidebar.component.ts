@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import {RouterLink} from "@angular/router";
+import {NgOptimizedImage} from "@angular/common";
 declare var $: any;
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   standalone: true,
+  imports: [
+    RouterLink,
+    NgOptimizedImage
+  ],
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
