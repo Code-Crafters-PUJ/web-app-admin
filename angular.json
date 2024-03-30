@@ -59,10 +59,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "web-app-admin:build:production"
+              "buildTarget": "web-app-admin:build:production",
+              "proxyConfig": "src/environments/proxy.conf.json"
             },
             "development": {
-              "buildTarget": "web-app-admin:build:development"
+              "buildTarget": "web-app-admin:build:development",
+              "proxyConfig": "src/environments/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -94,5 +96,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "5400d528-c9c2-42e8-ae83-274903a96df7"
   }
 }
