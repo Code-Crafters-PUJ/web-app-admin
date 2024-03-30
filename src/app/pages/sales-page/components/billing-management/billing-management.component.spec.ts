@@ -11,7 +11,7 @@ describe('BillingManagementComponent', () => {
       imports: [BillingManagementComponent]
     })
     .compileComponents();
-
+    
     fixture = TestBed.createComponent(BillingManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

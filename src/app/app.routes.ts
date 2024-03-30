@@ -12,4 +12,14 @@ export const routes: Routes = [
       { path: '', redirectTo: 'general', pathMatch: 'full' }
     ]
   },
+  {
+    path: 'home/sales',
+    children: [
+      { path: 'general', component: GeneralPageComponent },
+      { path: 'billing', component: GeneralPageComponent },
+      { path: 'billing/company', component: GeneralPageComponent },
+      { path: '', redirectTo: 'general', pathMatch: 'full' }
+    ]
+  },
+
 ];
