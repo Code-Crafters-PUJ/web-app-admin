@@ -8,6 +8,8 @@
   <app-table-accounts></app-table-accounts>
 </div>
 
-<div *ngIf="url === 'manage-account'">
+<div *ngIf="url === 'new' || url === 'modify'">
   <app-manage-account></app-manage-account>
 </div>
+
+

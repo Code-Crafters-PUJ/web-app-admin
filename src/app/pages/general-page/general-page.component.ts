@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {TableAccountsComponent} from "./components/table-accounts/table-accounts.component";
 import {GeneralInformationComponent} from "./components/general-information/general-information.component";
 import {ManageAccountComponent} from "./components/manage-account/manage-account.component";
@@ -22,20 +21,29 @@ import {NgIf} from "@angular/common";
 })
 export class GeneralPageComponent implements OnInit {
 
-  url: 'accounts' | 'general' | 'manage-account' = 'accounts';
+  url: string = 'general';
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit() {
     const currentUrl = this.router.url;
     const segments = currentUrl.split('/');
-    const lastSegment = segments[segments.length - 1];
+    const segment = segments[3];
+    const lastSegment = segments[4];
 
-    switch (lastSegment) {
+    switch (segment) {
       case 'general':
+        this.url = 'general';
+        break;
       case 'accounts':
-      case 'manage-account':
-        this.url = lastSegment;
+        if (lastSegment === 'new') {
+          this.url = 'new';
+        } else if (lastSegment === 'modify') {
+          this.url = 'modify';
+        } else {
+          this.url = 'accounts';
+        }
         break;
       default:
         this.url = 'general';

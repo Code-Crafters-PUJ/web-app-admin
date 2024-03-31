@@ -1,6 +1,7 @@
 import {RouterModule, Routes} from '@angular/router';
 import { GeneralPageComponent } from './pages/general-page/general-page.component';
 import {NgModule} from "@angular/core";
+import {SalesPageComponent} from "./pages/sales-page/sales-page.component";
 
 export const routes: Routes = [
   {
@@ -8,16 +9,17 @@ export const routes: Routes = [
     children: [
       { path: 'general', component: GeneralPageComponent },
       { path: 'accounts', component: GeneralPageComponent },
-      { path: 'manage-account', component: GeneralPageComponent },
+      { path: 'accounts/new', component: GeneralPageComponent },
+      { path: 'accounts/modify', component: GeneralPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
     ]
   },
   {
     path: 'home/sales',
     children: [
-      { path: 'general', component: GeneralPageComponent },
-      { path: 'billing', component: GeneralPageComponent },
-      { path: 'billing/company', component: GeneralPageComponent },
+      { path: 'general', component: SalesPageComponent },
+      { path: 'billing', component: SalesPageComponent },
+      { path: 'billing/company', component: SalesPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
     ]
   },

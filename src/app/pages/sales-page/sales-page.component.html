@@ -1,1 +1,11 @@
-<p>sales-page works!</p>
+<div *ngIf="url === 'general'">
+  <app-general-information></app-general-information>
+</div>
+
+<div *ngIf="url === 'billing'">
+  <app-general-information></app-general-information>
+</div>
+
+<div *ngIf="url === 'company'">
+  <app-manage-account></app-manage-account>
+</div>
