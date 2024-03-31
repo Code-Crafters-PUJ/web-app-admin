@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { Account } from '../../../../models/general-models/account';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { AccountService } from '../../../../services/general-services/account/account.service';
 
 @Component({
   selector: 'app-table-accounts',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './table-accounts.component.html',
   styleUrl: './table-accounts.component.css',
 })
@@ -22,7 +24,7 @@ export class TableAccountsComponent {
   ) {}
 
   ngOnInit() {
-   
+
         this.getAccounts();
     };
   private getAccounts() {
