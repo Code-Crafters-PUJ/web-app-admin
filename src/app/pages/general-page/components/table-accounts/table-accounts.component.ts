@@ -104,9 +104,7 @@ export class TableAccountsComponent {
       this.accountsFiltered = this.accounts.filter(accounts => accounts.credential.email.toLowerCase().includes(this.searchText.toLowerCase()));
       this.filtroAplicado = true;
       this.accounts = this.accountsFiltered;
-      this.router.navigateByUrl('http://localhost:4200/home/admin/accounts').then(() => {
-        this.router.navigateByUrl('/?pagina=' + 1);
-      });
+      this.router.navigateByUrl('/home/admin/accounts/?pagina='+1)
     }
     else {
       this.filtroAplicado = false;
