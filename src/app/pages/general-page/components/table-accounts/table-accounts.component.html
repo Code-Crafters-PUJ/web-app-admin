@@ -35,25 +35,40 @@
       </thead>
       <tbody>
         @for (account of accounts; track account.id) {
-          <tr>
-            <td>{{ account.name }}</td>
-            <td>{{ account.last_name }}</td>
-            <td>{{ account.rol.description }}</td>
-            <td>{{ account.last_connection }}</td>
-            <td>{{ account.last_report.activity }}</td>
-            <td class="dropdown">
-              <div class="dropdown">
-                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false"></button>
-                <ul class="dropdown-menu">
-                  <li>
-                    <button routerLink="/home/admin/accounts/modify" class="dropdown-item" type="button">Modificar
-                    </button>
-                  </li>
-                  <li>
-                    <button class="dropdown-item" type="button">Eliminar</button>
-                  </li>
-                </ul>
+        <tr class="row">
+          <td>{{ account.name }}</td>
+          <td>{{ account.last_name }}</td>
+          <td>{{ account.rol.description }}</td>
+          <td>{{ account.last_connection| date:'shortDate' }}</td>
+          <td>{{ account.last_report.activity}}</td>
+          <td class="edit-cell">
+            <input
+              id="{{ 'toggle-' + account.id }}"
+              class="toggle"
+              (click)="setSelectedEditAccount(account)"
+            />
+            <label
+              for="{{ 'toggle-' + account.id }}"
+              class="edit-button"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+              @if (account.id ===
+              selectedEditAccount?.id) {
+              <div class="edit-options">
+                <button class="options-buttons">modificar</button>
+                <button class="options-buttons">eliminar</button>
               </div>
             </td>
           </tr>
