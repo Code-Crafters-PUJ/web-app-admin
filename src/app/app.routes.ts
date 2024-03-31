@@ -18,9 +18,9 @@ export const routes: Routes = [
   {
     path: 'home/sales',
     children: [
-      { path: 'general', component: GeneralPageComponent },
-      { path: 'billing', component: BillingCompanyComponent },
-      { path: 'billing/company', component: GeneralPageComponent },
+      { path: 'general', component: SalesPageComponent },
+      { path: 'billing', component: SalesPageComponent },
+      { path: 'billing/company', component: SalesPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
     ]
   },

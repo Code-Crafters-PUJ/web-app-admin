@@ -23,8 +23,7 @@ export class GeneralPageComponent implements OnInit {
 
   url: string = 'general';
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-  }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     const currentUrl = this.router.url;

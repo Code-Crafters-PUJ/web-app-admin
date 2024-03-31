@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import {RouterLink} from "@angular/router";
-import {NgOptimizedImage} from "@angular/common";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 declare var $: any;
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   standalone: true,
-  imports: [
-    RouterLink,
-    NgOptimizedImage
-  ],
+    imports: [
+        RouterLink,
+        NgOptimizedImage,
+        NgIf
+    ],
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  url: string = 'home';
+
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     $(document).ready(() => {
@@ -29,5 +32,22 @@ export class SidebarComponent implements OnInit {
         $("#wrapper").toggleClass("menuDisplayed");
       });
     });
+
+    const currentUrl = this.router.url;
+    const segments = currentUrl.split('/');
+    const segment = segments[2];
+
+    switch (segment) {
+      case 'admin':
+        this.url = 'admin';
+        break;
+      case 'sales':
+        this.url = 'sales';
+        break;
+      default:
+        this.url = 'home';
+    }
+
+
   }
 }

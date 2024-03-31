@@ -21,9 +21,9 @@ export class BillingCompanyComponent implements OnInit {
   searchText: string = '';
 
   constructor(
-    private subscriptionService: SubscriptionService,
-    private route: ActivatedRoute,
-    private router: Router
+      private subscriptionService: SubscriptionService,
+      private route: ActivatedRoute,
+      private router: Router
   ) { }
 
 
@@ -40,13 +40,13 @@ export class BillingCompanyComponent implements OnInit {
   }
   private obtenerClientes() {
     this.subscriptionService.getSubscriptions().subscribe(
-      data => {
-        this.subscriptions = data;
-        this.totalPages = Math.ceil(this.subscriptions.length / 14);
-      },
-      error => {
-        console.error('Error al obtener usuarios:', error);
-      }
+        data => {
+          this.subscriptions = data;
+          this.totalPages = Math.ceil(this.subscriptions.length / 14);
+        },
+        error => {
+          console.error('Error al obtener usuarios:', error);
+        }
     );
   }
   private actualizarURL() {

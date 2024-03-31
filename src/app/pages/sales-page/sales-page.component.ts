@@ -7,6 +7,8 @@ import {NgIf} from "@angular/common";
 import {SidebarComponent} from "../../global/sidebar/sidebar.component";
 import {TableAccountsComponent} from "../general-page/components/table-accounts/table-accounts.component";
 import {ActivatedRoute, Router} from "@angular/router";
+import {BillingManagementComponent} from "./components/billing-management/billing-management.component";
+import {BillingCompanyComponent} from "./components/billing-company/billing-company.component";
 
 @Component({
   selector: 'app-sales-page',
@@ -16,7 +18,9 @@ import {ActivatedRoute, Router} from "@angular/router";
     ManageAccountComponent,
     NgIf,
     SidebarComponent,
-    TableAccountsComponent
+    TableAccountsComponent,
+    BillingManagementComponent,
+    BillingCompanyComponent
   ],
   templateUrl: './sales-page.component.html',
   styleUrl: './sales-page.component.css'
@@ -35,6 +39,8 @@ export class SalesPageComponent implements OnInit {
 
     switch (segment) {
       case 'general':
+        this.url = 'general';
+        break;
       case 'billing':
         if (lastSegment === 'company') {
           this.url = 'company';
