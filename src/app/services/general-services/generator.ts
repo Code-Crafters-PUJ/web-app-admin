@@ -68,6 +68,14 @@ export class Generation {
     static credential15: Credential;
 
     static generateData(): void {
+        const Date1 = new Date()
+        Date1.setFullYear(Date1.getFullYear() - 2);
+        const Date2 = new Date()
+        const mesActual = Date1.getMonth();
+        Date2.setMonth(mesActual - 2);
+        if (Date2.getMonth() === 11 && mesActual === 0) {
+            Date2.setFullYear(Date2.getFullYear() - 1);
+        }
         this.rol1 =
         {
             id: 1,
@@ -217,7 +225,8 @@ export class Generation {
             rol: this.rol1,
             credential: this.credential1,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:true
         };
 
         this.account2 = {
@@ -229,7 +238,8 @@ export class Generation {
             rol: this.rol2,
             credential: this.credential2,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:true
         };
 
         this.account3 = {
@@ -241,7 +251,8 @@ export class Generation {
             rol: this.rol1,
             credential: this.credential3,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:true
         };
 
         this.account4 = {
@@ -253,7 +264,8 @@ export class Generation {
             rol: this.rol2,
             credential: this.credential4,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:true
         };
 
         this.account5 = {
@@ -265,7 +277,8 @@ export class Generation {
             rol: this.rol3,
             credential: this.credential5,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:true
         };
 
         this.account6 = {
@@ -273,11 +286,12 @@ export class Generation {
             name: "Nombre6",
             last_name: "Apellido6",
             id_card: "ID6",
-            last_connection: new Date(),
+            last_connection: Date1,
             rol: this.rol1,
             credential: this.credential6,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:false
         };
 
         this.account7 = {
@@ -285,11 +299,13 @@ export class Generation {
             name: "Nombre7",
             last_name: "Apellido7",
             id_card: "ID7",
-            last_connection: new Date(),
+            last_connection: Date1,
             rol: this.rol2,
             credential: this.credential7,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:false
+
         };
 
         this.account8 = {
@@ -297,11 +313,13 @@ export class Generation {
             name: "Nombre8",
             last_name: "Apellido8",
             id_card: "ID8",
-            last_connection: new Date(),
+            last_connection: Date1,
             rol: this.rol3,
             credential: this.credential8,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:false
+
         };
 
         this.account9 = {
@@ -309,11 +327,12 @@ export class Generation {
             name: "Nombre9",
             last_name: "Apellido9",
             id_card: "ID9",
-            last_connection: new Date(),
+            last_connection: Date1,
             rol: this.rol1,
             credential: this.credential9,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:false
         };
 
         this.account10 = {
@@ -321,11 +340,13 @@ export class Generation {
             name: "Nombre10",
             last_name: "Apellido10",
             id_card: "ID10",
-            last_connection: new Date(),
+            last_connection: Date1,
             rol: this.rol2,
             credential: this.credential10,
             permissions: [],
-            last_report: this.report1
+            last_report: this.report1,
+            conected:false
+
         };
 
         this.account11 = {
@@ -333,11 +354,13 @@ export class Generation {
             name: "Nombre11",
             last_name: "Apellido11",
             id_card: "ID11",
-            last_connection: new Date(),
+            last_connection: Date2,
             rol: this.rol3,
             credential: this.credential11,
             permissions: [],
-            last_report: this.report2
+            last_report: this.report2,
+            conected:false
+
         };
 
         this.account12 = {
@@ -345,11 +368,13 @@ export class Generation {
             name: "Nombre12",
             last_name: "Apellido12",
             id_card: "ID12",
-            last_connection: new Date(),
+            last_connection: Date2,
             rol: this.rol1,
             credential: this.credential12,
             permissions: [],
-            last_report: this.report2
+            last_report: this.report2,
+            conected:false
+
         };
 
         this.account13 = {
@@ -357,11 +382,13 @@ export class Generation {
             name: "Nombre13",
             last_name: "Apellido13",
             id_card: "ID13",
-            last_connection: new Date(),
+            last_connection: Date2,
             rol: this.rol2,
             credential: this.credential13,
             permissions: [],
-            last_report: this.report2
+            last_report: this.report2,
+            conected:false
+
         };
 
         this.account14 = {
@@ -369,11 +396,13 @@ export class Generation {
             name: "Nombre14",
             last_name: "Apellido14",
             id_card: "ID14",
-            last_connection: new Date(),
+            last_connection:Date2,
             rol: this.rol3,
             credential: this.credential14,
             permissions: [],
-            last_report: this.report2
+            last_report: this.report2,
+            conected:false
+
         };
 
         this.account15 = {
@@ -381,11 +410,13 @@ export class Generation {
             name: "Nombre15",
             last_name: "Apellido15",
             id_card: "ID15",
-            last_connection: new Date(),
+            last_connection:Date2,
             rol: this.rol1,
             credential: this.credential15,
             permissions: [],
-            last_report: this.report2
+            last_report: this.report2,
+            conected:false
+
         };
         this.permission1 = {
             id: 1,

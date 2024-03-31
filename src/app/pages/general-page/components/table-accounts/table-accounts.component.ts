@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Account } from '../../../../models/general-models/account';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../../../services/general-services/account/account.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-table-accounts',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './table-accounts.component.html',
   styleUrl: './table-accounts.component.css',
 })

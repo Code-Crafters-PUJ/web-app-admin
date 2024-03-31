@@ -56,7 +56,7 @@
           <td>{{ account.name }}</td>
           <td>{{ account.last_name }}</td>
           <td>{{ account.rol.description }}</td>
-          <td>{{ account.last_connection }}</td>
+          <td>{{ account.last_connection| date:'shortDate' }}</td>
           <td>{{ account.last_report.activity}}</td>
           <td class="edit-cell">
             <input

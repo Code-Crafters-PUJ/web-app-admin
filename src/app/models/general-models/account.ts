@@ -13,4 +13,5 @@ export interface Account {
     credential:Credential;
     permissions:Permission[];
     last_report:Report;
+    conected:boolean;
 }
