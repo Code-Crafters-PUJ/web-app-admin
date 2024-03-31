@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-manage-account',
   standalone: true,
-    imports: [
-        NgIf
-    ],
+  imports: [
+    NgIf,
+    RouterLink
+  ],
   templateUrl: './manage-account.component.html',
   styleUrl: './manage-account.component.css'
 })

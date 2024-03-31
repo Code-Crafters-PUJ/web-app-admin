@@ -1,11 +1,14 @@
+<app-sidebar></app-sidebar>
+
 <div *ngIf="url === 'general'">
-  <app-general-information></app-general-information>
+  <h1>En proceso</h1>
 </div>
 
 <div *ngIf="url === 'billing'">
-  <app-general-information></app-general-information>
+
+  <app-billing-company></app-billing-company>
 </div>
 
 <div *ngIf="url === 'company'">
-  <app-manage-account></app-manage-account>
+  <app-billing-management></app-billing-management>
 </div>
