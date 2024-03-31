@@ -34,22 +34,22 @@ export class BillingCompanyComponent implements OnInit {
         this.subscriptions = this.subscriptionsFiltered;
       }
       else {
-        this.obtenerClientes();
+        this.getSubscriptions();
       }
     });
   }
-  private obtenerClientes() {
+  private getSubscriptions() {
     this.subscriptionService.getSubscriptions().subscribe(
         data => {
           this.subscriptions = data;
           this.totalPages = Math.ceil(this.subscriptions.length / 14);
         },
         error => {
-          console.error('Error al obtener usuarios:', error);
+          console.error('Error al obtener subscripciones:', error);
         }
     );
   }
-  private actualizarURL() {
+  private updateURL() {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { pagina: this.Actualpage },
@@ -57,17 +57,17 @@ export class BillingCompanyComponent implements OnInit {
     });
   }
 
-  irPaginaAnterior() {
+  previousPage() {
     if (this.Actualpage > 1) {
       this.Actualpage--;
-      this.actualizarURL();
+      this.updateURL();
     }
   }
 
-  irPaginaSiguiente() {
+  nextPage() {
     if (this.Actualpage < this.totalPages) {
       this.Actualpage++;
-      this.actualizarURL();
+      this.updateURL();
     }
   }
   getCurrentDate(): Date {
@@ -76,9 +76,9 @@ export class BillingCompanyComponent implements OnInit {
   onInput(value: string) {
     this.searchText = value || '';
   }
-  buscarPorEmpresa() {
+  searchByCompany() {
     if (this.searchText.trim().length != 0) {
-      this.obtenerClientes();
+      this.getSubscriptions();
       this.subscriptionsFiltered = this.subscriptions.filter(subscription => subscription.client.companyName.toLowerCase().includes(this.searchText.toLowerCase()));
       this.filtroAplicado = true;
       this.subscriptions = this.subscriptionsFiltered;
@@ -88,7 +88,8 @@ export class BillingCompanyComponent implements OnInit {
     }
     else {
       this.filtroAplicado = false;
-      this.obtenerClientes();
+      this.getSubscriptions();
     }
   }
+  
 }

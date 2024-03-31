@@ -146,7 +146,7 @@ export class Generation {
             email: "email2@example.com",
             hash: "hash2"
         };
-        this.credential10 = {
+        this.credential3 = {
             id: 3,
             email: "email3@example.com",
             hash: "hash3"
@@ -176,7 +176,7 @@ export class Generation {
             email: "email8@example.com",
             hash: "hash8"
         };
-        this.credential10 = {
+        this.credential9 = {
             id: 9,
             email: "email9@example.com",
             hash: "hash9"
@@ -226,7 +226,6 @@ export class Generation {
             credential: this.credential1,
             permissions: [],
             last_report: this.report1,
-            conected:true
         };
 
         this.account2 = {
@@ -239,7 +238,6 @@ export class Generation {
             credential: this.credential2,
             permissions: [],
             last_report: this.report1,
-            conected:true
         };
 
         this.account3 = {
@@ -252,7 +250,6 @@ export class Generation {
             credential: this.credential3,
             permissions: [],
             last_report: this.report1,
-            conected:true
         };
 
         this.account4 = {
@@ -265,7 +262,6 @@ export class Generation {
             credential: this.credential4,
             permissions: [],
             last_report: this.report1,
-            conected:true
         };
 
         this.account5 = {
@@ -278,7 +274,6 @@ export class Generation {
             credential: this.credential5,
             permissions: [],
             last_report: this.report1,
-            conected:true
         };
 
         this.account6 = {
@@ -291,7 +286,6 @@ export class Generation {
             credential: this.credential6,
             permissions: [],
             last_report: this.report1,
-            conected:false
         };
 
         this.account7 = {
@@ -304,8 +298,6 @@ export class Generation {
             credential: this.credential7,
             permissions: [],
             last_report: this.report1,
-            conected:false
-
         };
 
         this.account8 = {
@@ -318,8 +310,6 @@ export class Generation {
             credential: this.credential8,
             permissions: [],
             last_report: this.report1,
-            conected:false
-
         };
 
         this.account9 = {
@@ -332,7 +322,6 @@ export class Generation {
             credential: this.credential9,
             permissions: [],
             last_report: this.report1,
-            conected:false
         };
 
         this.account10 = {
@@ -345,7 +334,6 @@ export class Generation {
             credential: this.credential10,
             permissions: [],
             last_report: this.report1,
-            conected:false
 
         };
 
@@ -359,7 +347,6 @@ export class Generation {
             credential: this.credential11,
             permissions: [],
             last_report: this.report2,
-            conected:false
 
         };
 
@@ -373,7 +360,6 @@ export class Generation {
             credential: this.credential12,
             permissions: [],
             last_report: this.report2,
-            conected:false
 
         };
 
@@ -387,7 +373,6 @@ export class Generation {
             credential: this.credential13,
             permissions: [],
             last_report: this.report2,
-            conected:false
 
         };
 
@@ -401,8 +386,6 @@ export class Generation {
             credential: this.credential14,
             permissions: [],
             last_report: this.report2,
-            conected:false
-
         };
 
         this.account15 = {
@@ -415,7 +398,6 @@ export class Generation {
             credential: this.credential15,
             permissions: [],
             last_report: this.report2,
-            conected:false
 
         };
         this.permission1 = {

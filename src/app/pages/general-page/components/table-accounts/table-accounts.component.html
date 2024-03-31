@@ -7,14 +7,10 @@
       <h1 class="font-weight-bold mb-2">Cuentas de monitoreo</h1>
     </div>
     <div class="col d-flex justify-content-start ">
-      <form class="form-inline mb-2">
-        <div class="input-group input-custom ">
-          <input type="text" class="form-control" placeholder="Buscar en esta lista...">
-          <div class="input-group-append">
-            <button class="btn" type="submit"><i class="bi bi-search" style="color: #9A9A9A;"></i></button>
-          </div>
-        </div>
-      </form>
+      <div class="search-bar">
+        <input #searchInput type="text" [(ngModel)]="searchText" class="input-with-image"
+            placeholder="buscar en esta lista..." (keydown.enter)="searchByEmail()">
+    </div>
     </div>
     <div class="col-auto">
       <button routerLink="/home/admin/accounts/new" class="btn btn-custom">Nuevo</button>
@@ -24,58 +20,50 @@
   <div class="table-responsive">
     <table class="table text-center">
       <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Correo electrónico</th>
-        <th>Roles</th>
-        <th>Última hora de creación</th>
-        <th>Último reporte</th>
-        <th>Acciones</th>
-      </tr>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo electrónico</th>
+          <th>Roles</th>
+          <th>Última hora de creación</th>
+          <th>Último reporte</th>
+          <th>Acciones</th>
+        </tr>
       </thead>
       <tbody>
-        @for (account of accounts; track account.id) {
-        <tr class="row">
-          <td>{{ account.name }}</td>
-          <td>{{ account.last_name }}</td>
-          <td>{{ account.rol.description }}</td>
-          <td>{{ account.last_connection| date:'shortDate' }}</td>
-          <td>{{ account.last_report.activity}}</td>
-          <td class="edit-cell">
-            <input
-              id="{{ 'toggle-' + account.id }}"
-              class="toggle"
-              (click)="setSelectedEditAccount(account)"
-            />
-            <label
-              for="{{ 'toggle-' + account.id }}"
-              class="edit-button"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-              @if (account.id ===
-              selectedEditAccount?.id) {
-              <div class="edit-options">
-                <button class="options-buttons">modificar</button>
-                <button class="options-buttons">eliminar</button>
+        <ng-container *ngFor="let account of accounts.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
+          <tr>
+            <td>{{ account.name }}</td>
+            <td>{{ account.credential.email}}</td>
+            <td>{{ account.rol.description }}</td>
+            <td>{{ account.last_connection| date:'shortDate' }}</td>
+            <td>{{ account.last_report.activity}}</td>
+            <td>
+              <div>
+                <select (change)="handleOptionChange($event,account.id)">
+                  <option value="blank"> </option>
+                  <option>Modificar</option>
+                  <option>Eliminar</option>
+                </select>
               </div>
             </td>
           </tr>
-        }
+        </ng-container>
+        <tr style="border-bottom:0px" *ngIf="accounts.length > 14">
+          <td></td>
+          <td></td>
+          <td>
+            <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw"
+              (click)="previousPage()" *ngIf="Actualpage > 1">
+          </td>
+          <td>
+            <img src="../../../../../assets/icons/flecha.png"
+              style="cursor: pointer;width:1.5vw;transform: rotate(180deg);" (click)="nextPage()"
+              *ngIf="Actualpage < totalPages">
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </div>
 </div>
-
-
