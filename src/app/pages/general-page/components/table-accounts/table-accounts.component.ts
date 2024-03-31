@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { Account } from '../../../../models/general-models/account';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { AccountService } from '../../../../services/general-services/account/account.service';
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-table-accounts',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    NgOptimizedImage
   ],
   templateUrl: './table-accounts.component.html',
   styleUrl: './table-accounts.component.css',

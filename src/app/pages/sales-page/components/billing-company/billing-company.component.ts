@@ -1,14 +1,14 @@
 import {Component,OnInit} from '@angular/core';
 import {SubscriptionService} from "../../../../services/sales-services/subscription/subscription.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {Subscription} from "../../../../models/sales-models/subscription";
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-billing-company',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink, NgOptimizedImage],
   templateUrl: './billing-company.component.html',
   styleUrl: './billing-company.component.css'
 })
