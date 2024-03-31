@@ -1,7 +1,7 @@
 <div class="container-content container">
   <div class="row align-items-center mb-5">
     <div class="col-auto mb-2">
-      <img src="assets/icons/User.png" alt="Icono" class="user-icon">
+      <img ngSrc="assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
     </div>
     <div class="col-auto ps-0 mb-2">
       <h1 class="font-weight-bold mb-2">Cuentas de monitoreo</h1>
@@ -37,13 +37,19 @@
             <td>{{ account.rol.description }}</td>
             <td>{{ account.last_connection| date:'shortDate' }}</td>
             <td>{{ account.last_report.activity}}</td>
-            <td>
-              <div>
-                <select (change)="handleOptionChange($event,account.id)">
-                  <option value="blank"> </option>
-                  <option>Modificar</option>
-                  <option>Eliminar</option>
-                </select>
+            <td class="dropdown">
+              <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false"></button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <button routerLink="/home/admin/accounts/modify" class="dropdown-item" type="button">Modificar
+                    </button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" type="button">Eliminar</button>
+                  </li>
+                </ul>
               </div>
             </td>
           </tr>
