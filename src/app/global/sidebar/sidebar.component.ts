@@ -21,18 +21,6 @@ export class SidebarComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    $(document).ready(() => {
-      $(".sidebar-nav li a").click(function (this: HTMLElement) {
-        $(".sidebar-nav li a").removeClass("active");
-        $(this).addClass("active");
-      });
-
-      $("#menu-toggle").click((e: MouseEvent) => {
-        e.preventDefault();
-        $("#wrapper").toggleClass("menuDisplayed");
-      });
-    });
-
     const currentUrl = this.router.url;
     const segments = currentUrl.split('/');
     const segment = segments[2];
@@ -47,7 +35,18 @@ export class SidebarComponent implements OnInit {
       default:
         this.url = 'home';
     }
+    $(document).ready(() => {
+      $(".sidebar-nav li a").click(function (this: HTMLElement) {
+        $(".sidebar-nav li a").removeClass("active");
+        $(this).addClass("active");
+      });
 
+      $("#menu-toggle").click((e: MouseEvent) => {
+        e.preventDefault();
+        $("#wrapper").toggleClass("menuDisplayed");
+      });
+    });
 
+    
   }
 }

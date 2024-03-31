@@ -84,21 +84,12 @@ export class TableAccountsComponent {
       this.updateURL();
     }
   }
-  handleOptionChange(event: any,id:number) {
-    const selectedOption = event.target.value;
-    console.log(selectedOption)
-    if (selectedOption == "Modificar") {
-
-    }
-    if (selectedOption == "Eliminar") {
-      this.deleteAccount(id)
-    }
-  }
+  
   deleteAccount(i: number) {
     this.accountService.delete(i).subscribe(
       data => {
         this.accounts = data;
-        //location.reload();
+        //location.reload();Once connected,back only use this
       },
       error => {
       }

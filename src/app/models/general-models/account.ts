@@ -14,15 +14,3 @@ export interface Account {
     permissions:Permission[];
     last_report:Report;
 }
-
-const emptyAccount: Account = {
-    id: 0,
-    name: '',
-    last_name: '',
-    id_card: '',
-    last_connection: new Date(),
-    rol: {} as Rol,
-    credential: {} as Credential,
-    permissions: [],
-    last_report: {} as Report
-};

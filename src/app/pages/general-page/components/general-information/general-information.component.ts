@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Account } from '../../../../models/general-models/account';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService } from '../../../../services/general-services/account/account.service';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-general-information',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './general-information.component.html',
   styleUrl: './general-information.component.css'
 })

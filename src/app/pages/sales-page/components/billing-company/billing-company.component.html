@@ -11,7 +11,7 @@
     <div class="col d-flex justify-content-start ">
       <form class="form-inline mb-2">
         <div class="input-group input-custom ">
-          <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Buscar en esta lista..."
+          <input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}"class="form-control" placeholder="Buscar en esta lista..."
             (keydown.enter)="searchByCompany()">
           <div class="input-group-append">
             <button class="btn" type="submit"><i class="bi bi-search" style="color: #9A9A9A;"></i></button>

@@ -7,10 +7,14 @@
       <h1 class="font-weight-bold mb-2">Cuentas de monitoreo</h1>
     </div>
     <div class="col d-flex justify-content-start ">
-      <div class="search-bar">
-        <input #searchInput type="text" [(ngModel)]="searchText" class="input-with-image"
-            placeholder="buscar en esta lista..." (keydown.enter)="searchByEmail()">
-    </div>
+      <form class="form-inline mb-2">
+        <div class="input-group input-custom ">
+          <input type="text" class="form-control" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" (keydown.enter)="searchByEmail()" placeholder="Buscar en esta lista...">
+          <div class="input-group-append">
+            <button class="btn" type="submit"><i class="bi bi-search" style="color: #9A9A9A;"></i></button>
+          </div>
+        </div>
+      </form>
     </div>
     <div class="col-auto">
       <button routerLink="/home/admin/accounts/new" class="btn btn-custom">Nuevo</button>
@@ -47,7 +51,7 @@
                     </button>
                   </li>
                   <li>
-                    <button class="dropdown-item" type="button">Eliminar</button>
+                    <button class="dropdown-item" type="button" (click)="deleteAccount(i+1)">Eliminar</button>
                   </li>
                 </ul>
               </div>
