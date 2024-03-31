@@ -1,83 +1,149 @@
-<div class="container card">
-  <div class="card-body">
-    <h5 class="card-title text-center">Crear/Modificar</h5>
-    <h6 class="card-subtitle mb-2 text-muted" style="background-color: #D9D9D9; padding: 10px;">Información</h6>
-
-    <form>
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="nombre" class="form-label">Nombre:</label>
-          <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+<div *ngIf="url === 'new'">
+  <div class="container card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Crear/Modificar</h5>
+      <h6 class="card-subtitle mb-2 text-muted" style="background-color: #D9D9D9; padding: 10px;">Información</h6>
+      <form>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="new-nombre" placeholder="Ingrese su nombre">
+          </div>
+          <div class="col-md-6">
+            <label for="identificacion" class="form-label">Identificación:</label>
+            <input type="text" class="form-control" id="new-identificacion" placeholder="Ingrese su identificación">
+          </div>
         </div>
-        <div class="col-md-6">
-          <label for="identificacion" class="form-label">Identificación:</label>
-          <input type="text" class="form-control" id="identificacion" placeholder="Ingrese su identificación">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="apellido" class="form-label">Apellido:</label>
+            <input type="text" class="form-control" id="new-apellido" placeholder="Ingrese su apellido">
+          </div>
+          <div class="col-md-6">
+            <label for="rol" class="form-label">Rol:</label>
+            <select class="form-select" id="new-rol">
+              <option value="1">Administrador</option>
+              <option value="2">Usuario</option>
+              <option value="3">Invitado</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="apellido" class="form-label">Apellido:</label>
-          <input type="text" class="form-control" id="apellido" placeholder="Ingrese su apellido">
-        </div>
-        <div class="col-md-6">
-          <label for="rol" class="form-label">Rol:</label>
-          <select class="form-select" id="rol">
-            <option value="1">Administrador</option>
-            <option value="2">Usuario</option>
-            <option value="3">Invitado</option>
-          </select>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="correo" class="form-label">Correo:</label>
-          <input type="text" class="form-control mb-3" id="correo" placeholder="Ingrese su correo">
-
-          <label for="contraseña" class="form-label">Contraseña:</label>
-          <input type="text" class="form-control" id="contraseña" placeholder="Ingrese su nombre">
-
-        </div>
-
-
-        <div class="col-md-6">
-
-
-          <div class="row mb-3">
-            <div class="col-md-12">
-              <p>Permisos</p>
-              <table class="table">
-                <thead>
-                <tr>
-                  <th style="text-align: center;"></th>
-                  <th style="text-align: center;">Visualizar</th>
-                  <th style="text-align: center;">Modificar</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>Cuentas</td>
-                  <td><input type="checkbox"></td>
-                  <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                  <td>Usuarios</td>
-                  <td><input type="checkbox"></td>
-                  <td><input type="checkbox"></td>
-                </tr>
-                </tbody>
-              </table>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="correo" class="form-label">Correo:</label>
+            <input type="text" class="form-control mb-3" id="new-correo" placeholder="Ingrese su correo">
+            <label for="contraseña" class="form-label">Contraseña:</label>
+            <input type="text" class="form-control" id="new-contraseña" placeholder="Ingrese su nombre">
+          </div>
+          <div class="col-md-6">
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <p>Permisos</p>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th style="text-align: center;"></th>
+                    <th style="text-align: center;">Visualizar</th>
+                    <th style="text-align: center;">Modificar</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>Cuentas</td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                  </tr>
+                  <tr>
+                    <td>Usuarios</td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        <div class="container-btn">
+          <button type="reset" class="btn btn-primary btn-cancel">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-      <div class="container-btn">
-        <button type="reset" class="btn btn-primary btn-cancel">Cancelar</button>
-        <button type="submit" class="btn btn-primary btn-submit">Guardar</button>
-      </div>
-
-
-
-    </form>
+<div *ngIf="url === 'modify'">
+  <div class="container card">
+    <div class="card-body">
+      <h5 class="card-title text-center">Crear/Modificar</h5>
+      <h6 class="card-subtitle mb-2 text-muted" style="background-color: #D9D9D9; padding: 10px;">Información</h6>
+      <form>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre">
+          </div>
+          <div class="col-md-6">
+            <label for="identificacion" class="form-label">Identificación</label>
+            <input type="text" class="form-control" id="identificacion" placeholder="Ingrese su identificación">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" placeholder="Ingrese su apellido">
+          </div>
+          <div class="col-md-6">
+            <label for="rol" class="form-label">Rol:</label>
+            <select class="form-select" id="rol">
+              <option value="1">Administrador</option>
+              <option value="2">Usuario</option>
+              <option value="3">Invitado</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="correo" class="form-label">Correo</label>
+            <input type="text" class="form-control mb-3" id="correo" placeholder="Ingrese su correo">
+            <label for="contraseña" class="form-label">Contraseña</label>
+            <input type="text" class="form-control" id="contraseña" placeholder="Ingrese su nombre">
+          </div>
+          <div class="col-md-6">
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <p>Permisos</p>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th style="text-align: center;"></th>
+                    <th style="text-align: center;">Visualizar</th>
+                    <th style="text-align: center;">Modificar</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>Cuentas</td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                  </tr>
+                  <tr>
+                    <td>Usuarios</td>
+                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-btn">
+          <button type="reset" class="btn btn-primary btn-cancel">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-submit">Guardar</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
