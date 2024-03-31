@@ -9,6 +9,7 @@ import {TableAccountsComponent} from "../general-page/components/table-accounts/
 import {ActivatedRoute, Router} from "@angular/router";
 import {BillingManagementComponent} from "./components/billing-management/billing-management.component";
 import {BillingCompanyComponent} from "./components/billing-company/billing-company.component";
+import {GeneralSalesComponent} from "./components/general-sales/general-sales.component";
 
 @Component({
   selector: 'app-sales-page',
@@ -20,7 +21,8 @@ import {BillingCompanyComponent} from "./components/billing-company/billing-comp
     SidebarComponent,
     TableAccountsComponent,
     BillingManagementComponent,
-    BillingCompanyComponent
+    BillingCompanyComponent,
+    GeneralSalesComponent
   ],
   templateUrl: './sales-page.component.html',
   styleUrl: './sales-page.component.css'
