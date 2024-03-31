@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Account } from '../../../../models/account';
+import { Account } from '../../../../models/general-models/account';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AccountService } from '../../../../services/general-services/account/account.service';
 
 @Component({
   selector: 'app-table-accounts',
@@ -10,12 +12,29 @@ import { Account } from '../../../../models/account';
 })
 export class TableAccountsComponent {
   accounts: Account[] = [
-    new Account('John', 'Doe', 123456789, ['admin'], new Date(), new Date()),
-    new Account('Jane', 'Doe', 987654321, ['user'], new Date(), new Date()),
   ];
   selectedEditAccount: Account | null = null;
 
-  constructor() {}
+  constructor(
+    private accountService: AccountService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+   
+        this.getAccounts();
+    };
+  private getAccounts() {
+    this.accountService.getAccounts().subscribe(
+      data => {
+        this.accounts = data;
+      },
+      error => {
+        console.error('Error al obtener usuarios:', error);
+      }
+    );
+  }
 
   setSelectedEditAccount(optionalAccount: Account): void {
     if (this.selectedEditAccount === optionalAccount) {

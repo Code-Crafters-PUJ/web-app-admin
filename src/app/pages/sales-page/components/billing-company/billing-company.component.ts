@@ -1,17 +1,18 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {SubscriptionService} from "../../../../services/subscription/subscription.service";
+import {Component,OnInit} from '@angular/core';
+import {SubscriptionService} from "../../../../services/sales-services/subscription/subscription.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription} from "../../../../models/subscription";
+import {Subscription} from "../../../../models/sales-models/subscription";
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-billing-company',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './billing-company.component.html',
   styleUrl: './billing-company.component.css'
 })
 export class BillingCompanyComponent implements OnInit {
-  @ViewChild('searchInput') searchInput!: ElementRef;
   subscriptions: Subscription[] = [];
   Actualpage: number = 1;
   totalPages: number = 0;

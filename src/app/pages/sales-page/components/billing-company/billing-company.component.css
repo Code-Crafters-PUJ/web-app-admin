@@ -30,7 +30,7 @@
 }
 
 .input-with-image {
-  background-image: url('../../assets/icons/lupa.png');
+  background-image: url('../../../../../assets/icons/lupa.png');
   background-size: contain;
   background-repeat: no-repeat;
   padding-left: 2vw;

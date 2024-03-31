@@ -2,7 +2,7 @@
   <link href='https://fonts.googleapis.com/css?family=Radio Canada' rel='stylesheet'>
 </head>
 <div class="rectanguloBusqueda">
-  <div style="margin-left:1vw;width:4vw;"><img src="../../assets/icons/User.png" alt="logo"></div>
+  <div style="margin-left:1vw;width:4vw;"><img src="../../../../../assets/icons/User.png" alt="logo"></div>
   <div style="margin-left: 1%;">Historial de facturación</div>
   <div class="search-bar">
     <input #searchInput type="text" [(ngModel)]="searchText" class="input-with-image" placeholder="buscar en esta lista..." (keydown.enter)="buscarPorEmpresa()">
@@ -37,11 +37,11 @@
     <tr style="border-bottom: 0vw"*ngIf="subscriptions.length > 14">
       <td></td>
       <td>
-        <img src="../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw" (click)="irPaginaAnterior()" *ngIf="Actualpage > 1">
+        <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw" (click)="irPaginaAnterior()" *ngIf="Actualpage > 1">
       </td>
       <td></td>
       <td>
-        <img src="../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw;transform: rotate(180deg);" (click)="irPaginaSiguiente()"
+        <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw;transform: rotate(180deg);" (click)="irPaginaSiguiente()"
              *ngIf="Actualpage < totalPages">
       </td>
     </tbody>
