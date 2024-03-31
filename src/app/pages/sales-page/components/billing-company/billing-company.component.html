@@ -1,0 +1,49 @@
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Radio Canada' rel='stylesheet'>
+</head>
+<div class="rectanguloBusqueda">
+  <div style="margin-left:1vw;width:4vw;"><img src="../../../../../assets/icons/User.png" alt="logo"></div>
+  <div style="margin-left: 1%;">Historial de facturación</div>
+  <div class="search-bar">
+    <input #searchInput type="text" [(ngModel)]="searchText" class="input-with-image" placeholder="buscar en esta lista..." (keydown.enter)="buscarPorEmpresa()">
+  </div>
+</div>
+<div>
+  <table class="Divtable">
+    <thead>
+    <tr>
+      <th style="padding-left: 1vw;">Empresa</th>
+      <th>Inicio Suscripción</th>
+      <th>Tipo de Plan</th>
+      <th>Estado Suscripción</th>
+      <th>Método de pago</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container
+      *ngFor="let subscription of subscriptions.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
+      <tr>
+        <td>{{subscription.client.companyName}}</td>
+        <td>{{subscription.startDate| date:'shortDate' }}</td>
+        <td>{{subscription.plan.type}}</td>
+        <td>
+          <span *ngIf="!subscription.status && subscription.endDate >= getCurrentDate()">Vencida</span>
+          <span *ngIf="!subscription.status && subscription.endDate < getCurrentDate()">Falta pago</span>
+          <span *ngIf="subscription.status">Activa</span>
+        </td>
+        <td>{{subscription.payment.paymentMethod}}</td>
+      </tr>
+    </ng-container>
+    <tr style="border-bottom: 0vw"*ngIf="subscriptions.length > 14">
+      <td></td>
+      <td>
+        <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw" (click)="irPaginaAnterior()" *ngIf="Actualpage > 1">
+      </td>
+      <td></td>
+      <td>
+        <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw;transform: rotate(180deg);" (click)="irPaginaSiguiente()"
+             *ngIf="Actualpage < totalPages">
+      </td>
+    </tbody>
+  </table>
+</div>

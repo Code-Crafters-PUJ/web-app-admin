@@ -1,7 +1,7 @@
-import { Client } from "../models/client";
-import { Payment } from "../models/payment";
-import { Plan } from "../models/plan";
-import { Subscription } from "../models/subscription";
+import { Client } from "../../models/sales-models/client";
+import { Payment } from "../../models/sales-models/payment";
+import { Plan } from "../../models/sales-models/plan";
+import { Subscription } from "../../models/sales-models/subscription";
 
 export class Generation {
     static client1: Client;
@@ -119,7 +119,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment1,
             plan: this.plan1
         };
@@ -129,7 +129,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment2,
             plan: this.plan1
         };
@@ -139,7 +139,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment3,
             plan: this.plan1
         };
@@ -149,7 +149,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment1,
             plan: this.plan2
         };
@@ -159,7 +159,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment2,
             plan: this.plan2
         };
@@ -169,7 +169,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment3,
             plan: this.plan2
         };
@@ -179,7 +179,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment4,
             plan: this.plan3
         };
@@ -189,7 +189,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment4,
             plan: this.plan3
         };
@@ -199,7 +199,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage:{ hours: 10, minutes: 30 },
             payment: this.payment4,
             plan: this.plan3
         };
@@ -209,7 +209,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: true,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment1,
             plan: this.plan1
         };
@@ -221,7 +221,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: false,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment2,
             plan: this.plan1
         };
@@ -231,7 +231,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate2,
             status: false,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment3,
             plan: this.plan1
         };
@@ -241,7 +241,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: false,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment1,
             plan: this.plan2
         };
@@ -251,7 +251,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate2,
             status: false,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment2,
             plan: this.plan2
         };
@@ -261,7 +261,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: false,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment3,
             plan: this.plan2
         };
@@ -271,7 +271,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate2,
             status: false,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment1,
             plan: this.plan1
         };
@@ -281,7 +281,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate,
             status: false,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment2,
             plan: this.plan1
         };
@@ -291,7 +291,7 @@ export class Generation {
             startDate: new Date(),
             endDate: endDate2,
             status: false,
-            usage: "02:30:15",
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment3,
             plan: this.plan1
         };
