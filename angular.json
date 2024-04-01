@@ -28,7 +28,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -91,13 +93,15 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": "5400d528-c9c2-42e8-ae83-274903a96df7"
+    "analytics": "dac15f1e-be75-4645-a061-a8f5bd151a66"
   }
 }

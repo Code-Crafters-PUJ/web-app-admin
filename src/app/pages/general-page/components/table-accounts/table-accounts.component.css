@@ -1,13 +1,8 @@
-/*Estilo Principal */
-.container-content {
-  padding: 90px 40px;
-}
-
 /* Estilo de las tablas */
 table {
   width: 100%;
   border-collapse: collapse;
-  max-height: 100vh;
+  max-height: 30px;
 }
 
 table th {
@@ -22,8 +17,11 @@ table td {
   padding: 8px;
 }
 
-table td {
-  text-align: center;
+.table td:not(.dropdown) {
+  max-height: 3.6em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 table tr:first-child td {
@@ -32,4 +30,19 @@ table tr:first-child td {
 
 table tr:last-child td {
   border-bottom: 3px solid #D9D9D9;
+}
+
+.btn-custom {
+  border-color: #D9D9D9;
+  min-width: 100px
+}
+
+.input-custom {
+  min-width: 300px;
+  max-width: 300px;
+}
+
+.user-icon {
+  width: 45px;
+  height: 45px;
 }
