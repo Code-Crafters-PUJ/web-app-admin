@@ -1,0 +1,31 @@
+<!-- Main container for the login form -->
+<div id="main-container">
+    <!-- Logo -->
+    <img src="/../assets/login/main-logo.png" alt="logo-company">
+
+    <!-- Login form -->
+    <form (submit)="onSubmit()">
+
+        <!-- Username input -->
+        <label for="username" class="main-label">Usuario</label>
+        <input type="text" id="username" class="main-input" name="username">
+      
+        <!-- Password input -->
+        <label for="password" class="main-label">Contraseña</label>
+        <input type="password" id="password" class="main-input" name="password">
+      
+        <!-- Login button -->
+        <button type="submit" id="btn-login">INICIAR SESIÓN</button>
+        
+        <!-- Remember me checkbox -->
+        <div id="rememberMe-container">
+            <input type="checkbox" id="rememberMe" name="rememberMe">
+            <label for="rememberMe" >Recordarme</label>
+        </div>
+        
+    </form>
+
+    <!-- Information about password recovery -->
+    <hr>
+    <p>En caso de olvidar la contraseña, por favor, contáctese con el Administrador del Sistema</p>
+</div>
