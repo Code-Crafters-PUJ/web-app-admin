@@ -8,6 +8,7 @@ import { hasRoleGuard } from './guards/has-role.guard';
 import { isAuthenticatedGuard } from './guards/is-authenticated.guard';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent},
    /*{
        

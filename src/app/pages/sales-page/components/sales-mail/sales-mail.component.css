@@ -174,3 +174,14 @@
     font-size: 1.5em; /* Adjust font size */
   }
 }
+.subject-input {
+  width: 80%; /* El input de asunto ocupará todo el ancho disponible */
+  border: none; /* Eliminar los bordes del input */
+  background-color: transparent;
+}
+.description-input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none; /* El input de descripción crecerá dinámicamente a medida que se ingresa texto */
+}

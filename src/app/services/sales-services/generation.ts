@@ -37,6 +37,11 @@ export class Generation {
     static subscription18: Subscription;
 
     static generateData(): void {
+        const dateNow = new Date();
+        const twoWeeksAgo = new Date(dateNow);
+        twoWeeksAgo.setDate(dateNow.getDate() - 14);
+        const twoMonthsAgo = new Date(dateNow);
+        twoMonthsAgo.setMonth(dateNow.getMonth() - 2);
         this.client1 = {
             id: 1,
             companyName: "Company A",
@@ -46,7 +51,7 @@ export class Generation {
             NIT: "123-456-789",
             subscriptions: []
         };
-        
+
         this.client2 = {
             id: 2,
             companyName: "Company B",
@@ -56,7 +61,7 @@ export class Generation {
             NIT: "987-654-321",
             subscriptions: []
         };
-        
+
         this.client3 = {
             id: 3,
             companyName: "Company C",
@@ -66,7 +71,7 @@ export class Generation {
             NIT: "555-123-456",
             subscriptions: []
         };
-        
+
         this.payment1 = {
             id: 1,
             date: new Date(),
@@ -126,7 +131,7 @@ export class Generation {
         this.subscription2 = {
             id: 2,
             client: this.client1,
-            startDate: new Date(),
+            startDate: twoWeeksAgo,
             endDate: endDate,
             status: true,
             usage: { hours: 10, minutes: 30 },
@@ -136,7 +141,7 @@ export class Generation {
         this.subscription3 = {
             id: 3,
             client: this.client1,
-            startDate: new Date(),
+            startDate: twoMonthsAgo,
             endDate: endDate,
             status: true,
             usage: { hours: 10, minutes: 30 },
@@ -156,7 +161,7 @@ export class Generation {
         this.subscription5 = {
             id: 5,
             client: this.client1,
-            startDate: new Date(),
+            startDate: twoWeeksAgo,
             endDate: endDate,
             status: true,
             usage: { hours: 10, minutes: 30 },
@@ -166,7 +171,7 @@ export class Generation {
         this.subscription6 = {
             id: 6,
             client: this.client1,
-            startDate: new Date(),
+            startDate: twoMonthsAgo,
             endDate: endDate,
             status: true,
             usage: { hours: 10, minutes: 30 },
@@ -186,7 +191,7 @@ export class Generation {
         this.subscription8 = {
             id: 8,
             client: this.client1,
-            startDate: new Date(),
+            startDate: twoWeeksAgo,
             endDate: endDate,
             status: true,
             usage: { hours: 10, minutes: 30 },
@@ -196,10 +201,10 @@ export class Generation {
         this.subscription9 = {
             id: 9,
             client: this.client1,
-            startDate: new Date(),
+            startDate: twoMonthsAgo,
             endDate: endDate,
             status: true,
-            usage:{ hours: 10, minutes: 30 },
+            usage: { hours: 10, minutes: 30 },
             payment: this.payment4,
             plan: this.plan3
         };
@@ -213,12 +218,12 @@ export class Generation {
             payment: this.payment1,
             plan: this.plan1
         };
-        const endDate2=new Date()
+        const endDate2 = new Date()
         endDate2.setFullYear(endDate.getFullYear() - 2);
         this.subscription11 = {
             id: 11,
             client: this.client2,
-            startDate: new Date(),
+            startDate: twoWeeksAgo,
             endDate: endDate,
             status: false,
             usage: { hours: 10, minutes: 30 },
@@ -228,7 +233,7 @@ export class Generation {
         this.subscription12 = {
             id: 12,
             client: this.client2,
-            startDate: new Date(),
+            startDate: twoMonthsAgo,
             endDate: endDate2,
             status: false,
             usage: { hours: 10, minutes: 30 },
@@ -248,7 +253,7 @@ export class Generation {
         this.subscription14 = {
             id: 14,
             client: this.client2,
-            startDate: new Date(),
+            startDate: twoWeeksAgo,
             endDate: endDate2,
             status: false,
             usage: { hours: 10, minutes: 30 },
@@ -258,7 +263,7 @@ export class Generation {
         this.subscription15 = {
             id: 15,
             client: this.client2,
-            startDate: new Date(),
+            startDate: twoMonthsAgo,
             endDate: endDate,
             status: false,
             usage: { hours: 10, minutes: 30 },
@@ -278,7 +283,7 @@ export class Generation {
         this.subscription17 = {
             id: 17,
             client: this.client3,
-            startDate: new Date(),
+            startDate: twoWeeksAgo,
             endDate: endDate,
             status: false,
             usage: { hours: 10, minutes: 30 },
@@ -288,7 +293,7 @@ export class Generation {
         this.subscription18 = {
             id: 18,
             client: this.client3,
-            startDate: new Date(),
+            startDate: twoMonthsAgo,
             endDate: endDate2,
             status: false,
             usage: { hours: 10, minutes: 30 },

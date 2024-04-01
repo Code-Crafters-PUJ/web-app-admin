@@ -89,5 +89,8 @@ export class BillingCompanyComponent implements OnInit {
       this.getSubscriptions();
     }
   }
-  
+  saveCompanyId(id: number): void {
+    const companyId: string = id.toString();
+    sessionStorage.setItem('companyId', companyId);
+  }
 }

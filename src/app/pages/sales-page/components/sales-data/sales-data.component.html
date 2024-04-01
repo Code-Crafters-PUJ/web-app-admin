@@ -4,12 +4,20 @@
   </header>
   <section class="general-info-container">
     <ul>
-      <li></li>
-      <li>
-        <span class="date"></span>
-      </li>
-      <li class="plan-section"></li>
-      <li class="invoice"></li>
+      <ng-container
+        *ngFor="let subscription of subscriptions.slice((Actualpage - 1) * 5, Actualpage * 5); let i = index">
+        <li>{{subscription.client.contactName}}({{subscription.client.companyName}})</li>
+        <li>{{subscription.client.email}}</li>
+        <li>
+          <span class="date">{{subscription.startDate|date:'shortDate'}}</span>
+        </li>
+        <li class="plan-section">{{subscription.plan.type}}</li>
+        <li class="invoice">Factura:${{subscription.plan.price}}</li>
+      </ng-container>
     </ul>
+    <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw" (click)="previousPage()"
+      *ngIf="Actualpage > 1">
+    <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw;transform: rotate(180deg);"
+      (click)="nextPage()" *ngIf="Actualpage < totalPages">
   </section>
 </section>

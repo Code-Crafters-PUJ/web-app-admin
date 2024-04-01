@@ -21,18 +21,18 @@
               <h5 class="mb-3">Ventas generales </h5>
               <table class="table">
                 <tbody>
-                <tr>
-                  <td>Ventas Hoy</td>
-                  <td>Data 1</td>
-                </tr>
-                <tr>
-                  <td>Ventas Ultimo mes</td>
-                  <td>Data 2</td>
-                </tr>
-                <tr>
-                  <td>Ventas Ultimo Año</td>
-                  <td>Data 3</td>
-                </tr>
+                  <tr>
+                    <td>Ventas Hoy</td>
+                    <td>{{totalToday}}</td>
+                  </tr>
+                  <tr>
+                    <td>Ventas Ultimo mes</td>
+                    <td>{{totalMonth}}</td>
+                  </tr>
+                  <tr>
+                    <td>Ventas Ultimo Año</td>
+                    <td>{{totalYear}}</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -47,32 +47,19 @@
               <h5 class="mb-3">Ventas realizadas por negocios </h5>
               <table class="table">
                 <thead>
-                <tr>
-                  <th>Negocio</th>
-                  <th>Venta</th>
-                </tr>
+                  <tr>
+                    <th>Negocio</th>
+                    <th>Venta</th>
+                  </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Row 1</td>
-                  <td>Data 1</td>
-                </tr>
-                <tr>
-                  <td>Row 2</td>
-                  <td>Data 2</td>
-                </tr>
-                <tr>
-                  <td>Row 3</td>
-                  <td>Data 3</td>
-                </tr>
-                <tr>
-                  <td>Row 4</td>
-                  <td>Data 4</td>
-                </tr>
-                <tr>
-                  <td>Row 5</td>
-                  <td>Data 5</td>
-                </tr>
+                  <ng-container
+                  *ngFor="let client of clientesAux.slice((actualpageClients - 1) * 5, actualpageClients * 5); let i = index">
+                  <tr>
+                    <td>{{client.nombre}}</td>
+                    <td>{{client.total}}</td>
+                  </tr>
+                  </ng-container>
                 </tbody>
               </table>
             </div>
@@ -90,7 +77,7 @@
               <!-- Primera tarjeta -->
               <div class="card mb-3">
                 <div class="card-body">
-                  <h6 class="card-subtitle fw-bold mb-2 text-center">200</h6>
+                  <h6 class="card-subtitle fw-bold mb-2 text-center">{{totalFree}}</h6>
                   <p class="card-text text-center">Free Trial</p>
                 </div>
               </div>
@@ -99,7 +86,7 @@
               <!-- Segunda tarjeta -->
               <div class="card mb-3">
                 <div class="card-body">
-                  <h6 class="card-subtitle fw-bold mb-2 text-center">200</h6>
+                  <h6 class="card-subtitle fw-bold mb-2 text-center">{{totalGolden}}</h6>
                   <p class="card-text text-center">Plan Golden</p>
                 </div>
               </div>
@@ -108,7 +95,7 @@
               <!-- Tercera tarjeta -->
               <div class="card mb-3">
                 <div class="card-body">
-                  <h6 class="card-subtitle fw-bold mb-2  text-center">200</h6>
+                  <h6 class="card-subtitle fw-bold mb-2  text-center">{{totalSilver}}</h6>
                   <p class="card-text text-center">Plan Silver</p>
                 </div>
               </div>
@@ -122,7 +109,8 @@
             <div class="col">
               <form class="form-inline">
                 <div class="input-group w-100"> <!-- Añadimos la clase w-100 para que ocupe el ancho completo -->
-                  <input type="text" class="form-control" placeholder="Buscar en esta lista...">
+                  <input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" class="form-control"
+                    placeholder="Buscar en esta lista..." (keydown.enter)="searchByCompany()">
                   <div class="input-group-append">
                     <button class="btn" type="submit"><i class="bi bi-search" style="color: #9A9A9A;"></i></button>
                   </div>
@@ -133,58 +121,41 @@
           <div class="table-responsive">
             <table class="table">
               <thead>
-              <tr class="text-center">
-                <th>Empresa</th>
-                <th>Correo</th>
-                <th>Plan</th>
-                <th>Uso</th>
-              </tr>
+                <tr class="text-center">
+                  <th>Empresa</th>
+                  <th>Correo</th>
+                  <th>Plan</th>
+                  <th>Uso</th>
+                </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>1</td>
-                <td>Felipe Garcia</td>
-                <td>25/01/2023 12:00</td>
-                <td>26/01/2023 16:00</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Data 2</td>
-                <td>26/01/2023 16:00</td>
-                <td>26/01/2023 16:00</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Data 3</td>
-                <td>27/02/2023 17:00</td>
-                <td>26/01/2023 16:00</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Data 4</td>
-                <td>28/02/2023 18:00</td>
-                <td>26/01/2023 16:00</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Data 5</td>
-                <td>29/03/2023 22:00</td>
-                <td>26/01/2023 16:00</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Data 5</td>
-                <td>29/03/2023 22:00</td>
-                <td>26/01/2023 16:00</td>
-              </tr>
+                <ng-container
+                  *ngFor="let subscription of subscriptions.slice((actualpageSubscription - 1) * 5, actualpageSubscription * 5); let i = index">
+                  <tr>
+                    <td>{{subscription.client.companyName}}</td>
+                    <td>{{subscription.client.email}}</td>
+                    <td>{{subscription.plan.type}}</td>
+                    <td>{{subscription.usage.hours}}:{{subscription.usage.minutes}}</td>
+                  </tr>
+                </ng-container>
+                <tr style="border-bottom: 0vw" *ngIf="subscriptions.length > 5">
+                  <td></td>
+                  <td>
+                    <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw"
+                      (click)="previousPage()" *ngIf="actualpageSubscription > 1">
+                  </td>
+                  <td>
+                    <img src="../../../../../assets/icons/flecha.png"
+                      style="cursor: pointer;width:1.5vw;transform: rotate(180deg);" (click)="nextPage()"
+                      *ngIf="actualpageSubscription < totalpagesSubscription">
+                  </td>
+                  <td></td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
 </div>
-

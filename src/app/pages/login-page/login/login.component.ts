@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { AuthService} from '../../../services/auth.service';
-import { Credential } from '../../../models/credential';
-import { StorageService } from '../../../services/storage.service';
+import { AuthService } from '../../../services/login-services/auth.service';
+import { Credential } from '../../../models/login-models/credential';
+import { StorageService } from '../../../services/login-services/storage.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,12 +17,12 @@ export class LoginComponent {
   private authService: AuthService
   private storageService: StorageService
 
-  constructor(){
+  constructor(private router: Router) {
     this.authService = inject(AuthService)
     this.storageService = inject(StorageService)
   }
 
-  onSubmit(){
+  onSubmit() {
 
     const email = document.getElementById('username') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
@@ -29,9 +30,15 @@ export class LoginComponent {
     let role: any;
 
 
-    if(!email.value || !password.value){
+    if (!email.value || !password.value) {
       alert('Por favor ingrese email y contraseña');
       return
+    }
+    if (email.value == "admin") {
+      this.router.navigate(['/home/admin']);
+    }
+    else {
+      this.router.navigate(['/home/sales']);
     }
 
     let credential = { email: email.value, password: password.value } as Credential;
@@ -42,15 +49,11 @@ export class LoginComponent {
 
         this.storageService.saveAccount(response.account);
         role = this.storageService.getSavedAccount()?.role;
-
       },
       error: (error: any) => {
         alert('Usuario incorrecto');
       }
 
     });
-
-
-    
   }
 }
