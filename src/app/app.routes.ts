@@ -3,8 +3,22 @@ import { GeneralPageComponent } from './pages/general-page/general-page.componen
 import { BillingCompanyComponent } from './pages/sales-page/components/billing-company/billing-company.component';
 import {NgModule} from "@angular/core";
 import {SalesPageComponent} from "./pages/sales-page/sales-page.component";
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { hasRoleGuard } from './guards/has-role.guard';
+import { isAuthenticatedGuard } from './guards/is-authenticated.guard';
 
 export const routes: Routes = [
+  { path: 'login', component: LoginPageComponent},
+   /*{
+       
+        path: 'path',
+        component: PathComponent,
+        canActivate: [isAuthenticatedGuard, hasRoleGuard],
+        data:{
+        role: 'role',
+        }
+      
+    }*/
   {
     path: 'home/admin',
     children: [
@@ -24,4 +38,5 @@ export const routes: Routes = [
       { path: '', redirectTo: 'general', pathMatch: 'full' }
     ]
   },
+  
 ];
