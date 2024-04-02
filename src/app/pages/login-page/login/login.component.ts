@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/login-services/auth.service';
 import { Credential } from '../../../models/login-models/credential';
 import { StorageService } from '../../../services/login-services/storage.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -14,46 +15,58 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  private authService: AuthService
-  private storageService: StorageService
 
-  constructor(private router: Router) {
-    this.authService = inject(AuthService)
-    this.storageService = inject(StorageService)
+  constructor(private router: Router, private authService: AuthService, private storageService: StorageService) {
+
   }
 
-  onSubmit() {
-
-    const email = document.getElementById('username') as HTMLInputElement;
-    const password = document.getElementById('password') as HTMLInputElement;
-
-    let role: any;
-
-
-    if (!email.value || !password.value) {
-      alert('Por favor ingrese email y contraseña');
-      return
-    }
-    if (email.value == "admin") {
-      this.router.navigate(['/home/admin']);
+  signInUser(email: string, password: string) {
+    if (email === "" || password === "") {
+      Swal.fire({
+        title: 'Uppss algo pasó',
+        text: "Por favor, llene todos los campos",
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
     }
     else {
+      this.authService.login(email, password).then((value) => {
+        if (value) {
+          var role = JSON.parse(value).role;
+          // Autenticación exitosa
+          this.handleSuccessfulAuthentication(role);
+
+        } else {
+          // Autenticación fallida
+          this.handleFailedAuthentication();
+        }
+      });
+    }
+  }
+  private handleSuccessfulAuthentication(role:string) {
+    Swal.fire({
+      title: 'Bienvenido',
+      text: "Autenticación exitosa",
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+    if (role === "ADMIN") {
+      this.router.navigate(['/home/admin']);
+
+    } else{
       this.router.navigate(['/home/sales']);
     }
-
-    let credential = { email: email.value, password: password.value } as Credential;
-
-    this.authService.login(credential).subscribe({
-
-      next: (response: any) => {
-
-        this.storageService.saveAccount(response.account);
-        role = this.storageService.getSavedAccount()?.role;
-      },
-      error: (error: any) => {
-        alert('Usuario incorrecto');
-      }
-
+  }
+  private handleFailedAuthentication() {
+    Swal.fire({
+      title: 'Uppss algo pasó',
+      text: "La contraseña o el usuario son incorrectos",
+      icon: 'warning',
+      confirmButtonText: 'OK'
     });
+    window.location.reload();
+
+
   }
 }
+

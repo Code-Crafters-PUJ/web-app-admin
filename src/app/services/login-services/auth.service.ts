@@ -13,12 +13,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public login(credential: Credential): Observable<string> {
 
-    var responseBody =  this.http.post(`${environment.baseURL}/user/login`, { credential: credential }, { withCredentials: true, });
-    
-    var respons = responseBody as Observable<string>;
-    return respons
+  async login(email: string, password: string) {
+    var responseBody = await this.http.post(`${environment.baseURL}/user/login`, { email: email, password: password }, { withCredentials: true, responseType: "text" }).toPromise();
+    return responseBody;
+
+
   }
+
+  
 
 }
