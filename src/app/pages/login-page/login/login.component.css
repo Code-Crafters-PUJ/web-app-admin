@@ -41,6 +41,7 @@
 /* Styling for the form inputs */
 #main-container .form-container .main-input {
     height:5vh;
+    width:100%;
     margin-bottom: 3vh;
     padding: 0.2vw;
     border-radius: 0.5vh;
@@ -49,6 +50,7 @@
 
 /* Horizontal line separator */
 #main-container hr{
+    align-self: center;
     width:75%;
     border: 0.1vh solid #D9D9D9;
 }
@@ -116,4 +118,17 @@
         padding-left: 15vw;
         padding-right: 15vw;
     }
+}
+
+#password-container {
+    position: relative;
+    justify-content: center;
+}
+
+.eyeicon {
+    position:absolute;
+    top:18%;
+    right:5%;
+    z-index: 2;
+    cursor: pointer;
 }
