@@ -1,0 +1,66 @@
+<div class="container-content container">
+
+
+  <div class="row align-items-center mb-5">
+    <div class="col-auto mb-2">
+      <img ngSrc="assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
+    </div>
+    <div class="col-auto  mb-2">
+      <h1 class="font-weight-bold mb-2">Historial de facturación</h1>
+    </div>
+    <div class="col d-flex justify-content-start ">
+      <form class="form-inline mb-2">
+        <div class="input-group input-custom ">
+          <input type="text" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}"class="form-control" placeholder="Buscar en esta lista..."
+            (keydown.enter)="searchByCompany()">
+          <div class="input-group-append">
+            <button class="btn" type="submit"><i class="bi bi-search" style="color: #9A9A9A;"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="Divtable text-center">
+      <thead>
+        <tr>
+          <th style="padding-left: 1vw;">Empresa</th>
+          <th>Inicio Suscripción</th>
+          <th>Tipo de Plan</th>
+          <th>Estado Suscripción</th>
+          <th>Método de pago</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container
+          *ngFor="let subscription of subscriptions.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
+          <tr>
+            <td routerLink="/home/sales/billing/company" (click)="saveCompanyId(subscription.client.id)" style="color: #5CAEFA; text-decoration: underline;cursor: pointer;">{{ subscription.client.companyName }}</td>
+            <td>{{ subscription.startDate| date:'shortDate' }}</td>
+            <td>{{ subscription.plan.type }}</td>
+            <td>
+              <span *ngIf="!subscription.status && subscription.endDate >= getCurrentDate()">Vencida</span>
+              <span *ngIf="!subscription.status && subscription.endDate < getCurrentDate()">Falta pago</span>
+              <span *ngIf="subscription.status">Activa</span>
+            </td>
+            <td>{{ subscription.payment.paymentMethod }}</td>
+          </tr>
+        </ng-container>
+        <tr style="border-bottom: 0vw" *ngIf="subscriptions.length > 14">
+          <td></td>
+          <td>
+            <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw"
+              (click)="previousPage()" *ngIf="Actualpage > 1">
+          </td>
+          <td></td>
+          <td>
+            <img src="../../../../../assets/icons/flecha.png"
+              style="cursor: pointer;width:1.5vw;transform: rotate(180deg);" (click)="nextPage()"
+              *ngIf="Actualpage < totalPages">
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

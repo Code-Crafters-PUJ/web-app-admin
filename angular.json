@@ -28,7 +28,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -59,10 +61,12 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "web-app-admin:build:production"
+              "buildTarget": "web-app-admin:build:production",
+              "proxyConfig": "src/environments/proxy.conf.json"
             },
             "development": {
-              "buildTarget": "web-app-admin:build:development"
+              "buildTarget": "web-app-admin:build:development",
+              "proxyConfig": "src/environments/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -89,10 +93,15 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "dac15f1e-be75-4645-a061-a8f5bd151a66"
   }
 }

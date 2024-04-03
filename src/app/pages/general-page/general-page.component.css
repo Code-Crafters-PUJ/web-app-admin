@@ -1,0 +1,30 @@
+/* Estilo de las tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  max-height: 100vh;
+}
+
+table th {
+  background-color: #D9D9D9;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+table th,
+table td {
+  border-bottom: 3px solid #D9D9D9;
+  padding: 8px;
+}
+
+table td {
+  text-align: center;
+}
+
+table tr:first-child td {
+  border-top: 3px solid #D9D9D9;
+}
+
+table tr:last-child td {
+  border-bottom: 3px solid #D9D9D9;
+}

@@ -1,0 +1,15 @@
+<app-sidebar></app-sidebar>
+
+<div *ngIf="url === 'general'">
+  <app-general-information></app-general-information>
+</div>
+
+<div *ngIf="url === 'accounts'">
+  <app-table-accounts></app-table-accounts>
+</div>
+
+<div *ngIf="url === 'new' || url === 'modify'">
+  <app-manage-account></app-manage-account>
+</div>
+
+
