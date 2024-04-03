@@ -110,9 +110,17 @@ export class ManageAccountComponent implements OnInit {
   postEntity(): void {
     if (this.url === "new") {
       console.log(this.rol)
-      {
-
+      if (this.verificarCampos()) {
+        this.router.navigate(['/home/admin/accounts']);
       }
     }
+  }
+
+  verificarCampos(): boolean {
+    if (!this.account.name || !this.account.id_card || !this.account.credential.email || !this.account.credential.hash) {
+      alert('Por favor complete todos los campos obligatorios.');
+      return false;
+    }
+    return true;
   }
 }
