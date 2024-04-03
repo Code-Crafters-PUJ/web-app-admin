@@ -12,20 +12,40 @@ export class StorageService {
 
   constructor() { }
 
-  saveAccount(account : Account){
-    window.localStorage.removeItem(USER_KEY);
-    window.localStorage.setItem(USER_KEY, JSON.stringify(account));
+  saveAccount(account: Account): void {
+    try {
+      const existingUser = window.localStorage.getItem(USER_KEY);
+      if (existingUser !== JSON.stringify(account)) {
+        window.localStorage.setItem(USER_KEY, JSON.stringify(account));
+      }
+    } catch (error) {
+      console.error('Error while saving account:', error);
+    }
   }
 
-  getSavedAccount() : Account | null {
-    const user = window.localStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
+  getSavedAccount(): Account | null {
+    try {
+
+      if (window.localStorage.getItem(USER_KEY)?.length === 0 || window.localStorage.getItem(USER_KEY) === "undefined" || window.localStorage.getItem(USER_KEY) === "null"){
+        return null;
+
+      }else{
+        const user = window.localStorage.getItem(USER_KEY);
+        if (user) {
+          return JSON.parse(user);
+        }
+      }
+      return null;
+    } catch (error) {
+      console.error('Error while retrieving saved account:', error);
+      return null;
     }
-    return null;
   }
+
+
+
 
   clean(): void {
-    window.localStorage.clear();
+    window.localStorage.removeItem(USER_KEY);
   }
 }

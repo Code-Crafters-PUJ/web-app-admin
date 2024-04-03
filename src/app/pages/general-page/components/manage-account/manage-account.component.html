@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-6">
               <label for="identificacion" class="form-label">Identificación:</label>
-              <input type="text" class="form-control" id="new-identificacion"[(ngModel)]="account.id_card" [ngModelOptions]="{standalone: true}" placeholder="Ingrese su identificación">
+              <input type="text" class="form-control" id="new-identificacion"[(ngModel)]="account.id_card" [ngModelOptions]="{standalone: true}" placeholder="Ingrese su numero de identificación">
             </div>
           </div>
           <div class="row mb-3">
@@ -24,10 +24,11 @@
             </div>
             <div class="col-md-6">
               <label for="rol" class="form-label">Rol:</label>
-              <select class="form-select" id="new-rol" [(ngModel)]="rol" [ngModelOptions]="{standalone: true}">
-                <option value="1">Administrador</option>
-                <option value="2">Marketing</option>
-                <option value="3">Ventas</option>
+              <select class="form-select" id="new-rol" [(ngModel)]="rol" [ngModelOptions]="{standalone: true}" >
+                <option value="" disabled selected>Seleccione un rol</option>
+                <option value="ADMIN">Administrador</option>
+                <option value="MARKETING">Marketing</option>
+                <option value="VENTAS">Ventas</option>
               </select>
             </div>
           </div>
@@ -36,7 +37,7 @@
               <label for="correo" class="form-label">Correo:</label>
               <input type="text" class="form-control mb-3" id="new-correo" [(ngModel)]="account.credential.email"placeholder="Ingrese su correo" [ngModelOptions]="{standalone: true}">
               <label for="contraseña" class="form-label" >Contraseña:</label>
-              <input type="text" class="form-control" id="new-contraseña" [(ngModel)]="account.credential.hash"placeholder="Ingrese su nombre" [ngModelOptions]="{standalone: true}">
+              <input type="text" class="form-control" id="new-contraseña" [(ngModel)]="account.credential.hash"placeholder="Ingrese su contraseña" [ngModelOptions]="{standalone: true}">
             </div>
             <div class="col-md-6">
               <div class="row mb-3">

@@ -5,6 +5,7 @@ export class Account {
       public documentNumber: number,
       public role: string,
       public lastConected: Date,
-      public lastReport: Date
+      public lastReport: Date,
+      public jwt: string
     ) {}
   }

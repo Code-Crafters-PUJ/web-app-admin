@@ -11,14 +11,14 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginPageComponent},
    /*{
-       
+
         path: 'path',
         component: PathComponent,
         canActivate: [isAuthenticatedGuard, hasRoleGuard],
         data:{
         role: 'role',
         }
-      
+
     }*/
   {
     path: 'home/admin',
@@ -28,7 +28,12 @@ export const routes: Routes = [
       { path: 'accounts/new', component: GeneralPageComponent },
       { path: 'accounts/modify', component: GeneralPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
-    ]
+    ],
+
+    canActivate: [isAuthenticatedGuard, hasRoleGuard],
+    data: {
+      role: 'ADMIN',
+    }
   },
   {
     path: 'home/sales',
@@ -37,7 +42,10 @@ export const routes: Routes = [
       { path: 'billing', component: SalesPageComponent },
       { path: 'billing/company', component: SalesPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
-    ]
+    ], canActivate: [isAuthenticatedGuard, hasRoleGuard],
+    data: {
+      role: 'VENTAS',
+    }
   },
-  
+
 ];
