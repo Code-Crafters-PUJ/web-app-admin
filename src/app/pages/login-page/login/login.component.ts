@@ -19,11 +19,11 @@ export class LoginComponent {
   constructor(private router: Router, private authService: AuthService, private storageService: StorageService) {
 
   }
-  
-  visible:boolean = true;
-  changetype:boolean =true;
 
-  viewpass(){
+  visible: boolean = true;
+  changetype: boolean = true;
+
+  viewpass() {
     this.visible = !this.visible;
     this.changetype = !this.changetype;
   }
@@ -40,10 +40,15 @@ export class LoginComponent {
     else {
       this.authService.login(email, password).then((value) => {
         if (value) {
-          var role = JSON.parse(value).role;
-          // Autenticación exitosa
-          this.handleSuccessfulAuthentication(role);
-
+          var jwt = JSON.parse(value).jwt;
+          if (jwt === "No Credentials matches the given query." || jwt === "ups! credenciales incorrectas" || jwt === "Campos faltantes" || jwt === "Error en el formato de datos" || jwt === "Usuario no encontrado") {
+            this.handleFailedAuthentication();
+          }
+          else {
+            var role = JSON.parse(value).role;
+            // Autenticación exitosa
+            this.handleSuccessfulAuthentication(role);
+          }
         } else {
           // Autenticación fallida
           this.handleFailedAuthentication();
@@ -51,7 +56,7 @@ export class LoginComponent {
       });
     }
   }
-  private handleSuccessfulAuthentication(role:string) {
+  private handleSuccessfulAuthentication(role: string) {
     Swal.fire({
       title: 'Bienvenido',
       text: "Autenticación exitosa",
@@ -61,20 +66,21 @@ export class LoginComponent {
     if (role === "ADMIN") {
       this.router.navigate(['/home/admin']);
 
-    } else{
+    } else {
       this.router.navigate(['/home/sales']);
     }
   }
   private handleFailedAuthentication() {
     Swal.fire({
       title: 'Uppss algo pasó',
-      text: "La contraseña o el usuario son incorrectos",
+      text: "Error en los datos ingresados, por favor verifique los campos",
       icon: 'warning',
       confirmButtonText: 'OK'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload();
+      }
     });
-    window.location.reload();
-
-
   }
 }
 
