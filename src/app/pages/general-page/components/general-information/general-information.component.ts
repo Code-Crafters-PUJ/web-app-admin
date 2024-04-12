@@ -88,7 +88,7 @@ export class GeneralInformationComponent implements OnInit {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [{
           label: 'Usuarios Conectados',
-          data: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160],
+          data: [80, 60, 25, 80, 200, 100, 110, 20, 130, 140, 40, 160],
           borderColor: 'rgb(0,74,173)',
           tension: 0.1
         }]
