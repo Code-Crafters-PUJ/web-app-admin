@@ -33,3 +33,11 @@ table tr:last-child td {
   width: 45px;
   height: 45px;
 }
+
+
+.card-custom {
+  max-width: 400px; /* Ajusta el tamaño según tu diseño */
+  margin: 0 auto; /* Centra el contenedor */
+  overflow: hidden;
+
+}
