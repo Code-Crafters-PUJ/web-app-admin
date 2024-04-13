@@ -6,7 +6,7 @@ import {SalesPageComponent} from "./pages/sales-page/sales-page.component";
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { hasRoleGuard } from './guards/has-role.guard';
 import { isAuthenticatedGuard } from './guards/is-authenticated.guard';
-import {SupportPageComponent} from "./pages/support/support-page.component";
+import {SupportPageComponent} from "./pages/support-page/support-page.component";
 import {MarketingPageComponent} from "./pages/marketing-page/marketing-page.component";
 
 export const routes: Routes = [
