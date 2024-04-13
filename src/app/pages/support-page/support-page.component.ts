@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {SidebarComponent} from "../../global/sidebar/sidebar.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {GeneralSupportComponent} from "../suport-page/components/general-support/general-support.component";
-import {RequestsSupportComponent} from "../suport-page/components/requests-support/requests-support.component";
-import {CompanySupportComponent} from "../suport-page/components/company-support/company-support.component";
+import {GeneralSupportComponent} from "./components/general-support/general-support.component";
+import {RequestsSupportComponent} from "./components/requests-support/requests-support.component";
+import {CompanySupportComponent} from "./components/company-support/company-support.component";
 
 @Component({
   selector: 'app-support-page',
