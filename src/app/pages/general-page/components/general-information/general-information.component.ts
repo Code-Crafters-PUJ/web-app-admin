@@ -59,7 +59,7 @@ export class GeneralInformationComponent implements OnInit {
           label: 'Usuarios Activos',
           data: [35, 90],
           backgroundColor: [
-            'rgb(245,29,29)',
+            'rgb(245,105,29)',
             'rgb(0, 74, 173)'
           ],
           hoverOffset: 4
@@ -85,7 +85,7 @@ export class GeneralInformationComponent implements OnInit {
     this.lineChart = new Chart("lineChart", {
       type: 'line',
       data: {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
         datasets: [{
           label: 'Usuarios Conectados',
           data: [80, 60, 25, 80, 200, 100, 110, 20, 130, 140, 40, 160],

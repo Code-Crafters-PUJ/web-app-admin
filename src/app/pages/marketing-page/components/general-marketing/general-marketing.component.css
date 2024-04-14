@@ -1,0 +1,42 @@
+/* Estilo de las tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: #D9D9D9;
+  font-weight: bold;
+}
+
+table th,
+table td {
+  border-bottom: 3px solid #D9D9D9;
+  border-bottom: 3px solid #D9D9D9;
+  padding: 8px;
+}
+
+table td {
+  text-align: center;
+}
+
+table tr:first-child td {
+  border-top: 3px solid #D9D9D9;
+}
+
+table tr:last-child td {
+  border-bottom: 3px solid #D9D9D9;
+}
+
+.user-icon {
+  width: 45px;
+  height: 45px;
+}
+
+
+.card-custom {
+  max-width: 400px; /* Ajusta el tamaño según tu diseño */
+  margin: 0 auto; /* Centra el contenedor */
+  overflow: hidden;
+
+}
