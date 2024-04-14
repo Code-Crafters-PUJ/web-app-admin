@@ -29,8 +29,8 @@ export class SidebarComponent implements OnInit {
       case 'admin':
         this.url = 'admin';
         break;
-      case 'sales':
-        this.url = 'sales';
+      case 'accounts':
+        this.url = 'accounts';
         break;
       default:
         this.url = 'home';
@@ -47,6 +47,6 @@ export class SidebarComponent implements OnInit {
       });
     });
 
-    
+
   }
 }

@@ -27,10 +27,10 @@ export class GeneralSupportComponent implements OnInit {
     this.barChart = new Chart("barChart", {
       type: 'bar',
       data: {
-        labels: ['Administrativo', 'Ventas', 'Mrketing', 'Soporte'],
+        labels: ['Administrativo', 'Ventas', 'Marketing', 'Soporte'],
         datasets: [{
           label: 'Porcentaje de servidoes',
-          data: [65, 59, 80, 81],
+          data: [65, 59, 25, 94],
           backgroundColor: [
             'rgb(0,31,134)'
           ]

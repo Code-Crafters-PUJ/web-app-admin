@@ -35,7 +35,7 @@
         <ng-container
           *ngFor="let subscription of subscriptions.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
           <tr>
-            <td routerLink="/home/sales/billing/company" (click)="saveCompanyId(subscription.client.id)" style="color: #5CAEFA; text-decoration: underline;cursor: pointer;">{{ subscription.client.companyName }}</td>
+            <td routerLink="/home/accounts/billing/company" (click)="saveCompanyId(subscription.client.id)" style="color: #5CAEFA; text-decoration: underline;cursor: pointer;">{{ subscription.client.companyName }}</td>
             <td>{{ subscription.startDate| date:'shortDate' }}</td>
             <td>{{ subscription.plan.type }}</td>
             <td>

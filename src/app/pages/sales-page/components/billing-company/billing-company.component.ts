@@ -82,7 +82,7 @@ export class BillingCompanyComponent implements OnInit {
       this.subscriptionsFiltered = this.subscriptions.filter(subscription => subscription.client.companyName.toLowerCase().includes(this.searchText.toLowerCase()));
       this.filtroAplicado = true;
       this.subscriptions = this.subscriptionsFiltered;
-      this.router.navigateByUrl('/home/sales/billing/?pagina='+1)
+      this.router.navigateByUrl('/home/accounts/billing/?pagina='+1)
     }
     else {
       this.filtroAplicado = false;
