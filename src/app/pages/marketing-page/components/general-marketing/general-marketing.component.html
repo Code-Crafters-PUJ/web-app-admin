@@ -15,6 +15,7 @@
       <div class="card">
         <div class="card-body card-custom  text-center">
           <h5 class="mb-3">Porcentaje de uso de Servidores en Tiempo Real</h5>
+          <canvas  id="MyChart" style="max-width: 100%; max-height: 100%;">{{ doughnutChart }}</canvas>
         </div>
       </div>
     </div>
@@ -23,11 +24,7 @@
       <div class="card">
         <div class="card-body text-center">
           <h5 class="mb-3" >Monitoreo de infraestructura de la nube </h5>
-          <table class="table">
-            <tbody>
-
-            </tbody>
-          </table>
+          <canvas id="lineChart">{{ lineChart }}</canvas>
         </div>
       </div>
     </div>
@@ -36,11 +33,7 @@
       <div class="card">
         <div class="card-body text-center">
           <h5 class="mb-3" >Monitoreo de infraestructura de la nube </h5>
-          <table class="table">
-            <tbody>
 
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
