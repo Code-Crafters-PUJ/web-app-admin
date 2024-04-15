@@ -1,51 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {Account} from '../../../../models/general-models/account';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AccountService} from '../../../../services/general-services/account/account.service';
-import {NgOptimizedImage} from '@angular/common';
-import Chart from 'chart.js/auto';
-
+import {NgOptimizedImage} from "@angular/common";
+import Chart from "chart.js/auto";
 
 @Component({
-  selector: 'app-general-information',
+  selector: 'app-general-marketing',
   standalone: true,
-  imports: [NgOptimizedImage],
-  templateUrl: './general-information.component.html',
-  styleUrl: './general-information.component.css'
+    imports: [
+        NgOptimizedImage
+    ],
+  templateUrl: './general-marketing.component.html',
+  styleUrl: './general-marketing.component.css'
 })
-export class GeneralInformationComponent implements OnInit {
-  accounts: Account[] = [];
-  selectedEditAccount: Account | null = null;
+export class GeneralMarketingComponent implements OnInit {
+
   public doughnutChart: any;
   public lineChart: any;
+  public barChart: any;
+  ngOnInit(): void {
 
-
-
-  constructor(
-    private accountService: AccountService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-  }
-
-  ngOnInit() {
-    this.getAccounts();
     this.CreateDoughnutChart();
     this.createLineChart();
-
-  };
-
-
-  private getAccounts() {
-    this.accountService.getAccounts().subscribe(
-      data => {
-        this.accounts = data;
-      },
-      error => {
-        console.error('Error al obtener usuarios:', error);
-      }
-    );
+    this.createBarChart()
   }
+
 
   CreateDoughnutChart() {
     this.doughnutChart = new Chart("MyChart", {
@@ -60,7 +37,7 @@ export class GeneralInformationComponent implements OnInit {
           data: [35, 90],
           backgroundColor: [
             'rgb(245,105,29)',
-            'rgb(0, 74, 173)'
+            'rgb(0,31,134)'
           ],
           hoverOffset: 4
         }]
@@ -102,7 +79,23 @@ export class GeneralInformationComponent implements OnInit {
       }
     });
   }
+
+  createBarChart() {
+    this.barChart = new Chart("barChart", {
+      type: 'bar',
+      data: {
+        labels: ['Administrativo', 'Ventas', 'Marketing', 'Soporte'],
+        datasets: [{
+          label: 'Porcentaje de servidoes',
+          data: [65, 59, 25, 94],
+          backgroundColor: [
+            'rgb(0,31,134)'
+          ]
+        }]
+      }
+    })
+  }
+
+
+
 }
-
-
-

@@ -85,7 +85,7 @@ export class Generation {
         this.rol2 =
         {
             id: 1,
-            description: "marketing",
+            description: "marketing-page",
             accounts: []
         }
         this.rol3 =
@@ -103,7 +103,7 @@ export class Generation {
         this.modul2 =
         {
             id: 2,
-            description: "marketing",
+            description: "marketing-page",
             permissions: []
         }
         this.report1 =

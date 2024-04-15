@@ -1,0 +1,80 @@
+
+/* Estilo de las tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  background-color: #D9D9D9;
+  font-weight: bold;
+}
+
+table th,
+table td {
+  border-bottom: 3px solid #D9D9D9;
+  border-bottom: 3px solid #D9D9D9;
+  padding: 8px;
+}
+
+table td {
+  text-align: center;
+}
+
+table tr:first-child td {
+  border-top: 3px solid #D9D9D9;
+}
+
+table tr:last-child td {
+  border-bottom: 3px solid #D9D9D9;
+}
+
+.user-icon {
+  width: 45px;
+  height: 45px;
+}
+
+
+.card-custom {
+  max-width: 400px; /* Ajusta el tamaño según tu diseño */
+  margin: 0 auto; /* Centra el contenedor */
+  overflow: hidden;
+
+}
+
+
+.container-btn {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.container-btn button {
+  margin: 0 5px;
+}
+
+button.btn-primary.btn-submit {
+  background-color: #5CAEFA;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+}
+
+button.btn-primary.btn-cancel {
+  background-color: #B81717;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+}
+
+
+button.btn-primary.btn-new {
+  background-color: #ffffff;
+  color: #5CAEFA;
+  font-weight: bold;
+  border: #5CAEFA solid 1px;
+  padding: 10px 20px;
+}
+
