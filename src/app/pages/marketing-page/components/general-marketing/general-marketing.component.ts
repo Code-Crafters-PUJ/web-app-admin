@@ -15,10 +15,12 @@ export class GeneralMarketingComponent implements OnInit {
 
   public doughnutChart: any;
   public lineChart: any;
+  public barChart: any;
   ngOnInit(): void {
 
     this.CreateDoughnutChart();
     this.createLineChart();
+    this.createBarChart()
   }
 
 
@@ -76,6 +78,22 @@ export class GeneralMarketingComponent implements OnInit {
         }
       }
     });
+  }
+
+  createBarChart() {
+    this.barChart = new Chart("barChart", {
+      type: 'bar',
+      data: {
+        labels: ['Administrativo', 'Ventas', 'Marketing', 'Soporte'],
+        datasets: [{
+          label: 'Porcentaje de servidoes',
+          data: [65, 59, 25, 94],
+          backgroundColor: [
+            'rgb(0,31,134)'
+          ]
+        }]
+      }
+    })
   }
 
 
