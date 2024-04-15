@@ -88,110 +88,122 @@
             <input type="text" class="form-control" id="Estadotrial" placeholder="Estado ">
           </div>
 
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="row align-items-center mb-5">
-    <div class="col-auto mb-2">
-      <img ngSrc="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
-    </div>
-    <div class="col-auto ps-0 mb-2">
-      <h1 class="font-weight-bold mb-2">Cupones</h1>
-    </div>
-  </div>
-
-
-  <div class="row">
-
-    <div class="col-lg-6 mb-3">
-      <div class="card">
-        <div class="card-body text-center">
-          <div class="table-responsive">
-
-
-            <table class="table">
-
-              <thead>
-              <tr>
-                <th style="padding-left: 1vw;">Nombre</th>
-                <th>Actualizacion</th>
-                <th>Usuarios</th>
-                <th>Estado</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>Empresa S.A.</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              <tr>
-                <td>Empresa S.A</td>
-                <td>Data 2</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              <tr>
-                <td>Empresa S.A</td>
-                <td>Data 3</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              <tr>
-                <td>Empresa S.A</td>
-                <td>Data 3</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              </tbody>
-            </table>
+          <div class="container-btn">
+            <button  type="reset" class="btn btn-primary btn-cancel px-5">Eliminar</button>
+            <button  type="submit" class="btn btn-primary btn-submit px-5">Guardar</button>
           </div>
+
         </div>
       </div>
     </div>
-    <div class="col-lg-6 mb-3">
-      <div class="card">
-        <div class="card-body ">
-          <h5 class="mb-3 text-center">Edicion de Cupon</h5>
 
-          <!-- Input 1 -->
-          <div class="mb-3">
-            <label for="codigoCupon" class="form-label">Codigo </label>
-            <input type="text" class="form-control" id="codigoCupon" placeholder="X54GD" disabled>
+
+    <div class="row align-items-center mb-5">
+      <div class="col-auto mb-2">
+        <img ngSrc="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
+      </div>
+      <div class="col-auto ps-0 mb-2">
+        <h1 class="font-weight-bold mb-2">Cupones</h1>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-lg-6 mb-3">
+        <div class="card">
+          <div class="card-body text-center">
+            <div class="table-responsive">
+
+
+              <table class="table">
+
+                <thead>
+                <tr>
+                  <th style="padding-left: 1vw;">Nombre</th>
+                  <th>Actualizacion</th>
+                  <th>Usuarios</th>
+                  <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Empresa S.A.</td>
+                  <td>Data 1</td>
+                  <td>Data 1</td>
+                  <td>Data 1</td>
+                </tr>
+                <tr>
+                  <td>Empresa S.A</td>
+                  <td>Data 2</td>
+                  <td>Data 1</td>
+                  <td>Data 1</td>
+                </tr>
+                <tr>
+                  <td>Empresa S.A</td>
+                  <td>Data 3</td>
+                  <td>Data 1</td>
+                  <td>Data 1</td>
+                </tr>
+                <tr>
+                  <td>Empresa S.A</td>
+                  <td>Data 3</td>
+                  <td>Data 1</td>
+                  <td>Data 1</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-
-          <!-- Input 2 -->
-          <div class="mb-3">
-            <label for="empresaCupon" class="form-label">Empresa </label>
-            <input type="text" class="form-control" id="empresaCupon" placeholder="Empresa">
-          </div>
-
-          <!-- Input 3 -->
-          <div class="mb-3">
-          <label for="descuentoCupon" class="form-label">Descuento</label>
-          <select class="form-select" id="descuentoCupon">
-            <option value="10">10%</option>
-            <option value="20">20%</option>
-            <option value="30">30%</option>
-          </select>
         </div>
+      </div>
+      <div class="col-lg-6 mb-3">
+        <div class="card">
+          <div class="card-body ">
+            <h5 class="mb-3 text-center">Edicion de Cupon</h5>
 
-          <!-- Input 4 -->
-          <div class="mb-3">
-            <label for="duracionCupon" class="form-label">Duracion</label>
-            <input type="text" class="form-control" id="duracionCupon" placeholder="Duracion">
+            <!-- Input 1 -->
+            <div class="mb-3">
+              <label for="codigoCupon" class="form-label">Codigo </label>
+              <input type="text" class="form-control" id="codigoCupon" placeholder="X54GD" disabled>
+            </div>
+
+            <!-- Input 2 -->
+            <div class="mb-3">
+              <label for="empresaCupon" class="form-label">Empresa </label>
+              <input type="text" class="form-control" id="empresaCupon" placeholder="Empresa">
+            </div>
+
+            <!-- Input 3 -->
+            <div class="mb-3">
+              <label for="descuentoCupon" class="form-label">Descuento</label>
+              <select class="form-select" id="descuentoCupon">
+                <option value="10">10%</option>
+                <option value="20">20%</option>
+                <option value="30">30%</option>
+              </select>
+            </div>
+
+            <!-- Input 4 -->
+            <div class="mb-3">
+              <label for="duracionCupon" class="form-label">Duracion</label>
+              <input type="text" class="form-control" id="duracionCupon" placeholder="Duracion">
+            </div>
+
+            <!-- Input 4 -->
+            <div class="mb-3">
+              <label for="expiracionCupon" class="form-label">Expiracion</label>
+              <input type="text" class="form-control" id="expiracionCupon" placeholder="Expiracion">
+            </div>
+
+            <div class="container-btn">
+              <button  type="reset" class="btn btn-primary btn-cancel px-5">Eliminar</button>
+              <button  type="submit" class="btn btn-primary btn-submit px-5">Guardar</button>
+              <button  type="submit" class="btn btn-primary btn-new px-5">Nuevo</button>
+
+            </div>
+
           </div>
-
-          <!-- Input 4 -->
-          <div class="mb-3">
-            <label for="expiracionCupon" class="form-label">Expiracion</label>
-            <input type="text" class="form-control" id="expiracionCupon" placeholder="Expiracion">
-          </div>
-
         </div>
       </div>
     </div>

@@ -41,3 +41,40 @@ table tr:last-child td {
   overflow: hidden;
 
 }
+
+
+.container-btn {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.container-btn button {
+  margin: 0 5px;
+}
+
+button.btn-primary.btn-submit {
+  background-color: #5CAEFA;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+}
+
+button.btn-primary.btn-cancel {
+  background-color: #B81717;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+}
+
+
+button.btn-primary.btn-new {
+  background-color: #ffffff;
+  color: #5CAEFA;
+  font-weight: bold;
+  border: #5CAEFA solid 1px;
+  padding: 10px 20px;
+}
+
