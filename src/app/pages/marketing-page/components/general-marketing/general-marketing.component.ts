@@ -37,7 +37,7 @@ export class GeneralMarketingComponent implements OnInit {
           data: [35, 90],
           backgroundColor: [
             'rgb(245,105,29)',
-            'rgb(0, 74, 173)'
+            'rgb(0,31,134)'
           ],
           hoverOffset: 4
         }]
