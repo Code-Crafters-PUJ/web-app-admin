@@ -32,6 +32,12 @@ export class SidebarComponent implements OnInit {
       case 'accounts':
         this.url = 'accounts';
         break;
+      case 'support':
+        this.url = 'support';
+        break;
+      case 'marketing':
+        this.url = 'marketing';
+        break;
       default:
         this.url = 'home';
     }
