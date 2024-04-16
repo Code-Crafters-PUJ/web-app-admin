@@ -130,15 +130,15 @@
               </thead>
               <tbody>
                 <ng-container
-                  *ngFor="let subscription of subscriptions.slice((actualpageSubscription - 1) * 5, actualpageSubscription * 5); let i = index">
+                  *ngFor="let bill of billings.slice((actualpageSubscription - 1) * 5, actualpageSubscription * 5); let i = index">
                   <tr>
-                    <td>{{subscription.client.companyName}}</td>
-                    <td>{{subscription.client.email}}</td>
-                    <td>{{subscription.plan.type}}</td>
-                    <td>{{subscription.usage.hours}}:{{subscription.usage.minutes}}</td>
+                    <td>{{bill.client.company_name}}</td>
+                    <td>{{bill.client.email}}</td>
+                    <td>{{bill.plan.type}}</td>
+                    <td>{{bill.usage.hours}}:{{bill.usage.minutes}}</td>
                   </tr>
                 </ng-container>
-                <tr style="border-bottom: 0vw" *ngIf="subscriptions.length > 5">
+                <tr style="border-bottom: 0vw" *ngIf="billings.length > 5">
                   <td></td>
                   <td>
                     <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw"

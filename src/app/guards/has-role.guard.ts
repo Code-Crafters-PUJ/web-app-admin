@@ -9,7 +9,7 @@ export const hasRoleGuard: CanActivateFn = (route, state) => {
 
   const account = storageService.getSavedAccount()
 
-  if (!account || account.role != route.data['role']){
+  if (!account || account.rol != route.data['role']){
     router.navigate(['/login'])
   }
   

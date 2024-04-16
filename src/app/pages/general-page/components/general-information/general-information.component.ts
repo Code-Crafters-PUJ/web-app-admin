@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Account} from '../../../../models/Users-models/account';
+import {Credential} from '../../../../models/Accounts-Models/credential';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AccountService} from '../../../../services/general-services/account/account.service';
+import {CredentialService} from '../../../../services/general-services/credential/credential.service';
 import {NgOptimizedImage} from '@angular/common';
 import Chart from 'chart.js/auto';
 
@@ -14,15 +14,15 @@ import Chart from 'chart.js/auto';
   styleUrl: './general-information.component.css'
 })
 export class GeneralInformationComponent implements OnInit {
-  accounts: Account[] = [];
-  selectedEditAccount: Account | null = null;
+  credentials: Credential[] = [];
+  selectedEditAccount: Credential | null = null;
   public doughnutChart: any;
   public lineChart: any;
 
 
 
   constructor(
-    private accountService: AccountService,
+    private credentialService: CredentialService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -37,9 +37,9 @@ export class GeneralInformationComponent implements OnInit {
 
 
   private getAccounts() {
-    this.accountService.getAccounts().subscribe(
+    this.credentialService.getCredentials().subscribe(
       data => {
-        this.accounts = data;
+        this.credentials = data;
       },
       error => {
         console.error('Error al obtener usuarios:', error);

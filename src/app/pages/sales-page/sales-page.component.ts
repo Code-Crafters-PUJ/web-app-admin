@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {
-    GeneralInformationComponent
-} from "../general-page/components/general-information/general-information.component";
+import {GeneralInformationComponent} from "../general-page/components/general-information/general-information.component";
 import {ManageAccountComponent} from "../general-page/components/manage-account/manage-account.component";
 import {NgIf} from "@angular/common";
 import {SidebarComponent} from "../../global/sidebar/sidebar.component";

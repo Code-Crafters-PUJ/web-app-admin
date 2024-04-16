@@ -35,12 +35,12 @@ export class CompanyInfoComponent {
       );
       if(this.client!=null)
       {
-        if(this.client.subscriptions.length!=0)
+        if(this.client.Billings.length!=0)
         {
-          this.plan=this.client.subscriptions[this.client.subscriptions.length-1].plan.type
+          this.plan=this.client.Billings[this.client.Billings.length-1].plan.type
         }
-        for (let i = 0; i < this.client.subscriptions.length; i++) {
-          this.total+=this.client.subscriptions[i].plan.price; 
+        for (let i = 0; i < this.client.Billings.length; i++) {
+          this.total+=this.client.Billings[i].plan.price; 
         }
       }
     }

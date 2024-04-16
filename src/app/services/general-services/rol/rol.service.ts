@@ -1,20 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Generation } from '../generator';
-import { Rol } from '../../../models/Users-models/rol';
+import { Rol } from '../../../models/Accounts-Models/rol';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RolService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
   getRoles(): Observable<Rol[]> {
-    //return this.http.get<Rol[]>('http://localhost:/admin/Rol/all');
-    return new Observable<Rol[]>(observer => {
-      const Rols: Rol[] = [Generation.rol1,Generation.rol2,Generation.rol3]
-      observer.next(Rols);
-      observer.complete();
-    });
+    return this.http.get<Rol[]>('http://localhost:/admin/Rol/all');
   }
 }

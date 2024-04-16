@@ -1,7 +1,7 @@
 import {Component,OnInit} from '@angular/core';
-import {SubscriptionService} from "../../../../services/sales-services/subscription/subscription.service";
+import {BillingService} from "../../../../services/sales-services/billing/subscription.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {Subscription} from "../../../../models/sales-models/billing";
+import {Billing} from "../../../../models/sales-models/billing";
 import { FormsModule } from '@angular/forms';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 
@@ -13,15 +13,15 @@ import {CommonModule, NgOptimizedImage} from '@angular/common';
   styleUrl: './billing-company.component.css'
 })
 export class BillingCompanyComponent implements OnInit {
-  subscriptions: Subscription[] = [];
+  billings: Billing[] = [];
   Actualpage: number = 1;
   totalPages: number = 0;
-  subscriptionsFiltered: Subscription[] = [];
+  billingsFiltered: Billing[] = [];
   filtroAplicado: boolean = false;
   searchText: string = '';
 
   constructor(
-      private subscriptionService: SubscriptionService,
+      private billingService: BillingService,
       private route: ActivatedRoute,
       private router: Router
   ) { }
@@ -31,7 +31,7 @@ export class BillingCompanyComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.Actualpage = +params['pagina'] || 1;
       if (this.filtroAplicado) {
-        this.subscriptions = this.subscriptionsFiltered;
+        this.billings = this.billingsFiltered;
       }
       else {
         this.getSubscriptions();
@@ -39,10 +39,10 @@ export class BillingCompanyComponent implements OnInit {
     });
   }
   private getSubscriptions() {
-    this.subscriptionService.getSubscriptions().subscribe(
+    this.billingService.getBillings().subscribe(
         data => {
-          this.subscriptions = data;
-          this.totalPages = Math.ceil(this.subscriptions.length / 14);
+          this.billings = data;
+          this.totalPages = Math.ceil(this.billings.length / 14);
         },
         error => {
           console.error('Error al obtener subscripciones:', error);
@@ -79,9 +79,9 @@ export class BillingCompanyComponent implements OnInit {
   searchByCompany() {
     if (this.searchText.trim().length != 0) {
       this.getSubscriptions();
-      this.subscriptionsFiltered = this.subscriptions.filter(subscription => subscription.client.companyName.toLowerCase().includes(this.searchText.toLowerCase()));
+      this.billingsFiltered = this.billings.filter(subscription => subscription.client.company_name.toLowerCase().includes(this.searchText.toLowerCase()));
       this.filtroAplicado = true;
-      this.subscriptions = this.subscriptionsFiltered;
+      this.billings = this.billingsFiltered;
       this.router.navigateByUrl('/home/accounts/billing/?pagina='+1)
     }
     else {

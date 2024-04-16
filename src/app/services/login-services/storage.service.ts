@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 //import { CookieService } from 'ngx-cookie-service';
-import { Account } from '../../models/login-models/account';
+import { Account } from '../../models/Accounts-Models/account';
 
 const USER_KEY = 'authenticated-user';
 

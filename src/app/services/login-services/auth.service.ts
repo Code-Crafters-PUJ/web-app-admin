@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { Credential } from '../../models/login-models/credential';
 import { environment } from '../../../environments/environment';
 
 

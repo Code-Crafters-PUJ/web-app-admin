@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Account } from '../../../../models/Users-models/account';
+import { Credential } from '../../../../models/Accounts-Models/credential';
 import { ActivatedRoute, Router, RouterLink} from '@angular/router';
-import { AccountService } from '../../../../services/general-services/account/account.service';
+import { CredentialService } from '../../../../services/general-services/credential/credential.service';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -20,14 +20,14 @@ import { FormsModule } from '@angular/forms';
 export class TableAccountsComponent {
   Actualpage: number = 1;
   totalPages: number = 0;
-  accounts: Account[] = [];
+  credentials: Credential[] = [];
   filtroAplicado: boolean = false;
-  selectedEditAccount: Account | null = null;
+  selectedEditAccount: Credential | null = null;
   searchText:string=""
-  accountsFiltered:Account[]=[]
+  credentialsFiltered:Credential[]=[]
 
   constructor(
-    private accountService: AccountService,
+    private credentialService: CredentialService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -36,18 +36,18 @@ export class TableAccountsComponent {
     this.route.queryParams.subscribe(params => {
       this.Actualpage = +params['pagina'] || 1;
       if (this.filtroAplicado) {
-        this.accounts = this.accountsFiltered;
+        this.credentials = this.credentialsFiltered;
       }
       else {
-        this.getAccounts();
+        this.getCredentials();
       }
     });
   };
-  private getAccounts() {
-    this.accountService.getAccounts().subscribe(
+  private getCredentials() {
+    this.credentialService.getCredentials().subscribe(
       data => {
-        this.accounts = data;
-        this.totalPages = Math.ceil(this.accounts.length / 14);
+        this.credentials = data;
+        this.totalPages = Math.ceil(this.credentials.length / 14);
       },
       error => {
         console.error('Error al obtener usuarios:', error);
@@ -55,7 +55,7 @@ export class TableAccountsComponent {
     );
   }
 
-  setSelectedEditAccount(optionalAccount: Account): void {
+  setSelectedEditAccount(optionalAccount: Credential): void {
     if (this.selectedEditAccount === optionalAccount) {
       this.selectedEditAccount = null;
       return;
@@ -85,10 +85,9 @@ export class TableAccountsComponent {
   }
   
   deleteAccount(i: number) {
-    this.accountService.delete(i).subscribe(
+    this.credentialService.delete(i).subscribe(
       data => {
-        this.accounts = data;
-        //location.reload();Once connected,back only use this
+        location.reload();
       },
       error => {
       }
@@ -99,15 +98,15 @@ export class TableAccountsComponent {
   }
   searchByEmail() {
     if (this.searchText.trim().length != 0) {
-      this.getAccounts();
-      this.accountsFiltered = this.accounts.filter(accounts => accounts.credential.email.toLowerCase().includes(this.searchText.toLowerCase()));
+      this.getCredentials();
+      this.credentialsFiltered = this.credentials.filter(credential => credential.email.toLowerCase().includes(this.searchText.toLowerCase()));
       this.filtroAplicado = true;
-      this.accounts = this.accountsFiltered;
+      this.credentials = this.credentialsFiltered;
       this.router.navigateByUrl('/home/admin/accounts/?pagina='+1)
     }
     else {
       this.filtroAplicado = false;
-      this.getAccounts();
+      this.getCredentials();
     }
   }
 }

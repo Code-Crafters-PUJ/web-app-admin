@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClientService } from '../../../../services/sales-services/client/client.service';
 import { Client } from '../../../../models/sales-models/client';
-import { Subscription } from '../../../../models/sales-models/billing';
+import { Billing } from '../../../../models/sales-models/billing';
 
 @Component({
   selector: 'app-sales-data',
@@ -22,7 +22,7 @@ export class SalesDataComponent {
     private router: Router,
     private clientService: ClientService) {
   }
-  subscriptions: Subscription[] = []
+  Billings: Billing[] = []
   ngOnInit(): void {
     const companyIdString = sessionStorage.getItem('companyId');
     if (companyIdString !== null) {
@@ -36,10 +36,10 @@ export class SalesDataComponent {
         }
       );
       if (this.client != null) {
-        for (let i = 0; i < this.client.subscriptions.length; i++) {
-          this.subscriptions[i] = this.client.subscriptions[i]
+        for (let i = 0; i < this.client.Billings.length; i++) {
+          this.Billings[i] = this.client.Billings[i]
         }
-        this.totalPages = Math.ceil(this.subscriptions.length /5);
+        this.totalPages = Math.ceil(this.Billings.length /5);
       }
     }
   }

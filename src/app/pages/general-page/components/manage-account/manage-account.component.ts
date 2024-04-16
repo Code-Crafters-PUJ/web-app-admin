@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { Account } from '../../../../models/Users-models/account';
+import { Account } from '../../../../models/Accounts-Models/account';
 import { ModulsService } from '../../../../services/general-services/moduls/moduls.service';
-import { OperationService } from '../../../../services/general-services/operation/operation.service';
 import { RolService } from '../../../../services/general-services/rol/rol.service';
-import { Rol } from '../../../../models/Users-models/rol';
-import { Credential } from '../../../../models/Users-models/credential';
-import { Report } from '../../../../models/Users-models/report';
-import { Operation } from '../../../../models/Users-models/operation';
-import { Modul } from '../../../../models/Users-models/Module';
+import { Rol } from '../../../../models/Accounts-Models/rol';
+import { Credential } from '../../../../models/Accounts-Models/credential';
+import { Report } from '../../../../models/Accounts-Models/report';
+import { Module } from '../../../../models/Accounts-Models/Module';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -29,8 +27,8 @@ import { FormsModule } from '@angular/forms';
 export class ManageAccountComponent implements OnInit {
   url: string = "";
   rols: Rol[] = []
-  operations: Operation[] = []
-  moduls: Modul[] = []
+  //operations: Operation[] = []
+  //moduls: Modul[] = []
   bools:boolean[]=[false,false,false,false]
   rol:string=''
   account: Account = {
@@ -39,17 +37,24 @@ export class ManageAccountComponent implements OnInit {
     last_name: '',
     id_card: '',
     last_connection: new Date(),
+    connected:0,
     rol: {} as Rol,
-    credential: {} as Credential,
     permissions: [],
-    last_report: {} as Report
+    Reports:[]
   };
+  credential:Credential=
+  {
+    id:0,
+    email:'',
+    hash:'',
+    account:this.account
+  }
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private modulService: ModulsService,
-    private operationService: OperationService,
+    //private operationService: OperationService,
     private rolService: RolService
   ) { }
 
@@ -69,12 +74,12 @@ export class ManageAccountComponent implements OnInit {
         this.url = 'new';
     }
 
-    this.getModules();
-    this.getOperations();
+    //this.getModules();
+    //this.getOperations();
     this.getRoles();
   }
 
-  private getModules() {
+  /*private getModules() {
     this.modulService.getModules().subscribe(
       data => {
         this.moduls = data
@@ -94,7 +99,7 @@ export class ManageAccountComponent implements OnInit {
         console.error('Error fetching operations:', error);
       }
     );
-  }
+  }*/
 
   private getRoles() {
     this.rolService.getRoles().subscribe(
@@ -117,7 +122,7 @@ export class ManageAccountComponent implements OnInit {
   }
 
   verificarCampos(): boolean {
-    if (!this.account.name || !this.account.id_card || !this.account.credential.email || !this.account.credential.hash) {
+    if (!this.account.name || !this.account.id_card || !this.credential.email || !this.credential.hash) {
       alert('Por favor complete todos los campos obligatorios.');
       return false;
     }
