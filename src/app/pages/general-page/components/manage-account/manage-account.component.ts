@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { Account } from '../../../../models/general-models/account';
+import { Account } from '../../../../models/Users-models/account';
 import { ModulsService } from '../../../../services/general-services/moduls/moduls.service';
 import { OperationService } from '../../../../services/general-services/operation/operation.service';
 import { RolService } from '../../../../services/general-services/rol/rol.service';
-import { Rol } from '../../../../models/general-models/rol';
-import { Credential } from '../../../../models/general-models/credential';
-import { Report } from '../../../../models/general-models/report';
-import { Operation } from '../../../../models/general-models/operation';
-import { Modul } from '../../../../models/general-models/modul';
+import { Rol } from '../../../../models/Users-models/rol';
+import { Credential } from '../../../../models/Users-models/credential';
+import { Report } from '../../../../models/Users-models/report';
+import { Operation } from '../../../../models/Users-models/operation';
+import { Modul } from '../../../../models/Users-models/Module';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

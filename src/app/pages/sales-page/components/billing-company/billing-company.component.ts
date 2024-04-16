@@ -1,7 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {SubscriptionService} from "../../../../services/sales-services/subscription/subscription.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {Subscription} from "../../../../models/sales-models/subscription";
+import {Subscription} from "../../../../models/sales-models/billing";
 import { FormsModule } from '@angular/forms';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Account} from '../../../../models/general-models/account';
+import {Account} from '../../../../models/Users-models/account';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AccountService} from '../../../../services/general-services/account/account.service';
 import {NgOptimizedImage} from '@angular/common';
