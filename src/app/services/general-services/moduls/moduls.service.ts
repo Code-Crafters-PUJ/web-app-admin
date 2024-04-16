@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Modul } from '../../../models/general-models/modul';
+import { Modul } from '../../../models/Users-models/Module';
 import { Observable } from 'rxjs';
 import { Generation } from '../generator';
 

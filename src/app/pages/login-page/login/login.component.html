@@ -11,7 +11,11 @@
 
     <!-- Password input -->
     <label for="password" class="main-label">Contraseña</label>
-    <input type="password" id="password" class="main-input" name="password" #password>
+    <div id="password-container">
+      <input type="password" id="password" class="main-input" name="password" #password [type]="changetype?'password':'text'">
+      <span class="eyeicon" (click)="viewpass()"><i [ngClass]="visible?'fa fa-eye':'fa fa-eye-slash'"></i>
+      </span>
+    </div>
 
     <!-- Login button -->
     <button type="submit" id="btn-login" (click)="signInUser(email.value,password.value)">INICIAR SESIÓN</button>

@@ -1,7 +1,7 @@
 import { Client } from "../../models/sales-models/client";
 import { Payment } from "../../models/sales-models/payment";
 import { Plan } from "../../models/sales-models/plan";
-import { Subscription } from "../../models/sales-models/subscription";
+import { Subscription } from "../../models/sales-models/billing";
 
 export class Generation {
     static client1: Client;

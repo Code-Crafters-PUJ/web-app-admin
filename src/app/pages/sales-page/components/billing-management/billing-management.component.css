@@ -9,7 +9,7 @@
 }
 
 
-/* Styling for support history section */
+/* Styling for support-page history section */
 .support-history {
   border: 1px solid rgba(217, 217, 217, 0.5);
   margin-top: 3.5%;
@@ -19,7 +19,7 @@
   padding: 1%;
 }
 
-/* Applying flex-grow and width to 'item5' and support history */
+/* Applying flex-grow and width to 'item5' and support-page history */
 .item5,
 .support-history {
   flex-grow: 1; /* Allowing these elements to grow within their container */

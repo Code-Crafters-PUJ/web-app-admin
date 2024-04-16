@@ -1,9 +1,10 @@
-import { Subscription } from "./subscription";
+import { Billing} from "./billing";
 
 export interface Plan {
     id: number;
     type: string;
     price: number;
-    description: string;
-    subscriptions: Subscription[];
+    plan_description: string;
+    duration:string
+    billings: Billing[];
 }

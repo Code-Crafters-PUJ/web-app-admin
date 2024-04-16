@@ -4,7 +4,7 @@ import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { ClientService } from '../../../../services/sales-services/client/client.service';
 import { SubscriptionService } from '../../../../services/sales-services/subscription/subscription.service';
-import { Subscription } from '../../../../models/sales-models/subscription';
+import { Subscription } from '../../../../models/sales-models/billing';
 import { Client } from '../../../../models/sales-models/client';
 import { SalesAux } from './SalesAux'
 

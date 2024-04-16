@@ -13,23 +13,10 @@
   <div class="row">
     <div class="col-lg-12 mb-3">
       <div class="card">
-        <div class="card-body text-center">
-          <h5 class="mb-3" >Usuarios activos en tiempo real </h5>
-          <table class="table">
-            <thead>
-            <tr>
-              <th>No.</th>
-              <th>Usuario</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr><td>Row 1</td><td>Data 1</td></tr>
-            <tr><td>Row 2</td><td>Data 2</td></tr>
-            <tr><td>Row 3</td><td>Data 3</td></tr>
-            <tr><td>Row 4</td><td>Data 4</td></tr>
-            <tr><td>Row 5</td><td>Data 5</td></tr>
-            </tbody>
-          </table>
+        <div class="card-body card-custom  text-center">
+          <h5 class="mb-3">Usuarios activos en tiempo real</h5>
+          <canvas  id="MyChart" style="max-width: 100%; max-height: 100%;">{{ doughnutChart }}</canvas>
+          <h5>El 10% de los usuarios se encuentran activos actualmente</h5>
         </div>
       </div>
     </div>
@@ -37,22 +24,9 @@
       <div class="card">
         <div class="card-body text-center">
           <h5 class="mb-3" >Historial de Uusarios conectados </h5>
-          <table class="table">
-            <thead>
-            <tr>
-              <th>No.</th>
-              <th>Usuario</th>
-              <th>Ultima Hora de Conexion</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr><td>1</td><td>Felipe Garcia</td><td>25/01/2023 12:00</td></tr>
-            <tr><td>2</td><td>Data 2</td><td>26/01/2023 16:00</td></tr>
-            <tr><td>3</td><td>Data 3</td><td>27/02/2023 17:00</td></tr>
-            <tr><td>4</td><td>Data 4</td><td>28/02/2023 18:00</td></tr>
-            <tr><td>5</td><td>Data 5</td><td>29/03/2023 22:00</td></tr>
-            </tbody>
-          </table>
+
+          <canvas id="lineChart">{{ lineChart }}</canvas>
+
         </div>
       </div>
     </div>

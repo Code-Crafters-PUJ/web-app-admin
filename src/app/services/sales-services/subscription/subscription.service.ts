@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Subscription } from '../../../models/sales-models/subscription';
+import { Subscription } from '../../../models/sales-models/billing';
 import { Generation } from '../generation'
 
 @Injectable({

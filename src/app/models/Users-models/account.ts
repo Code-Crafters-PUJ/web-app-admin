@@ -9,8 +9,8 @@ export interface Account {
     last_name:string;
     id_card:string;
     last_connection:Date;
+    connected:number
     rol:Rol;
-    credential:Credential;
     permissions:Permission[];
-    last_report:Report;
+    Reports:Report[];
 }

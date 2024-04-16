@@ -1,15 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../services/login-services/auth.service';
-import { Credential } from '../../../models/login-models/credential';
 import { StorageService } from '../../../services/login-services/storage.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,6 +18,14 @@ export class LoginComponent {
 
   constructor(private router: Router, private authService: AuthService, private storageService: StorageService) {
 
+  }
+
+  visible: boolean = true;
+  changetype: boolean = true;
+
+  viewpass() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
   }
 
   signInUser(email: string, password: string) {
@@ -33,9 +41,10 @@ export class LoginComponent {
       this.authService.login(email, password).then((value) => {
         if (value) {
           var jwt = JSON.parse(value).jwt;
-          if (jwt === "No Credentials matches the given query." || jwt === "ups! credenciales incorrectas") {
+          if (jwt === "No Credentials matches the given query." || jwt === "ups! credenciales incorrectas" || jwt === "Campos faltantes" || jwt === "Error en el formato de datos" || jwt === "Usuario no encontrado") {
             this.handleFailedAuthentication();
-          } else {
+          }
+          else {
             var role = JSON.parse(value).role;
             // Autenticación exitosa
             this.handleSuccessfulAuthentication(role);
@@ -64,12 +73,10 @@ export class LoginComponent {
   private handleFailedAuthentication() {
     Swal.fire({
       title: 'Uppss algo pasó',
-      text: "La contraseña o el usuario son incorrectos",
+      text: "Error en los datos ingresados, por favor verifique los campos",
       icon: 'warning',
       confirmButtonText: 'OK'
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-
       if (result.isConfirmed) {
         window.location.reload();
       }

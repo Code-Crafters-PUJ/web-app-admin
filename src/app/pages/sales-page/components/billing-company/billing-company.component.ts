@@ -1,7 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {SubscriptionService} from "../../../../services/sales-services/subscription/subscription.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {Subscription} from "../../../../models/sales-models/subscription";
+import {Subscription} from "../../../../models/sales-models/billing";
 import { FormsModule } from '@angular/forms';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 
@@ -82,7 +82,7 @@ export class BillingCompanyComponent implements OnInit {
       this.subscriptionsFiltered = this.subscriptions.filter(subscription => subscription.client.companyName.toLowerCase().includes(this.searchText.toLowerCase()));
       this.filtroAplicado = true;
       this.subscriptions = this.subscriptionsFiltered;
-      this.router.navigateByUrl('/home/sales/billing/?pagina='+1)
+      this.router.navigateByUrl('/home/accounts/billing/?pagina='+1)
     }
     else {
       this.filtroAplicado = false;

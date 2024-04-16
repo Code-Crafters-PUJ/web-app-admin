@@ -1,10 +1,10 @@
-import { Account } from "../../models/general-models/account";
-import { Modul } from "../../models/general-models/modul";
-import { Operation } from "../../models/general-models/operation";
-import { Permission } from "../../models/general-models/permission";
-import { Report } from "../../models/general-models/report";
-import { Rol } from "../../models/general-models/rol";
-import { Credential } from "../../models/general-models/credential";
+import { Account } from "../../models/Users-models/account";
+import { Modul } from "../../models/Users-models/Module";
+import { Operation } from "../../models/Users-models/operation";
+import { Permission } from "../../models/Users-models/permission";
+import { Report } from "../../models/Users-models/report";
+import { Rol } from "../../models/Users-models/rol";
+import { Credential } from "../../models/Users-models/credential";
 
 export class Generation {
     static modul1: Modul;
@@ -85,7 +85,7 @@ export class Generation {
         this.rol2 =
         {
             id: 1,
-            description: "marketing",
+            description: "marketing-page",
             accounts: []
         }
         this.rol3 =
@@ -103,7 +103,7 @@ export class Generation {
         this.modul2 =
         {
             id: 2,
-            description: "marketing",
+            description: "marketing-page",
             permissions: []
         }
         this.report1 =

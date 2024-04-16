@@ -3,13 +3,14 @@ import { Client } from "./client";
 import { Payment } from "./payment";
 import { Plan } from "./plan";
 
-export interface Subscription {
+export interface Billing {
     id: number;
-    client: Client;
-    startDate: Date;
-    endDate: Date;
-    status: boolean;
+    initial_date: Date;
+    final_date: Date;
+    suscription_status:number
     usage: Time;
-    payment: Payment;
     plan: Plan;
+    payment: Payment;
+    client: Client;
+    amount:number
 }

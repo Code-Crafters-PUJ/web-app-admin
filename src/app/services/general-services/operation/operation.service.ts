@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Generation } from '../generator';
-import { Operation } from '../../../models/general-models/operation';
+import { Operation } from '../../../models/Users-models/operation';
 
 @Injectable({
   providedIn: 'root'

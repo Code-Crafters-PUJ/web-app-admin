@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Account } from '../../../../models/general-models/account';
+import { Account } from '../../../../models/Users-models/account';
 import { ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { AccountService } from '../../../../services/general-services/account/account.service';
-import {NgOptimizedImage} from "@angular/common";
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({

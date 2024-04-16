@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ClientService } from '../../../../services/sales-services/client/client.service';
 import { Client } from '../../../../models/sales-models/client';
-import { Subscription } from '../../../../models/sales-models/subscription';
+import { Subscription } from '../../../../models/sales-models/billing';
 
 @Component({
   selector: 'app-sales-data',
