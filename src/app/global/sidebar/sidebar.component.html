@@ -11,17 +11,19 @@
       <li><a routerLink="/home/admin/general" class="fw-bold">Panel General</a></li>
       <li><a routerLink="/home/admin/accounts" class="fw-bold">Cuentas Monitoreo</a></li>
       <p style="margin: 0;">Soporte</p>
-      <li><a routerLink="/home/support/general" class="fw-bold">Panel General</a></li>
-      <li><a routerLink="/home/support/requests" class="fw-bold">PQRS</a></li>
+      <li><a routerLink="/home/admin/generalSupport" class="fw-bold">Panel General</a></li>
+      <li><a routerLink="/home/admin/requests" class="fw-bold">PQRS</a></li>
       <p style="margin: 0;">Clientes</p>
-      <li><a routerLink="/home/accounts/general" class="fw-bold">Panel General</a></li>
-      <li><a routerLink="/home/accounts/billing" class="fw-bold">Facturacion</a></li>
-      <li><a routerLink="/home/accounts/settings" class="fw-bold">Configuración</a></li>
-      <li><a routerLink="/home/accounts/benefits" class="fw-bold">Beneficios</a></li>
+      <li><a routerLink="/home/admin/generalSales" class="fw-bold">Panel General</a></li>
+      <li><a routerLink="/home/admin/billing" class="fw-bold">Facturacion</a></li>
+      <li><a routerLink="/home/admin/settings" class="fw-bold">Configuración</a></li>
+      <li><a routerLink="/home/admin/benefits" class="fw-bold">Beneficios</a></li>
       <p style="margin: 0;">Marketing</p>
-        <li><a routerLink="/home/marketing/general" class="fw-bold">Panel General</a></li>
-        <li><a routerLink="/home/marketing/requests" class="fw-bold">Solicitudes</a></li>
+        <li><a routerLink="/home/admin/generalMarketing" class="fw-bold">Panel General</a></li>
+        <li><a routerLink="/home/admin/requestsMarketing" class="fw-bold">Solicitudes</a></li>
       </div>
+
+
       <div *ngIf="url === 'accounts'">
         <li><a routerLink="/home/accounts/general" class="fw-bold mt-5">Panel General</a></li>
         <li><a routerLink="/home/accounts/billing" class="fw-bold">Facturacion</a></li>

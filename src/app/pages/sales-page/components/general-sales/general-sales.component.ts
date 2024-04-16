@@ -185,7 +185,7 @@ export class GeneralSalesComponent {
       this.billingsFiltered = this.billings.filter(subscription => subscription.client.company_name.toLowerCase().includes(this.searchText.toLowerCase()));
       this.filtroAplicado = true;
       this.billings = this.billingsFiltered;
-      this.router.navigateByUrl('/home/sales/billing/?pagina=' + 1)
+      this.router.navigateByUrl('/home/accounts/billing/?pagina=' + 1)
     }
     else {
       this.filtroAplicado = false;

@@ -4,6 +4,7 @@ import { StorageService } from '../../../services/login-services/storage.service
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { Account } from '../../../models/Accounts-Models/account';
 
 
 @Component({
@@ -35,7 +36,12 @@ export class LoginComponent {
         text: "Por favor, llene todos los campos",
         icon: 'warning',
         confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
       });
+
     }
     else {
       this.authService.login(email, password).then((value) => {
@@ -43,11 +49,14 @@ export class LoginComponent {
           var jwt = JSON.parse(value).jwt;
           if (jwt === "No Credentials matches the given query." || jwt === "ups! credenciales incorrectas" || jwt === "Campos faltantes" || jwt === "Error en el formato de datos" || jwt === "Usuario no encontrado") {
             this.handleFailedAuthentication();
+            this.storageService.getSavedAccount();
           }
           else {
             var role = JSON.parse(value).role;
+            var jwt = JSON.parse(value).jwt;
             // Autenticación exitosa
             this.handleSuccessfulAuthentication(role);
+            this.storageService.saveAccount(role,jwt);
           }
         } else {
           // Autenticación fallida

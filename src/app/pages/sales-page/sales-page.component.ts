@@ -42,6 +42,9 @@ export class SalesPageComponent implements OnInit {
     const lastSegment = segments[4];
 
     switch (segment) {
+      case  'generalSales':
+        this.url='general'
+        break
       case 'general':
         this.url = 'general';
         break;
