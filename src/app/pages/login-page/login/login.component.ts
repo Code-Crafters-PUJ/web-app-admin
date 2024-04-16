@@ -32,10 +32,14 @@ export class LoginComponent {
     else {
       this.authService.login(email, password).then((value) => {
         if (value) {
-          var role = JSON.parse(value).role;
-          // Autenticación exitosa
-          this.handleSuccessfulAuthentication(role);
-
+          var jwt = JSON.parse(value).jwt;
+          if (jwt === "No Credentials matches the given query." || jwt === "ups! credenciales incorrectas") {
+            this.handleFailedAuthentication();
+          } else {
+            var role = JSON.parse(value).role;
+            // Autenticación exitosa
+            this.handleSuccessfulAuthentication(role);
+          }
         } else {
           // Autenticación fallida
           this.handleFailedAuthentication();
@@ -43,7 +47,7 @@ export class LoginComponent {
       });
     }
   }
-  private handleSuccessfulAuthentication(role:string) {
+  private handleSuccessfulAuthentication(role: string) {
     Swal.fire({
       title: 'Bienvenido',
       text: "Autenticación exitosa",
@@ -53,7 +57,7 @@ export class LoginComponent {
     if (role === "ADMIN") {
       this.router.navigate(['/home/admin']);
 
-    } else{
+    } else {
       this.router.navigate(['/home/sales']);
     }
   }
@@ -63,10 +67,13 @@ export class LoginComponent {
       text: "La contraseña o el usuario son incorrectos",
       icon: 'warning',
       confirmButtonText: 'OK'
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+
+      if (result.isConfirmed) {
+        window.location.reload();
+      }
     });
-    window.location.reload();
-
-
   }
 }
 
