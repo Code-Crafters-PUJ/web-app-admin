@@ -71,10 +71,7 @@ button.btn-primary.btn-cancel {
 }
 
 
-button.btn-primary.btn-new {
-  background-color: #ffffff;
-  color: #5CAEFA;
-  font-weight: bold;
-  border: #5CAEFA solid 1px;
-  padding: 10px 20px;
+.btn-custom {
+  border-color: #D9D9D9;
+  min-width: 100px
 }
