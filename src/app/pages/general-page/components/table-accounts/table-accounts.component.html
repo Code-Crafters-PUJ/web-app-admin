@@ -36,11 +36,11 @@
       <tbody>
         <ng-container *ngFor="let credential of credentials.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
           <tr>
-            <td>{{ credential.account.name }}</td>
+            <td>{{ credential.first_name}}</td>
             <td>{{ credential.email}}</td>
-            <td>{{ credential.account.rol.description }}</td>
-            <td>{{ credential.account.last_connection| date:'shortDate' }}</td>
-            <td>{{ credential.account.Reports[0]}}</td>
+            <td>{{ credential.Rol}}</td>
+            <td>{{ credential.last_login| date:'shortDate' }}</td>
+            <td>{{ credential.Report?.activity}}</td>
             <td class="dropdown">
               <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"

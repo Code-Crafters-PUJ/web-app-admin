@@ -1,20 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { Credential } from '../../../models/Accounts-Models/credential';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { StorageService } from '../../login-services/storage.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CredentialService {
 
-  constructor(private http: HttpClient) { }
-  getCredentials(): Observable<Credential[]> {
-    return this.http.get<Credential[]>('http://localhost:/admin/accounts/all');
 
+  constructor(private http: HttpClient, private storageservice: StorageService) { }
+  getCredentials(): Observable<any> {
+    const savedAccount = this.storageservice.getSavedAccount();
+    var jwt = savedAccount?.jwt;
+    if (!jwt) {
+      throw new Error('JWT token is not defined.');
+    }
+    jwt = jwt.replace(/"/g, '');
+
+    // Make the HTTP GET request with the custom headers
+    return this.http.get<any>(`${environment.baseURL}/accounts/all`, {
+      headers: {
+        Authorization: jwt
+      }
+    });
   }
-  delete(id:number)
-  {
+  delete(id: number) {
     return this.http.delete<Credential[]>('http://localhost:/admin/accounts/delete/+id');
   }
 }
