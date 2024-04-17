@@ -20,6 +20,7 @@ export const routes: Routes = [
     children: [
       { path: 'general', component: GeneralPageComponent },
       { path: 'accounts', component: GeneralPageComponent },
+      { path: 'accounts/', component: GeneralPageComponent },
       { path: 'accounts/new', component: GeneralPageComponent },
       { path: 'accounts/modify', component: GeneralPageComponent },
       { path: 'generalSales', component: SalesPageComponent },

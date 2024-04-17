@@ -20,7 +20,6 @@ export class CredentialService {
     }
     jwt = jwt.replace(/"/g, '');
 
-    // Make the HTTP GET request with the custom headers
     return this.http.get<any>(`${environment.baseURL}/accounts/all`, {
       headers: {
         Authorization: jwt
@@ -29,5 +28,8 @@ export class CredentialService {
   }
   delete(id: number) {
     return this.http.delete<Credential[]>('http://localhost:/admin/accounts/delete/+id');
+  }
+  postCredential(credentialData: any): Observable<any> {
+    return this.http.post(`${environment.baseURL}/post/account`,credentialData)
   }
 }

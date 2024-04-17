@@ -51,21 +51,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td>Monitoreo</td>
-                      <td><input type="checkbox"[(ngModel)]="bools[0]"[ngModelOptions]="{standalone: true}"></td>
-                      <td><input type="checkbox"[(ngModel)]="bools[1]"[ngModelOptions]="{standalone: true}"></td>
-                    </tr>
-                    <tr>
-                      <td>Soporte</td>
-                      <td><input type="checkbox"[(ngModel)]="bools[2]"[ngModelOptions]="{standalone: true}"></td>
-                      <td><input type="checkbox"[(ngModel)]="bools[3]"[ngModelOptions]="{standalone: true}"></td>
-                    </tr>
-                    <tr>
-                      <td>Marketing</td>
-                      <td><input type="checkbox"[(ngModel)]="bools[2]"[ngModelOptions]="{standalone: true}"></td>
-                      <td><input type="checkbox"[(ngModel)]="bools[3]"[ngModelOptions]="{standalone: true}"></td>
-                    </tr>
+                      <tr *ngFor="let permiso of permisos; let i = index">
+                        <td>{{ permiso.nombre }}</td>
+                        <td><input type="checkbox" [(ngModel)]="permisos[i].visualizar" [ngModelOptions]="{standalone: true}"></td>
+                        <td><input type="checkbox" [(ngModel)]="permisos[i].modificar" [ngModelOptions]="{standalone: true}"></td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>

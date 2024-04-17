@@ -39,18 +39,12 @@ export class TableAccountsComponent {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.Actualpage = +params['pagina'] || 1;
-      if (this.filtroAplicado) {
-        this.credentials = this.credentialsFiltered;
-      }
-      else {
-        this.getCredentials();
-      }
+      this.getCredentials()
     });
   };
   private getCredentials() {
     this.credentialService.getCredentials().subscribe(
       data => {
-        console.log(data)
         this.DTOAccount = data.account;
         this.DTOCredentials = data.credentials;
         this.DTOreport = data.report;
@@ -61,7 +55,6 @@ export class TableAccountsComponent {
           this.credentials[i].email = this.DTOCredentials[i].email
           for (let l = 0; l < this.DTOAccount.length; l++) {
             if (this.DTOAccount[l].idcuenta == this.credentials[i].id) {
-              console.log("Hola?")
               this.credentials[i].first_name = this.DTOAccount[l].first_name
               this.credentials[i].last_name = this.DTOAccount[l].last_name
               this.credentials[i].last_login = this.DTOAccount[l].last_login
@@ -130,13 +123,19 @@ export class TableAccountsComponent {
   onInput(value: string) {
     this.searchText = value || '';
   }
-  searchByEmail() {
+  searchByName() {
+    if (this.filtroAplicado) {
+      this.credentials = this.credentialsFiltered
+      this.filtroAplicado = false
+    }
     if (this.searchText.trim().length != 0) {
-      this.getCredentials();
-      this.credentialsFiltered = this.credentials.filter(credential => credential.email.toLowerCase().includes(this.searchText.toLowerCase()));
+      this.credentialsFiltered = this.credentials
+      const searchTextLower = this.searchText.toLowerCase();
+      this.credentials = this.credentials.filter(credential =>
+        credential.first_name.toLowerCase().includes(searchTextLower) ||
+        credential.last_name.toLowerCase().includes(searchTextLower)
+      );
       this.filtroAplicado = true;
-      this.credentials = this.credentialsFiltered;
-      this.router.navigateByUrl('/home/admin/accounts/?pagina=' + 1)
     }
     else {
       this.filtroAplicado = false;

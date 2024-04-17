@@ -9,6 +9,7 @@ import { Report } from '../../../../models/Accounts-Models/report';
 import { Module } from '../../../../models/Accounts-Models/Module';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CredentialService } from '../../../../services/general-services/credential/credential.service';
 
 @Component({
   selector: 'app-manage-account',
@@ -29,31 +30,21 @@ export class ManageAccountComponent implements OnInit {
   rols: Rol[] = []
   //operations: Operation[] = []
   //moduls: Modul[] = []
-  bools:boolean[]=[false,false,false,false]
-  rol:string=''
-  account: Account = {
-    id: 0,
-    name: '',
-    last_name: '',
-    id_card: '',
-    last_connection: new Date(),
-    connected:0,
-    rol: {} as Rol,
-    permissions: [],
-    Reports:[]
-  };
-  credential:Credential=
-  {
-    id:0,
-    email:'',
-    hash:'',
-    account:this.account
-  }
+  account: any = {};
+  credential: any = {};
+  rol: string = ''
+  permisos = [
+    { nombre: 'MONITOREO', visualizar: false, modificar: false },
+    { nombre: 'SOPORTE', visualizar: false, modificar: false },
+    { nombre: 'MARKETING', visualizar: false, modificar: false }
+  ];
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private modulService: ModulsService,
+    private credentialservice: CredentialService,
     //private operationService: OperationService,
     private rolService: RolService
   ) { }
@@ -114,9 +105,32 @@ export class ManageAccountComponent implements OnInit {
 
   postEntity(): void {
     if (this.url === "new") {
-      console.log(this.rol)
       if (this.verificarCampos()) {
-        this.router.navigate(['/home/admin/accounts']);
+        const formData = {
+          name: this.account.name,
+          id_card: this.account.id_card,
+          last_name: this.account.last_name,
+          rol: this.rol,
+          email: this.credential.email,
+          hash: this.credential.hash,
+          permissions: { ...this.permisos }
+        };
+
+
+        const formDataJSON = JSON.stringify(formData, (key, value) => {
+          if (key === 'permissions') {
+            return value;
+          }
+          return value;
+        }, 2);
+        this.credentialservice.postCredential(formData).subscribe(
+          response => {
+            console.log(response.message);
+          },
+          error => {
+            console.error(error);
+          }
+        );
       }
     }
   }
@@ -129,3 +143,4 @@ export class ManageAccountComponent implements OnInit {
     return true;
   }
 }
+

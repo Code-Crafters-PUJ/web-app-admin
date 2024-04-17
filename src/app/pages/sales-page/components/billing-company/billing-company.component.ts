@@ -1,5 +1,5 @@
 import {Component,OnInit} from '@angular/core';
-import {BillingService} from "../../../../services/sales-services/billing/subscription.service";
+import {BillingService} from "../../../../services/sales-services/billing/billing.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {Billing} from "../../../../models/sales-models/billing";
 import { FormsModule } from '@angular/forms';
@@ -32,6 +32,7 @@ export class BillingCompanyComponent implements OnInit {
       this.Actualpage = +params['pagina'] || 1;
       if (this.filtroAplicado) {
         this.billings = this.billingsFiltered;
+        console.log(this.billings)
       }
       else {
         this.getSubscriptions();
