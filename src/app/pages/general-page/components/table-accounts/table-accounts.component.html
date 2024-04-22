@@ -34,31 +34,32 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let credential of credentials.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
+        <ng-container *ngFor="let account of accounts.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
           <tr>
-            <td>{{ credential.first_name + " " +credential.last_name}}</td>
-            <td>{{ credential.email}}</td>
-            <td>{{ credential.Rol}}</td>
-            <td>{{ credential.last_login| date:'shortDate' }}</td>
-            <td>{{ credential.Report?.activity}}</td>
+            <td>{{ account.first_name + " " +account.last_name}}</td>
+            <td>{{ account.credentials && account.credentials.length > 0 ? account.credentials[0].email : '' }}</td>
+            <td>{{ account.role}}</td>
+            <td>{{ account.last_login| date:'short'}}</td>
+            <td>
+              {{ account.reports.length > 0 ? account.reports[account.reports.length - 1].activity : '' }}
+            </td>
             <td class="dropdown">
               <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false"></button>
                 <ul class="dropdown-menu">
                   <li>
-                    <button routerLink="/home/admin/accounts/modify" class="dropdown-item" type="button">Modificar
-                    </button>
+                    <button [routerLink]="['/home/admin/accounts/modify', account.credentials[0].id]" class="dropdown-item" type="button">Modificar</button>
                   </li>
                   <li>
-                    <button class="dropdown-item" type="button" (click)="deleteAccount(i+1)">Eliminar</button>
+                    <button class="dropdown-item" type="button" (click)="deleteAccount(account.credentials[0].id)">Eliminar</button>
                   </li>
                 </ul>
               </div>
             </td>
           </tr>
         </ng-container>
-        <tr style="border-bottom:0px" *ngIf="credentials.length > 14">
+        <tr style="border-bottom:0px" *ngIf="accounts.length > 14">
           <td></td>
           <td></td>
           <td>

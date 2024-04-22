@@ -72,7 +72,7 @@ export class LoginComponent {
       icon: 'success',
       confirmButtonText: 'OK'
     });
-    if (role === "ADMIN") {
+    if (role === "Admin") {
       this.router.navigate(['/home/admin']);
 
     } else {
