@@ -34,8 +34,8 @@ export class MarketingPageComponent implements OnInit{
       case 'general':
         this.url = 'general';
         break;
-      case 'requests':
-        this.url = 'requests';
+      case 'requestsMarketing':
+        this.url = 'requestsMarketing';
         break;
       default:
         this.url = 'general';

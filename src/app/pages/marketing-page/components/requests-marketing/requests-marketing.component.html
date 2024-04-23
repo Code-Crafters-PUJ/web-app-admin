@@ -1,69 +1,47 @@
 <div class="container container-content">
-
   <div class="row align-items-center mb-5">
     <div class="col-auto mb-2">
-      <img ngSrc="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
+      <img src="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="45" width="45">
     </div>
     <div class="col-auto ps-0 mb-2">
       <h1 class="font-weight-bold mb-2">Negocio S.A.</h1>
     </div>
   </div>
 
-
   <div class="row">
     <div class="col-md-6">
-      <!-- Primera card -->
-      <div class="row">
-        <div class="col-md-12 p-3">
-          <div class="card">
-            <div class="card-body ">
-              <div class="row align-items-center mb-5 ">
-                <div class="col-auto mb-2">
-                  <img ngSrc="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413"
-                       width="412">
-                </div>
-                <div class="col-auto ps-0 mb-2">
-                  <h3 class="font-weight-bold mb-2">Respuestas Dudas</h3>
-                </div>
-                <div class="col">
-                  <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-custom">Enviar</button>
-                  </div>
-                </div>
-
-                <div class="bg-light py-3 ">
-                  <h6 class="mb-0">Asunto</h6>
-                </div>
-
-                <div class="mt-3 pb-3" style="border-bottom: 1px solid #dee2e6;">
-                  <h6>Destinatario</h6>
-                </div>
-
-
-                <div class="mt-3">
-                  <h6>Descripción</h6>
-                </div>
-
-              </div>
-
+      <div class="card">
+        <div class="card-body">
+          <!-- Form Section -->
+          <form #f="ngForm" (ngSubmit)="sendMarketingData(f)" novalidate>
+            <h3 class="font-weight-bold mb-3">Respuestas Dudas</h3>
+            <div class="form-group mb-3">
+              <label for="subject">Asunto</label>
+              <input type="text" id="subject" class="form-control" placeholder="Asunto" name="subject" required ngModel>
             </div>
-          </div>
+            <div class="form-group mb-3">
+              <label for="recipient">Destinatario</label>
+              <input type="text" id="recipient" class="form-control" placeholder="Destinatario" name="recipient" required ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <label for="description">Descripción</label>
+              <textarea id="description" class="form-control" placeholder="Descripción" name="description" rows="3" required ngModel></textarea>
+            </div>
+            <button type="submit" class="btn btn-custom">Enviar</button>
+          </form>
         </div>
       </div>
-
     </div>
-
 
     <div class="col-md-6 p-3">
       <div class="card">
         <div class="card-body">
-
           <h5 class="mb-3 text-center">Historial de Dudas</h5>
-
           <!-- Card que se repite-->
+          <!-- Ejemplos de historial de dudas, replicar o modificar según los datos recibidos -->
           <div class="card mb-3">
             <div class="card-body">
-              <div class="row  mb-3">
+              <div class="row mb-3">
                 <div class="col-6">
                   <span class="fw-bold">Andrés Armando (Negocio S.A.)</span>
                 </div>
@@ -85,19 +63,16 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col " style="text-align: justify;">
+                <div class="col" style="text-align: justify;">
                   <span>¡Hola StockWage! Escribo porque tengo dudas acerca de las nuevas características del nuevo plan</span>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-          <!-- Card que se repite-->
+          <!-- Repetir este bloque para cada item en el historial de dudas -->
           <div class="card mb-3">
             <div class="card-body">
-              <div class="row  mb-3">
+              <div class="row mb-3">
                 <div class="col-6">
                   <span class="fw-bold">Andrés Armando (Negocio S.A.)</span>
                 </div>
@@ -119,16 +94,12 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col " style="text-align: justify;">
+                <div class="col" style="text-align: justify;">
                   <span>¡Hola StockWage! Escribo porque tengo dudas acerca de las nuevas características del nuevo plan</span>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
         </div>
       </div>
     </div>
