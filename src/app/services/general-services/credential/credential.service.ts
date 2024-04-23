@@ -26,8 +26,55 @@ export class CredentialService {
       }
     });
   }
+
+  getUniqueCredential(id:number): Observable<any> {
+    const savedAccount = this.storageservice.getSavedAccount();
+    var jwt = savedAccount?.jwt;
+    if (!jwt) {
+      throw new Error('JWT token is not defined.');
+    }
+    jwt = jwt.replace(/"/g, '');
+
+    return this.http.get<any>(`${environment.baseURL}/Admin/user/${id}`, {
+      headers: {
+        Authorization: jwt
+      }
+    });
+  }
+
+  putModifyAccount(id: number, datosActualizados: any): Observable<any> {
+
+
+    const savedAccount = this.storageservice.getSavedAccount();
+    var jwt = savedAccount?.jwt;
+    if (!jwt) {
+      throw new Error('JWT token is not defined.');
+    }
+
+    jwt = jwt.replace(/"/g, '');
+
+
+    // Realizar la solicitud PUT con los datos actualizados y las cabeceras
+    return this.http.put<any>(`${environment.baseURL}/Admin/user/put/${id}`, datosActualizados, {
+      headers: {
+        Authorization: jwt
+      }
+    });
+  }
+
   delete(id: number) {
-    return this.http.delete<Credential[]>('http://localhost:/admin/accounts/delete/+id');
+    const savedAccount = this.storageservice.getSavedAccount();
+    var jwt = savedAccount?.jwt;
+    if (!jwt) {
+      throw new Error('JWT token is not defined.');
+    }
+
+    jwt = jwt.replace(/"/g, '');
+    return this.http.delete<any>(`${environment.baseURL}/Admin/user/delete/${id}`, {
+      headers: {
+        Authorization: jwt
+      }
+    });
   }
   postCredential(credentialData: any): Observable<any> {
     return this.http.post(`${environment.baseURL}/post/account`,credentialData)

@@ -1,10 +1,12 @@
 export interface AccountDTO {
     connected: boolean;
+    credentials:CredentialDTO[]
     first_name: string;
     id_card: string;
     idcuenta: number;
     last_login: Date;
     last_name: string;
+    reports:ReportDTO[]
     role: string;
   }
   
@@ -19,15 +21,4 @@ export interface AccountDTO {
     activity: string;
     date: Date;
     id: number;
-  }
-
-  export interface AuxiliarCredential
-  {
-    id: number;
-    email: string;
-    first_name: string;
-    last_name: string;
-    last_login: Date|null;
-    Rol:string;
-    Report:ReportDTO|null;
   }

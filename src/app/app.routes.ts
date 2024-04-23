@@ -15,14 +15,14 @@ export const routes: Routes = [
   {
     path: 'home/admin', canActivate: [isAuthenticatedGuard, hasRoleGuard],
     data: {
-      role: '"ADMIN"',
+      role: '"Admin"',
     },
     children: [
       { path: 'general', component: GeneralPageComponent },
       { path: 'accounts', component: GeneralPageComponent },
       { path: 'accounts/', component: GeneralPageComponent },
       { path: 'accounts/new', component: GeneralPageComponent },
-      { path: 'accounts/modify', component: GeneralPageComponent },
+      { path: 'accounts/modify/:accountId', component: GeneralPageComponent },
       { path: 'generalSales', component: SalesPageComponent },
       { path: 'billing', component: SalesPageComponent },
       { path: 'billing/company', component: SalesPageComponent },
@@ -39,7 +39,7 @@ export const routes: Routes = [
   {
     path: 'home/accounts', canActivate: [isAuthenticatedGuard, hasRoleGuard],
     data: {
-      role: '"VENTAS"',
+      role: '"Ventas"',
     },
     children: [
       { path: 'general', component: SalesPageComponent },
@@ -53,7 +53,7 @@ export const routes: Routes = [
   {
     path: 'home/support', canActivate: [isAuthenticatedGuard, hasRoleGuard],
     data: {
-      role: '"SOPORTE"',
+      role: '"Soporte"',
     },
     children: [
       { path: 'general', component: SupportPageComponent },
@@ -65,7 +65,7 @@ export const routes: Routes = [
   {
     path: 'home/marketing', canActivate: [isAuthenticatedGuard, hasRoleGuard],
     data: {
-      role: '"MARKETING"',
+      role: '"Marketing"',
     },
     children: [
       { path: 'general', component: MarketingPageComponent },
