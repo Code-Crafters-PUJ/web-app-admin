@@ -28,7 +28,7 @@
           <th>Nombre</th>
           <th>Correo electrónico</th>
           <th>Roles</th>
-          <th>Última hora de creación</th>
+          <th>Última hora de conexión</th>
           <th>Último reporte</th>
           <th>Acciones</th>
         </tr>
@@ -49,10 +49,10 @@
                         aria-expanded="false"></button>
                 <ul class="dropdown-menu">
                   <li>
-                    <button [routerLink]="['/home/admin/accounts/modify', account.credentials[0].id]" class="dropdown-item" type="button">Modificar</button>
+                    <button [routerLink]="['/home/admin/accounts/modify',account.idcuenta]" class="dropdown-item" type="button">Modificar</button>
                   </li>
                   <li>
-                    <button class="dropdown-item" type="button" (click)="deleteAccount(account.credentials[0].id)">Eliminar</button>
+                    <button class="dropdown-item" type="button" (click)="deleteAccount(account.idcuenta)">Eliminar</button>
                   </li>
                 </ul>
               </div>

@@ -84,7 +84,7 @@ export class TableAccountsComponent {
   deleteAccount(i: number) {
     this.credentialService.delete(i).subscribe(
       data => {
-        location.reload();
+       
       },
       error => {
       }

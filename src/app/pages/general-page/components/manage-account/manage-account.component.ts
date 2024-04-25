@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { ModulsService } from '../../../../services/general-services/moduls/moduls.service';
-import { RolService } from '../../../../services/general-services/rol/rol.service';
 import { Rol } from '../../../../models/Accounts-Models/rol';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -47,16 +45,17 @@ export class ManageAccountComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private modulService: ModulsService,
     private credentialservice: CredentialService,
-    private rolService: RolService
   ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       // Extrae el ID de la cuenta de los parámetros de la URL
       this.accountId = params.get('accountId') || ''; // Asignamos un valor predeterminado en caso de que params.get('accountId') sea null
-      this.getAccount();
+      if(this.accountId!='')
+        {
+          this.getAccount();
+        }
     });
     
     const currentUrl = this.router.url;
@@ -80,8 +79,6 @@ export class ManageAccountComponent implements OnInit {
     const id = parseInt(this.accountId, 10);
     this.credentialservice.getUniqueCredential(id).subscribe(
       data => {
-     
-
         this.accountExtracted=data.user;
         if (data ) {
           this.credentialExtracted = data.credentials[0];
@@ -112,7 +109,6 @@ export class ManageAccountComponent implements OnInit {
           permissions: { ...this.permisos }
         };
 
-
         const formDataJSON = JSON.stringify(formData, (key, value) => {
           if (key === 'permissions') {
             return value;
@@ -121,10 +117,35 @@ export class ManageAccountComponent implements OnInit {
         }, 2);
         this.credentialservice.postCredential(formData).subscribe(
           response => {
-            console.log(response.message);
+            if(response.message=="El email ya esta registrado")
+              {
+                Swal.fire({
+                  title: 'Ups!',
+                  text: "Ese correo Ya esta registrado",
+                  icon: 'warning',
+                  confirmButtonText: 'OK'
+                });
+              }
+            else if(response.message=="El ID ya existe en la base de datos")
+              {
+                Swal.fire({
+                  title: 'Ups!',
+                  text: "Ese ID Ya esta registrado",
+                  icon: 'warning',
+                  confirmButtonText: 'OK'
+                });
+              }
+              else
+              {
+                Swal.fire({
+                  title: 'Registro Exitoso!',
+                  text: "La cuenta fue creada de manera correcta",
+                  icon: 'success',
+                  confirmButtonText: 'OK'
+                });
+              }
           },
           error => {
-            console.log(formData)
             console.error(error);
           }
         );
@@ -133,7 +154,17 @@ export class ManageAccountComponent implements OnInit {
   }
   esCorreoValido(): boolean {
     const patron = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return patron.test(this.account.email);
+    if(!patron.test(this.credential.email))
+      {
+        Swal.fire({
+          title: 'Ups!',
+          text: "Ese correo no es valido",
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        return false
+      }
+      return true
   }
   verificarCampos(): boolean {
     if (!this.account.name || !this.account.id_card || !this.credential.email || !this.credential.hash) {
@@ -217,10 +248,9 @@ guardarCambios():void{
       email: this.credentialExtracted.email,
       
     };
-    console.log("ROLE:"+this.accountExtracted.role)
     
-    if(this.accountExtracted.role=="Marketing"){
-      datosActualizados.rol = 4;
+    if(this.accountExtracted.role=="Admin"){
+      datosActualizados.rol = 1;
     }
     if(this.accountExtracted.role=="Ventas"){
       datosActualizados.rol = 2;
@@ -228,12 +258,16 @@ guardarCambios():void{
     if(this.accountExtracted.role=="Soporte"){
       datosActualizados.rol = 3;
     }
+    if(this.accountExtracted.role=="Marketing"){
+      datosActualizados.rol = 4;
+    }
+    if(this.accountExtracted.role=="Monitoreo"){
+      datosActualizados.rol = 5;
+    }
     // Verificar si el campo de contraseña no está vacío antes de agregarlo
     if (this.passForm) {
       datosActualizados.hash = this.passForm;
     }
-
-    console.log(JSON.stringify(datosActualizados))
 
       const id = parseInt(this.accountId, 10);
       this.credentialservice.putModifyAccount(id,datosActualizados).subscribe(
