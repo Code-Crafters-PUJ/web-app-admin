@@ -8,6 +8,7 @@ import { hasRoleGuard } from './guards/has-role.guard';
 import { isAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { SupportPageComponent } from "./pages/support-page/support-page.component";
 import { MarketingPageComponent } from "./pages/marketing-page/marketing-page.component";
+import { SidebarComponent } from './global/sidebar/sidebar.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -73,5 +74,24 @@ export const routes: Routes = [
       { path: '', redirectTo: 'general', pathMatch: 'full' }
     ]
   },
-
+  {
+    path:'home', canActivate:[isAuthenticatedGuard],
+    children: [
+    {
+      path:'all',component:SidebarComponent
+    }
+  ]
+  },
+  {
+    path: 'home/Monitoreo', canActivate: [isAuthenticatedGuard, hasRoleGuard],
+    data: {
+      role: '"Monitoreo"',
+    },
+    children: [
+      { path: 'accounts', component: GeneralPageComponent },
+      { path: 'accounts/', component: GeneralPageComponent },
+      { path: 'accounts/new', component: GeneralPageComponent },
+      { path: 'accounts/modify/:accountId', component: GeneralPageComponent },
+    ]
+  }
 ];

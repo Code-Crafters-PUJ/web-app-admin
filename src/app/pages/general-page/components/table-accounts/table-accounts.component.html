@@ -17,7 +17,7 @@
       </form>
     </div>
     <div class="col-auto">
-      <button routerLink="/home/admin/accounts/new" class="btn btn-custom">Nuevo</button>
+      <button [routerLink]="isAdmin ? '/home/admin/accounts/new' : '/home/Monitoreo/accounts/new'" class="btn btn-custom">Nuevo</button>
     </div>
   </div>
 
@@ -49,7 +49,7 @@
                         aria-expanded="false"></button>
                 <ul class="dropdown-menu">
                   <li>
-                    <button [routerLink]="['/home/admin/accounts/modify',account.idcuenta]" class="dropdown-item" type="button">Modificar</button>
+                    <button [routerLink]="isAdmin ? '/home/admin/accounts/modify/' + account.idcuenta : '/home/Monitoreo/accounts/modify/' + account.idcuenta" class="dropdown-item" type="button">Modificar</button>
                   </li>
                   <li>
                     <button class="dropdown-item" type="button" (click)="deleteAccount(account.idcuenta)">Eliminar</button>

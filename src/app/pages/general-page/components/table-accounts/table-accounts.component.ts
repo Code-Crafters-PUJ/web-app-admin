@@ -3,7 +3,9 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CredentialService } from '../../../../services/general-services/credential/credential.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AccountDTO} from '../../../../DTO/Accounts.dto';
+import { AccountDTO } from '../../../../DTO/Accounts.dto';
+import { StorageService } from '../../../../services/login-services/storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-table-accounts',
@@ -25,25 +27,43 @@ export class TableAccountsComponent {
   searchText: string = ""
   accounts: AccountDTO[] = [];
   accountsFiltered: AccountDTO[] = [];
+  Permisos: any[] = []
+  Rol: String = ""
+  permiso: Boolean = false
+  isAdmin: boolean = false;
 
 
   constructor(
     private credentialService: CredentialService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
+    const currentRoute = this.route.snapshot.routeConfig?.path
+    if (currentRoute) {
+      this.isAdmin = currentRoute.startsWith('home/admin');
+    }
     this.route.queryParams.subscribe(params => {
       this.Actualpage = +params['pagina'] || 1;
       this.getCredentials()
+      this.Rol = (this.storageService.getSavedAccount()?.role) || "";
+      if (this.Rol == '"Admin"') {
+        this.permiso = true
+      }
+      else {
+        this.Permisos = this.storageService.getPermissions()
+        if (this.Permisos[0].can_modify) {
+          this.permiso = true
+        }
+      }
     });
   };
   private getCredentials() {
     this.credentialService.getCredentials().subscribe(
       data => {
-        this.accounts=data.collection
-        console.log(this.accounts)
+        this.accounts = data.collection
         this.totalPages = Math.ceil(this.accounts.length / 14);
       },
       error => {
@@ -82,13 +102,24 @@ export class TableAccountsComponent {
   }
 
   deleteAccount(i: number) {
-    this.credentialService.delete(i).subscribe(
-      data => {
-       
-      },
-      error => {
-      }
-    );
+    if (this.permiso) {
+      this.credentialService.delete(i).subscribe(
+        data => {
+
+        },
+        error => {
+        }
+      );
+    }
+    else
+    {
+      Swal.fire({
+        title: 'No tienes Permisos!',
+        text: "Habla con tu administrador para poder realizar esta acción",
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+    }
   }
   onInput(value: string) {
     this.searchText = value || '';

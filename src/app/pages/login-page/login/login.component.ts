@@ -54,9 +54,10 @@ export class LoginComponent {
           else {
             var role = JSON.parse(value).role;
             var jwt = JSON.parse(value).jwt;
+            var Permissions=JSON.parse(value).Permissions;
             // Autenticación exitosa
             this.handleSuccessfulAuthentication(role);
-            this.storageService.saveAccount(role,jwt);
+            this.storageService.saveAccount(role,jwt,Permissions);
           }
         } else {
           // Autenticación fallida
@@ -76,7 +77,7 @@ export class LoginComponent {
       this.router.navigate(['/home/admin']);
 
     } else {
-      this.router.navigate(['/home/sales']);
+      this.router.navigate(['/home/all']);
     }
   }
   private handleFailedAuthentication() {
