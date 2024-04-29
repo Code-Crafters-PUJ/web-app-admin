@@ -1,56 +1,95 @@
 import { Component, inject } from '@angular/core';
-import { AuthService} from '../../../services/auth.service';
-import { Credential } from '../../../models/credential';
-import { StorageService } from '../../../services/storage.service';
+import { AuthService } from '../../../services/login-services/auth.service';
+import { StorageService } from '../../../services/login-services/storage.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
+import { Account } from '../../../models/Accounts-Models/account';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  private authService: AuthService
-  private storageService: StorageService
 
-  constructor(){
-    this.authService = inject(AuthService)
-    this.storageService = inject(StorageService)
+  constructor(private router: Router, private authService: AuthService, private storageService: StorageService) {
+
   }
 
-  onSubmit(){
+  visible: boolean = true;
+  changetype: boolean = true;
 
-    const email = document.getElementById('username') as HTMLInputElement;
-    const password = document.getElementById('password') as HTMLInputElement;
+  viewpass() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
+  }
 
-    let role: any;
+  signInUser(email: string, password: string) {
+    if (email === "" || password === "") {
+      Swal.fire({
+        title: 'Uppss algo pasó',
+        text: "Por favor, llene todos los campos",
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
+      });
 
-
-    if(!email.value || !password.value){
-      alert('Por favor ingrese email y contraseña');
-      return
     }
-
-    let credential = { email: email.value, password: password.value } as Credential;
-
-    this.authService.login(credential).subscribe({
-
-      next: (response: any) => {
-
-        this.storageService.saveAccount(response.account);
-        role = this.storageService.getSavedAccount()?.role;
-
-      },
-      error: (error: any) => {
-        alert('Usuario incorrecto');
-      }
-
+    else {
+      this.authService.login(email, password).then((value) => {
+        if (value) {
+          var jwt = JSON.parse(value).jwt;
+          if (jwt === "No Credentials matches the given query." || jwt === "ups! credenciales incorrectas" || jwt === "Campos faltantes" || jwt === "Error en el formato de datos" || jwt === "Usuario no encontrado") {
+            this.handleFailedAuthentication();
+            this.storageService.getSavedAccount();
+          }
+          else {
+            var role = JSON.parse(value).role;
+            var jwt = JSON.parse(value).jwt;
+            // Autenticación exitosa
+            this.handleSuccessfulAuthentication(role);
+            this.storageService.saveAccount(role,jwt);
+          }
+        } else {
+          // Autenticación fallida
+          this.handleFailedAuthentication();
+        }
+      });
+    }
+  }
+  private handleSuccessfulAuthentication(role: string) {
+    Swal.fire({
+      title: 'Bienvenido',
+      text: "Autenticación exitosa",
+      icon: 'success',
+      confirmButtonText: 'OK'
     });
+    if (role === "Admin") {
+      this.router.navigate(['/home/admin']);
 
-
-    
+    } else {
+      this.router.navigate(['/home/sales']);
+    }
+  }
+  private handleFailedAuthentication() {
+    Swal.fire({
+      title: 'Uppss algo pasó',
+      text: "Error en los datos ingresados, por favor verifique los campos",
+      icon: 'warning',
+      confirmButtonText: 'OK'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.reload();
+      }
+    });
   }
 }
+

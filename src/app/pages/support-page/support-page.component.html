@@ -1,0 +1,13 @@
+<app-sidebar></app-sidebar>
+
+<div *ngIf="url === 'general'">
+  <app-general-support></app-general-support>
+</div>
+
+<div *ngIf="url === 'requests'">
+  <app-requests-support></app-requests-support>
+</div>
+
+<div *ngIf="url === 'company'">
+  <app-company-support></app-company-support>
+</div>

@@ -1,0 +1,49 @@
+<div class="container-content container">
+
+  <div class="row align-items-center mb-5">
+    <div class="col-auto mb-2">
+      <img ngSrc="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
+    </div>
+    <div class="col-auto ps-0 mb-2">
+      <h1 class="font-weight-bold mb-2">Informacion General</h1>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-12 mb-3">
+      <div class="card">
+        <div class="card-body card-custom  text-center">
+          <h5 class="mb-3">Usuarios activos en tiempo real</h5>
+          <canvas  id="MyChart" style="max-width: 100%; max-height: 100%;">{{ doughnutChart }}</canvas>
+          <h5>El 10% de los usuarios se encuentran activos actualmente</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mb-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="mb-3" >Historial de Usarios conectados </h5>
+
+          <canvas id="lineChart">{{ lineChart }}</canvas>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mb-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="mb-3" >Datos generales </h5>
+          <table class="table">
+            <tbody>
+            <tr><td>Usuarios Totales</td><td>Data 1</td></tr>
+            <tr><td>Ganacias Usuario</td><td>Data 2</td></tr>
+            <tr><td>Problemas detectados</td><td>Data 3</td></tr>
+            <tr><td>Nuevos Clientes</td><td>Data 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

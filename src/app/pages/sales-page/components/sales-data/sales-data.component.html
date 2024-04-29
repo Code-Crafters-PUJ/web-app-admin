@@ -1,0 +1,23 @@
+<section class="billing-hist">
+  <header>
+    <h2>Historial de Facturación</h2>
+  </header>
+  <section class="general-info-container">
+    <ul>
+      <ng-container
+        *ngFor="let billing of Billings.slice((Actualpage - 1) * 5, Actualpage * 5); let i = index">
+        <li>{{billing.client.contact_name}}({{billing.client.company_name}})</li>
+        <li>{{billing.client.email}}</li>
+        <li>
+          <span class="date">{{billing.initial_date|date:'shortDate'}}</span>
+        </li>
+        <li class="plan-section">{{billing.plan.type}}</li>
+        <li class="invoice">Factura:${{billing.plan.price}}</li>
+      </ng-container>
+    </ul>
+    <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw" (click)="previousPage()"
+      *ngIf="Actualpage > 1">
+    <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw;transform: rotate(180deg);"
+      (click)="nextPage()" *ngIf="Actualpage < totalPages">
+  </section>
+</section>

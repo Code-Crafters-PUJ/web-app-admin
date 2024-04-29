@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { StorageService } from '../services/storage.service';
+import { StorageService } from '../services/login-services/storage.service';
 
 export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
 

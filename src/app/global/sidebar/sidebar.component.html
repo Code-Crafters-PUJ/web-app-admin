@@ -1,0 +1,56 @@
+
+<div id="wrapper">
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper" class="d-flex flex-column" style="margin-bottom: 200px;">
+    <ul class="sidebar-nav mt-4 mb-auto">
+      <li>
+        <img ngSrc="assets/images/logo.svg" alt="Logo" width="200" height="57">
+      </li>
+      <div *ngIf="url === 'admin'">
+      <li><p style="margin: 0;">Administración General</p></li>
+      <li><a routerLink="/home/admin/general" class="fw-bold">Panel General</a></li>
+      <li><a routerLink="/home/admin/accounts" class="fw-bold">Cuentas Monitoreo</a></li>
+      <p style="margin: 0;">Soporte</p>
+      <li><a routerLink="/home/admin/generalSupport" class="fw-bold">Panel General</a></li>
+      <li><a routerLink="/home/admin/requests" class="fw-bold">PQRS</a></li>
+      <p style="margin: 0;">Clientes</p>
+      <li><a routerLink="/home/admin/generalSales" class="fw-bold">Panel General</a></li>
+      <li><a routerLink="/home/admin/billing" class="fw-bold">Facturacion</a></li>
+      <li><a routerLink="/home/admin/settings" class="fw-bold">Configuración</a></li>
+      <li><a routerLink="/home/admin/benefits" class="fw-bold">Beneficios</a></li>
+      <p style="margin: 0;">Marketing</p>
+        <li><a routerLink="/home/admin/generalMarketing" class="fw-bold">Panel General</a></li>
+        <li><a routerLink="/home/admin/requestsMarketing" class="fw-bold">Solicitudes</a></li>
+      </div>
+
+
+      <div *ngIf="url === 'accounts'">
+        <li><a routerLink="/home/accounts/general" class="fw-bold mt-5">Panel General</a></li>
+        <li><a routerLink="/home/accounts/billing" class="fw-bold">Facturacion</a></li>
+        <li><a routerLink="/home/accounts/settings" class="fw-bold">Configuración</a></li>
+      <li><a routerLink="/home/accounts/benefits" class="fw-bold">Beneficios</a></li>
+      </div>
+      <div *ngIf="url === 'support'">
+        <li><a routerLink="/home/support/general" class="fw-bold">Panel General</a></li>
+        <li><a routerLink="/home/support/requests" class="fw-bold">PQRS</a></li>
+      </div>
+      <div *ngIf="url === 'marketing'">
+        <li><a routerLink="/home/marketing/general" class="fw-bold">Panel General</a></li>
+        <li><a routerLink="/home/marketing/requestsMarketing" class="fw-bold">Solicitudes</a></li>
+      </div>
+    </ul>
+    <ul class="sidebar-nav">
+      <li style="margin-top: auto;"><a href="" class="fw-normal">Cerrar Sesión</a></li>
+    </ul>
+  </div>
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <a class="btn" id="menu-toggle"><i class="fas fa-bars"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
