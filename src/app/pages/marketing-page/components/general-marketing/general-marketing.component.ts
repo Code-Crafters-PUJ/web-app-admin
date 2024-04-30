@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import Chart from "chart.js/auto";
+import { DataService } from '../../../../services/marketing-services/data.service';
+import { GraphData } from '../../../../DTO/marketingRequests.dto';
 
 @Component({
   selector: 'app-general-marketing',
@@ -16,15 +18,22 @@ export class GeneralMarketingComponent implements OnInit {
   public doughnutChart: any;
   public lineChart: any;
   public barChart: any;
-  ngOnInit(): void {
 
-    this.CreateDoughnutChart();
-    this.createLineChart();
-    this.createBarChart()
+  constructor(private dataService: DataService) {}
+
+  ngOnInit(): void {
+    this.dataService.getGraphData().subscribe({
+      next: (graphData: GraphData) => {
+        this.createDoughnutChart(graphData.activos);
+        this.createLineChart(graphData.monitoreoMes);
+        this.createBarChart(graphData.monitoreoTipo);
+      },
+      error: (error) => console.error('Failed to load graph data:', error)
+    });
   }
 
 
-  CreateDoughnutChart() {
+  createDoughnutChart(data: number[]) {
     this.doughnutChart = new Chart("MyChart", {
       type: 'doughnut',
       data: {
@@ -34,7 +43,7 @@ export class GeneralMarketingComponent implements OnInit {
         ],
         datasets: [{
           label: 'Usuarios Activos',
-          data: [35, 90],
+          data: data,
           backgroundColor: [
             'rgb(245,105,29)',
             'rgb(0,31,134)'
@@ -58,14 +67,14 @@ export class GeneralMarketingComponent implements OnInit {
     });
   }
 
-  createLineChart() {
+  createLineChart(data: number[]) {
     this.lineChart = new Chart("lineChart", {
       type: 'line',
       data: {
         labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
         datasets: [{
           label: 'Usuarios Conectados',
-          data: [80, 60, 25, 80, 200, 100, 110, 20, 130, 140, 40, 160],
+          data: data,
           borderColor: 'rgb(0,74,173)',
           tension: 0.1
         }]
@@ -80,14 +89,14 @@ export class GeneralMarketingComponent implements OnInit {
     });
   }
 
-  createBarChart() {
+  createBarChart(data: { administrativo: number; ventas: number; marketing: number; soporte: number }) {
     this.barChart = new Chart("barChart", {
       type: 'bar',
       data: {
         labels: ['Administrativo', 'Ventas', 'Marketing', 'Soporte'],
         datasets: [{
           label: 'Porcentaje de servidoes',
-          data: [65, 59, 25, 94],
+          data: Object.values(data), 
           backgroundColor: [
             'rgb(0,31,134)'
           ]

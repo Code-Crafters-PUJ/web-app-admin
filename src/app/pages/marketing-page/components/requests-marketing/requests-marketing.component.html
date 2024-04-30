@@ -37,13 +37,13 @@
       <div class="card">
         <div class="card-body">
           <h5 class="mb-3 text-center">Historial de Dudas</h5>
-          <!-- Card que se repite-->
-          <!-- Ejemplos de historial de dudas, replicar o modificar según los datos recibidos -->
-          <div class="card mb-3">
+          <!-- Iterar sobre userHistory para mostrar el historial de dudas -->
+          <div *ngFor="let historyItem of userHistory" class="card mb-3">
             <div class="card-body">
+              <!-- Resto del contenido de la tarjeta -->
               <div class="row mb-3">
                 <div class="col-6">
-                  <span class="fw-bold">Andrés Armando (Negocio S.A.)</span>
+                  <span class="fw-bold">{{ historyItem.sender.name }} ({{ historyItem.company }})</span>
                 </div>
                 <div class="col-6 text-end">
                   <input type="checkbox">
@@ -51,57 +51,25 @@
               </div>
               <div class="row mb-3">
                 <div class="col-6">
-                  <span class="fw-bold">andresArg&#64;negocio.com</span>
+                  <span class="fw-bold">{{ historyItem.sender.email }}</span>
                 </div>
                 <div class="col-6 text-end">
-                  <span>2024/20/02</span>
+                  <span>{{ historyItem.sender.date | date:'yyyy/MM/dd' }}</span>
                 </div>
               </div>
               <div class="row bg-light py-3 mb-3">
                 <div class="col">
-                  <span>COSTOS DEL NUEVO PLAN</span>
+                  <span>{{ historyItem.subject }}</span>
                 </div>
               </div>
               <div class="row">
                 <div class="col" style="text-align: justify;">
-                  <span>¡Hola StockWage! Escribo porque tengo dudas acerca de las nuevas características del nuevo plan</span>
+                  <span>{{ historyItem.description }}</span>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Repetir este bloque para cada item en el historial de dudas -->
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="row mb-3">
-                <div class="col-6">
-                  <span class="fw-bold">Andrés Armando (Negocio S.A.)</span>
-                </div>
-                <div class="col-6 text-end">
-                  <input type="checkbox">
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-6">
-                  <span class="fw-bold">andresArg&#64;negocio.com</span>
-                </div>
-                <div class="col-6 text-end">
-                  <span>2024/20/02</span>
-                </div>
-              </div>
-              <div class="row bg-light py-3 mb-3">
-                <div class="col">
-                  <span>COSTOS DEL NUEVO PLAN</span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col" style="text-align: justify;">
-                  <span>¡Hola StockWage! Escribo porque tengo dudas acerca de las nuevas características del nuevo plan</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Fin de iteración -->
         </div>
       </div>
     </div>
-  </div>
-</div>
