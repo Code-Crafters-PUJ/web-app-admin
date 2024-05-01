@@ -42,7 +42,7 @@ export class GeneralSalesComponent {
   constructor(private billingService: BillingService,
     private clientService: ClientService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,) {
   }
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -64,8 +64,8 @@ export class GeneralSalesComponent {
     for (let i = 0; i < this.clients.length; i++) {
       const nombre:String=this.clients[i].company_name
       let total:number=0
-      for (let j = 0; j < this.clients[i].Billings.length; j++) {
-        total+=this.clients[i].Billings[j].plan.price
+      for (let j = 0; j < this.clients[i].billings.length; j++) {
+        total+=this.clients[i].billings[j].plan.price
       }
       const clienteAux: SalesAux = {
         nombre: nombre,
@@ -86,15 +86,20 @@ export class GeneralSalesComponent {
       if (this.billings[i].plan.type == "Free") {
         this.totalFree++;
       }
-      if (this.isSameDateAsToday(this.billings[i].initial_date)) {
-        this.totalToday++;
-      }
-      if (this.isSameMonthAndYearAsToday(this.billings[i].final_date)) {
-        this.totalMonth++;
-      }
-      if (this.isSameYearAsToday(this.billings[i].initial_date)) {
-        this.totalYear++;
-      }
+      // if (this.isSameDateAsToday(this.billings[i].initial_date)) {
+      //   this.totalToday++;
+      // }
+      // if (this.isSameMonthAndYearAsToday(this.billings[i].final_date)) {
+      //   this.totalMonth++;
+      // }
+      // if (this.isSameYearAsToday(this.billings[i].initial_date)) {
+      //   this.totalYear++;
+      // }
+      this.clientService.getStats().subscribe((data) => {
+        this.totalToday = data["today"];
+        this.totalMonth = data["lastMonth"];
+        this.totalYear = data["lastYear"];
+      })
     }
   }
   isSameDateAsToday(date: Date): boolean {

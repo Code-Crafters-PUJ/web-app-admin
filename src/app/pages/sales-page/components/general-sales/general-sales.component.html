@@ -54,7 +54,7 @@
                 </thead>
                 <tbody>
                   <ng-container
-                  *ngFor="let client of clientesAux.slice((actualpageClients - 1) * 5, actualpageClients * 5); let i = index">
+                  *ngFor="let client of clientesAux; let i = index">
                   <tr>
                     <td>{{client.nombre}}</td>
                     <td>{{client.total}}</td>

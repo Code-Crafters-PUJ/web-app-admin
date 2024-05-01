@@ -8,6 +8,6 @@ export interface Client {
     telephone: string;
     NIT: string;
     status:string;
-    Billings: Billing[];
+    billings: Billing[];
 }
 

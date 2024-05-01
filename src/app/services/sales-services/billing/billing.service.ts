@@ -10,8 +10,8 @@ import { environment } from '../../../../environments/environment';
 })
 export class BillingService {
 
-  constructor(private http: HttpClient,private storageservice: StorageService) { }
-  getBillings(): Observable<Billing[]> {
+  constructor(private http: HttpClient, private storageservice: StorageService) { }
+  getBillings(): Observable<any[]> {
     const savedAccount = this.storageservice.getSavedAccount();
     var jwt = savedAccount?.jwt;
     if (!jwt) {
@@ -19,7 +19,7 @@ export class BillingService {
     }
     jwt = jwt.replace(/"/g, '');
 
-    return this.http.get<Billing[]>(`${environment.baseURL}/sales/all`, {
+    return this.http.get<any[]>(`${environment.baseURL}/clients/sales/all`, {
       headers: {
         Authorization: jwt
       }

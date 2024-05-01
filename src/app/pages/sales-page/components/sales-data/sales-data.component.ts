@@ -36,8 +36,8 @@ export class SalesDataComponent {
         }
       );
       if (this.client != null) {
-        for (let i = 0; i < this.client.Billings.length; i++) {
-          this.Billings[i] = this.client.Billings[i]
+        for (let i = 0; i < this.client.billings.length; i++) {
+          this.Billings[i] = this.client.billings[i]
         }
         this.totalPages = Math.ceil(this.Billings.length /5);
       }
