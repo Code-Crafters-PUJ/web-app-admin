@@ -2,63 +2,41 @@
 
   <div class="row align-items-center mb-5">
     <div class="col-auto mb-2">
-      <img ngSrc="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
+      <img src="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
     </div>
     <div class="col-auto ps-0 mb-2">
       <h1 class="font-weight-bold mb-2">Planes</h1>
     </div>
   </div>
-
-
+  
   <div class="row">
-
     <div class="col-lg-6 mb-3">
       <div class="card">
         <div class="card-body text-center">
           <div class="table-responsive">
-
-
             <table class="table">
-
               <thead>
-              <tr>
-                <th style="padding-left: 1vw;">Plan</th>
-                <th>Costo</th>
-                <th>Usuarios</th>
-                <th>Estado</th>
-              </tr>
+                <tr>
+                  <th style="padding-left: 1vw;">Plan</th>
+                  <th>Precio</th>
+                  <th>Usuarios</th>
+                  <th>Estado</th>
+                </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>Empresa S.A.</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              <tr>
-                <td>Empresa S.A</td>
-                <td>Data 2</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              <tr>
-                <td>Empresa S.A</td>
-                <td>Data 3</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              <tr>
-                <td>Empresa S.A</td>
-                <td>Data 3</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
+                <tr *ngFor="let sale of salesData">
+                  <td>{{ sale.type }}</td>
+                  <td>{{ sale.price }} USD, {{ sale.duration }} Meses</td>
+                  <td>{{ sale.users }} usuarios</td>
+                  <td>{{ sale.status }}</td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
+  </div>
     <div class="col-lg-6 mb-3">
       <div class="card">
         <div class="card-body ">
@@ -67,25 +45,26 @@
           <!-- Input 1 -->
           <div class="mb-3">
             <label for="nombrePlan" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombrePlan" placeholder="Nombre">
+            <input type="text" class="form-control" id="type" [(ngModel)]="newPlan.type" name="type" placeholder="Type" required>
           </div>
 
           <!-- Input 2 -->
           <div class="mb-3">
             <label for="costoMensualPlan" class="form-label">Costo Mensual</label>
-            <input type="text" class="form-control" id="costoMensualPlan" placeholder="Costo Mensual">
+            <input type="number" class="form-control" id="priceMensual" [(ngModel)]="newPlan.priceMensual" name="priceMensual" placeholder="Precio Mensual" required>
           </div>
 
           <!-- Input 3 -->
           <div class="mb-3">
             <label for="costoSemestralPlan" class="form-label">Costo Semestral</label>
-            <input type="text" class="form-control" id="costoSemestralPlan" placeholder="Costo Semestral">
+            <input type="number" class="form-control" id="priceSemestral" [(ngModel)]="newPlan.priceSemestral" name="priceSemestral" placeholder="Precio Semestral" required>
+            
           </div>
 
           <!-- Input 4 -->
           <div class="mb-3">
             <label for="costoAnualPlan" class="form-label">Costo Anual</label>
-            <input type="text" class="form-control" id="costoAnualPlan" placeholder="Costo Anual">
+            <input type="number" class="form-control" id="priceAnual" [(ngModel)]="newPlan.priceAnual" name="priceAnual" placeholder="Precio Anual" required>
           </div>
 
           <!-- Input 5 -->
@@ -93,9 +72,9 @@
             <label for="creacionCuentasPlan" class="form-label">Creacion Cuentas</label>
             <div class="input-group">
               <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" id="flexCheckDefault1">
-              </div>
-              <input type="text" class="form-control" id="creacionCuentasPlan" placeholder="Creacion Cuentas ">
+                  <input class="form-check-input mt-0" type="checkbox" [(ngModel)]="newPlan.createPlan" id="creacionCuentasCheckbox">
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="newPlan.planDescription" id="creacionCuentasPlan" placeholder="Descripción de Creacion Cuentas">
             </div>
           </div>
 
@@ -103,17 +82,17 @@
           <div class="mb-3">
             <label for="creacionServiciosPlan" class="form-label">Creacion Servicios</label>
             <div class="input-group">
-              <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" id="flexCheckDefault2">
-              </div>
-              <input type="text" class="form-control" id="creacionServiciosPlan" placeholder="Creacion Servicios">
+                <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" [(ngModel)]="newPlan.createService" id="creacionServiciosCheckbox">
+                </div>
+                <input type="text" class="form-control" [(ngModel)]="newPlan.serviceDescription" id="creacionServiciosPlan" placeholder="Descripción de Creacion Servicios">
             </div>
-          </div>
+        </div>
 
           <!-- Input 7 -->
           <div class="mb-3">
             <label for="estadoPlan" class="form-label">Estado</label>
-            <input type="text" class="form-control" id="estadoPlan" placeholder="Estado">
+            <input type="text" class="form-control" id="estadoPlan" [(ngModel)]="newPlan.status" placeholder="Estado">
           </div>
 
           <div class="container-btn">
@@ -218,4 +197,3 @@
       </div>
     </div>
   </div>
-</div>
