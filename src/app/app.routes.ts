@@ -31,7 +31,7 @@ export const routes: Routes = [
       { path: 'benefits', component: SalesPageComponent },
       { path: 'generalSupport', component: SupportPageComponent },
       { path: 'requests', component: SupportPageComponent },
-      { path: 'requests/company', component: SupportPageComponent },
+      { path: 'requests/company/:accountId', component: SupportPageComponent },
       { path: 'generalMarketing', component: MarketingPageComponent },
       { path: 'requestsMarketing', component: MarketingPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
@@ -59,7 +59,7 @@ export const routes: Routes = [
     children: [
       { path: 'general', component: SupportPageComponent },
       { path: 'requests', component: SupportPageComponent },
-      { path: 'requests/company', component: SupportPageComponent },
+      { path: 'requests/company/:accountId', component: SupportPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
     ]
   },
