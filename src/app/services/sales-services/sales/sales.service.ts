@@ -12,8 +12,8 @@ export class SalesService {
 
   constructor(private http: HttpClient) { }
 
-  getSalesData(): Observable<PlansDTO[]> {
-    return this.http.get<PlansDTO[]>(`${this.apiUrl}/plans/all`);
+  getSalesData(): Observable<{plans: PlansDTO[]}> {
+    return this.http.get<{plans: PlansDTO[]}>(`${this.apiUrl}/plans/all`);
   }
 
   createPlan(planData: PlansDTO): Observable<PlansDTO> {

@@ -28,8 +28,8 @@ export class SalesSettingsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.salesService.getSalesData().subscribe((data: PlansDTO[]) => {
-      this.salesData = data;
+    this.salesService.getSalesData().subscribe((data: {plans: PlansDTO[]}) => {
+      this.salesData = data.plans;
     });
     /*this.serviceService.getServices().subscribe((data: ServiceDTO[]) => {
       this.servicesData = data;
