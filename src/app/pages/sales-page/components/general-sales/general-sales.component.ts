@@ -46,8 +46,8 @@ export class GeneralSalesComponent {
   }
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.actualpageSubscription = +params['pagina'] || 1;
-      this.actualpageClients = +params['paginaClientes'] || 1;
+      this.actualpageSubscription = + params['pagina'] || 1;
+      this.actualpageClients = + params['paginaClientes'] || 1;
     });
 
     if (this.filtroAplicado) {
@@ -77,13 +77,11 @@ export class GeneralSalesComponent {
 
   calculateTotals(): void {
     for (let i = 0; i < this.billings.length; i++) {
-      if (this.billings[i].plan.type == "Golden") {
+      if (this.billings[i].plan.type === "Golden") {
         this.totalGolden++;
-      }
-      if (this.billings[i].plan.type == "Silver") {
+      } else if (this.billings[i].plan.type === "Silver") {
         this.totalSilver++;
-      }
-      if (this.billings[i].plan.type == "Free") {
+      } else if (this.billings[i].plan.type === "Free") {
         this.totalFree++;
       }
       // if (this.isSameDateAsToday(this.billings[i].initial_date)) {
@@ -125,8 +123,9 @@ export class GeneralSalesComponent {
  private getBillings() {
     this.billingService.getBillings().subscribe(
       data => {
-        this.billings = data;
+        this.billings = data.sales;
         this.totalpagesSubscription = Math.ceil(this.billings.length / 5);
+        this.calculateTotals()
       },
       error => {
         console.error('Error al obtener subscripciones:', error);

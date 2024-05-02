@@ -1,4 +1,4 @@
-export class PlansDTO {
+export class PlanDTO {
   id: number;
   type: string;
   description: string;

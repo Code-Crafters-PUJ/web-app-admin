@@ -3,7 +3,7 @@ import {NgOptimizedImage} from "@angular/common";
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SalesService } from '../../../../services/sales-services/sales/sales.service';
-import { PlansDTO, ServiceDTO } from '../../../../DTO/sales.dto';
+import { PlanDTO, ServiceDTO } from '../../../../DTO/sales.dto';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
@@ -18,8 +18,8 @@ import { Observable } from 'rxjs/internal/Observable';
   styleUrl: './sales-settings.component.css'
 })
 export class SalesSettingsComponent implements OnInit {
-  public salesData: PlansDTO[] = [];
-  public newPlan: PlansDTO = new PlansDTO({});
+  public salesData: PlanDTO[] = [];
+  public newPlan: PlanDTO = new PlanDTO({});
   public servicesData: ServiceDTO[] = [];
 
   constructor(
@@ -28,7 +28,7 @@ export class SalesSettingsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.salesService.getSalesData().subscribe((data: {plans: PlansDTO[]}) => {
+    this.salesService.getSalesData().subscribe((data: {plans: PlanDTO[]}) => {
       this.salesData = data.plans;
     });
     /*this.serviceService.getServices().subscribe((data: ServiceDTO[]) => {
@@ -37,7 +37,7 @@ export class SalesSettingsComponent implements OnInit {
   
   }
 
-  createPlan(): Observable<PlansDTO> {
+  createPlan(): Observable<PlanDTO> {
     return this.salesService.createPlan(this.newPlan);
   }
   
@@ -45,7 +45,7 @@ export class SalesSettingsComponent implements OnInit {
     this.newPlan.price = this.newPlan.priceMensual;
     this.newPlan.duration = 1;
     this.createPlan().subscribe({
-      next: (response: PlansDTO) => {
+      next: (response: PlanDTO) => {
         console.log('Plan mensual creado', response);
         this.salesData.push(response);
       },
@@ -59,7 +59,7 @@ export class SalesSettingsComponent implements OnInit {
     this.newPlan.price = this.newPlan.priceSemestral;
     this.newPlan.duration = 6;
     this.createPlan().subscribe({
-      next: (response: PlansDTO) => {
+      next: (response: PlanDTO) => {
         console.log('Plan semestral creado', response);
         this.salesData.push(response);
       },
@@ -73,7 +73,7 @@ export class SalesSettingsComponent implements OnInit {
     this.newPlan.price = this.newPlan.priceAnual;
     this.newPlan.duration = 12;
     this.createPlan().subscribe({
-      next: (response: PlansDTO) => {
+      next: (response: PlanDTO) => {
         console.log('Plan anual creado', response);
         this.salesData.push(response);
       },
