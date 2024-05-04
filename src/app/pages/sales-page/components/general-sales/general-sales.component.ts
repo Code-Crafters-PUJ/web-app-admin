@@ -122,12 +122,30 @@ export class GeneralSalesComponent {
     return date.getFullYear() === today.getFullYear();
   }
 
+  private updateClientSales() {
+    this.billings.forEach(element => {
+      const index = this.clientesAux.map(c => c.nombre).indexOf(element.client.companyName);
+
+      if (index === -1) {
+        this.clientesAux.push({
+          nombre: element.client.companyName,
+          total: 1
+        })
+        return
+      }
+
+      this.clientesAux[index].total += 1
+      
+    });
+  }
+
  private getBillings() {
     this.billingService.getBillings().subscribe(
       data => {
         this.billings = data.sales;
         this.totalpagesSubscription = Math.ceil(this.billings.length / 5);
         this.calculateTotals()
+        this.updateClientSales()
       },
       error => {
         console.error('Error al obtener subscripciones:', error);
