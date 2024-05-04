@@ -5,8 +5,8 @@ import { Plan } from "./plan";
 
 export interface Billing {
     id: number;
-    initial_date: Date;
-    final_date: Date;
+    initialDate: Date;
+    finalDate: Date;
     suscription_status:number
     usage: Time;
     plan: Plan;

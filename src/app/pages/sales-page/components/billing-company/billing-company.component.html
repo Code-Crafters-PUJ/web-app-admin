@@ -35,12 +35,12 @@
         <ng-container
           *ngFor="let bill of billings.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
           <tr>
-            <td routerLink="/home/accounts/billing/company" (click)="saveCompanyId(bill.client.id)" style="color: #5CAEFA; text-decoration: underline;cursor: pointer;">{{ bill.client.company_name }}</td>
-            <td>{{ bill.initial_date| date:'shortDate' }}</td>
+            <td routerLink="/home/accounts/billing/company" (click)="saveCompanyId(bill.client.id)" style="color: #5CAEFA; text-decoration: underline;cursor: pointer;">{{ bill.client.companyName }}</td>
+            <td>{{ bill.initialDate| date:'shortDate' }}</td>
             <td>{{ bill.plan.type }}</td>
             <td>
-              <span *ngIf="bill.suscription_status==0 && bill.final_date >= getCurrentDate()">Vencida</span>
-              <span *ngIf="bill.suscription_status==0 && bill.final_date < getCurrentDate()">Falta pago</span>
+              <span *ngIf="bill.suscription_status==0 && bill.finalDate >= getCurrentDate()">Vencida</span>
+              <span *ngIf="bill.suscription_status==0 && bill.finalDate < getCurrentDate()">Falta pago</span>
               <span *ngIf="bill.suscription_status==1">Activa</span>
             </td>
             <td>{{ bill.payment.method }}</td>

@@ -50,20 +50,19 @@ export class GeneralSalesComponent {
       this.actualpageClients = + params['paginaClientes'] || 1;
     });
 
+    this.getBillings();
     if (this.filtroAplicado) {
-      this.getBillings();
       this.billingsData = this.billings;
       this.billings = this.billingsFiltered;
     } else {
-      this.getBillings();
       this.billingsData = this.billings;
     }
     this.calculateTotals();
     this.getClients();
 
     for (let i = 0; i < this.clients.length; i++) {
-      const nombre:String=this.clients[i].company_name
-      let total:number=0
+      const nombre: String = this.clients[i].companyName
+      let total: number = 0
       for (let j = 0; j < this.clients[i].billings.length; j++) {
         total+=this.clients[i].billings[j].plan.price
       }
@@ -76,6 +75,9 @@ export class GeneralSalesComponent {
   }
 
   calculateTotals(): void {
+    this.totalFree = 0;
+    this.totalGolden = 0;
+    this.totalSilver = 0;
     for (let i = 0; i < this.billings.length; i++) {
       if (this.billings[i].plan.type === "Golden") {
         this.totalGolden++;
@@ -186,7 +188,7 @@ export class GeneralSalesComponent {
   searchByCompany() {
     if (this.searchText.trim().length != 0) {
       this.getBillings();
-      this.billingsFiltered = this.billings.filter(subscription => subscription.client.company_name.toLowerCase().includes(this.searchText.toLowerCase()));
+      this.billingsFiltered = this.billings.filter(subscription => subscription.client.companyName.toLowerCase().includes(this.searchText.toLowerCase()));
       this.filtroAplicado = true;
       this.billings = this.billingsFiltered;
       this.router.navigateByUrl('/home/accounts/billing/?pagina=' + 1)

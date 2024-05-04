@@ -2,8 +2,8 @@ import { Billing } from "./billing";
 
 export interface Client {
     id: number;
-    company_name: string;
-    contact_name: string;
+    companyName: string;
+    contactName: string;
     email: string;
     telephone: string;
     NIT: string;

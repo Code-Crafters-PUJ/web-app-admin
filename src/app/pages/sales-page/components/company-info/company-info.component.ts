@@ -15,8 +15,8 @@ import { Client } from '../../../../models/sales-models/client';
 export class CompanyInfoComponent {
   companyId: number = 0
   client: Client | null = null;
-  plan:string=''
-  total:number=0
+  plan: string=''
+  total: number=0
   constructor(
     private clientService: ClientService,
   ) { }
