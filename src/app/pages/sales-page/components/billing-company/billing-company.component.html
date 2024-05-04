@@ -38,11 +38,7 @@
             <td routerLink="/home/accounts/billing/company" (click)="saveCompanyId(bill.client.id)" style="color: #5CAEFA; text-decoration: underline;cursor: pointer;">{{ bill.client.companyName }}</td>
             <td>{{ bill.initialDate| date:'shortDate' }}</td>
             <td>{{ bill.plan.type }}</td>
-            <td>
-              <span *ngIf="bill.suscription_status==0 && bill.finalDate >= getCurrentDate()">Vencida</span>
-              <span *ngIf="bill.suscription_status==0 && bill.finalDate < getCurrentDate()">Falta pago</span>
-              <span *ngIf="bill.suscription_status==1">Activa</span>
-            </td>
+            <td>{{ bill.suscription_status }}</td>
             <td>{{ bill.payment.method }}</td>
           </tr>
         </ng-container>

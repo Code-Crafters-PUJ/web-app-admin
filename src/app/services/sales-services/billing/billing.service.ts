@@ -11,7 +11,7 @@ import { environment } from '../../../../environments/environment';
 export class BillingService {
 
   constructor(private http: HttpClient, private storageservice: StorageService) { }
-  getBillings(): Observable<any> {
+  getBillings(): Observable<{sales: Billing[]}> {
     const savedAccount = this.storageservice.getSavedAccount();
     var jwt = savedAccount?.jwt;
     if (!jwt) {
@@ -19,7 +19,7 @@ export class BillingService {
     }
     jwt = jwt.replace(/"/g, '');
 
-    return this.http.get<any>(`${environment.baseURL}/clients/sales/all`, {
+    return this.http.get<{sales: Billing[]}>(`${environment.baseURL}/clients/sales/all`, {
       headers: {
         Authorization: jwt
       }

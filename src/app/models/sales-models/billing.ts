@@ -7,7 +7,7 @@ export interface Billing {
     id: number;
     initialDate: Date;
     finalDate: Date;
-    suscription_status:number
+    suscription_status: string
     usage: Time;
     plan: Plan;
     payment: Payment;
