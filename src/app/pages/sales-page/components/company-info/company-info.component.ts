@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ClientService } from '../../../../services/sales-services/client/client.service';
 import { CommonModule } from '@angular/common';
@@ -25,15 +25,15 @@ export class CompanyInfoComponent {
     const companyIdString = sessionStorage.getItem('companyId');
     if (companyIdString !== null) {
       this.companyId = parseInt(companyIdString, 10);
-      this.clientService.getClient(this.companyId).subscribe(
-        (client: Client) => {
-          this.client = client;
+      this.clientService.getClientById(this.companyId).subscribe(
+        (data) => {
+          this.client = data.client;
         },
         (error) => {
           console.error('Error al obtener los datos del cliente:', error);
         }
       );
-      if(this.client!=null)
+      if (this.client!=null)
       {
         if(this.client.billings.length!=0)
         {

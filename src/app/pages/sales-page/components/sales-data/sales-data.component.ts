@@ -20,27 +20,31 @@ export class SalesDataComponent {
   totalPages: number = 0;
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private clientService: ClientService) {
-  }
-  Billings: Billing[] = []
+    private clientService: ClientService,
+  ) {}
+  billings: Billing[] = []
   ngOnInit(): void {
     const companyIdString = sessionStorage.getItem('companyId');
-    if (companyIdString !== null) {
+    if (companyIdString) {
       this.companyId = parseInt(companyIdString, 10);
-      this.clientService.getClient(this.companyId).subscribe(
-        (client: Client) => {
-          this.client = client;
+      this.clientService.getClientById(this.companyId).subscribe(
+        (data) => {
+          this.client = data.client;
+          if (this.client) {
+            this.clientService.getSalesByClient(this.companyId).subscribe(
+              (data) => {
+                this.billings = data.sales
+              },
+              (error) => {
+                console.error('Error al obtener los datos del cliente:', error);
+              }
+            )
+          }
         },
         (error) => {
           console.error('Error al obtener los datos del cliente:', error);
         }
       );
-      if (this.client != null) {
-        for (let i = 0; i < this.client.billings.length; i++) {
-          this.Billings[i] = this.client.billings[i]
-        }
-        this.totalPages = Math.ceil(this.Billings.length /5);
-      }
     }
   }
   previousPage() {

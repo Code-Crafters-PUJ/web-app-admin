@@ -13,11 +13,11 @@ export class SalesService {
   constructor(private http: HttpClient) { }
 
   getSalesData(): Observable<{plans: PlanDTO[]}> {
-    return this.http.get<{plans: PlanDTO[]}>(`${this.apiUrl}/plans/all`);
+    return this.http.get<{plans: PlanDTO[]}>(`${this.apiUrl}/clients/plans/all`);
   }
 
   createPlan(planData: PlanDTO): Observable<PlanDTO> {
-    return this.http.post<PlanDTO>(`${this.apiUrl}/plans/`, planData);
+    return this.http.post<PlanDTO>(`${this.apiUrl}/clients/plans/`, planData);
   }
 
   /*getServices(): Observable<ServiceDTO[]>{

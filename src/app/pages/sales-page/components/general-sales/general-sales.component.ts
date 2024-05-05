@@ -155,7 +155,7 @@ export class GeneralSalesComponent {
   private getClients() {
     this.clientService.getClients().subscribe(
       data => {
-        this.clients = data;
+        this.clients = data.clients;
         this.totalpagesClients = Math.ceil(this.billings.length / 5);
       },
       error => {

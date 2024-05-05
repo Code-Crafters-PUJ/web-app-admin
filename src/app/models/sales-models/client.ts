@@ -6,7 +6,7 @@ export interface Client {
     contactName: string;
     email: string;
     telephone: string;
-    NIT: string;
+    nit: string;
     status: string;
     billings: Billing[];
 }
