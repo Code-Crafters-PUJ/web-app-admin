@@ -35,20 +35,3 @@ export class PlanDTO {
     this.serviceDescription = data.serviceDescription;
   }
 }
-export class ServiceDTO {
-  id: number;
-  name: string;
-  status: boolean;
-  users: number;
-  createdAt: string;
-  updatedAt: string;
-
-  constructor(data: any) {
-    this.id = data.id;
-    this.name = data.name;
-    this.status = data.status;
-    this.users = data.users;
-    this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
-  }
-}

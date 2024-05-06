@@ -3,8 +3,9 @@ import {NgOptimizedImage} from "@angular/common";
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SalesService } from '../../../../services/sales-services/sales/sales.service';
-import { PlanDTO, ServiceDTO } from '../../../../DTO/sales.dto';
+import { PlanDTO } from '../../../../DTO/sales.dto';
 import { Observable } from 'rxjs/internal/Observable';
+import { Service } from '../../../../models/sales-models/service';
 
 @Component({
   selector: 'app-sales-settings',
@@ -20,7 +21,7 @@ import { Observable } from 'rxjs/internal/Observable';
 export class SalesSettingsComponent implements OnInit {
   public salesData: PlanDTO[] = [];
   public newPlan: PlanDTO = new PlanDTO({});
-  public servicesData: ServiceDTO[] = [];
+  public servicesData: Service[] = [];
 
   constructor(
     private salesService: SalesService, 
@@ -31,9 +32,9 @@ export class SalesSettingsComponent implements OnInit {
     this.salesService.getSalesData().subscribe((data: {plans: PlanDTO[]}) => {
       this.salesData = data.plans;
     });
-    /*this.serviceService.getServices().subscribe((data: ServiceDTO[]) => {
-      this.servicesData = data;
-  });*/
+    this.salesService.getServices().subscribe((data) => {
+      this.servicesData = data.services;
+    });
   
   }
 
@@ -82,6 +83,4 @@ export class SalesSettingsComponent implements OnInit {
       }
     });
   }
-
-
 }

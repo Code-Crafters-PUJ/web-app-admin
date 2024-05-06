@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PlanDTO, ServiceDTO } from '../../../DTO/sales.dto';
+import { PlanDTO } from '../../../DTO/sales.dto';
 import { environment } from '../../../../environments/environment';
+import { Service } from '../../../models/sales-models/service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class SalesService {
     return this.http.post<PlanDTO>(`${this.apiUrl}/clients/plans/`, planData);
   }
 
-  /*getServices(): Observable<ServiceDTO[]>{
-    return this.http.get<ServiceDTO>(`${this.apiUrl}/services/all`);
-  }*/
+  getServices(): Observable<{services: Service[]}>{
+    return this.http.get<{services: Service[]}>(`${this.apiUrl}/clients/services/all`);
+  }
 }
