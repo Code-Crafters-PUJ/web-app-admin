@@ -16,43 +16,22 @@
       <div class="card">
         <div class="card-body text-center">
           <div class="table-responsive">
-
-
             <table class="table">
-
               <thead>
-              <tr>
-                <th style="padding-left: 1vw;">Empresa</th>
-                <th>Plan</th>
-                <th>Duracion</th>
-                <th>Estado</th>
-              </tr>
+                <tr>
+                  <th style="padding-left: 1vw;">Tipo</th>
+                  <th>Duracion</th>
+                  <th>Usuarios</th>
+                  <th>Estado</th>
+                </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>Empresa S.A.</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              <tr>
-                <td>Empresa S.A</td>
-                <td>Data 2</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              <tr>
-                <td>Empresa S.A</td>
-                <td>Data 3</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
-              <tr>
-                <td>Empresa S.A</td>
-                <td>Data 3</td>
-                <td>Data 1</td>
-                <td>Data 1</td>
-              </tr>
+                <tr *ngFor="let trial of trials">
+                  <td>{{ trial.type }}</td>
+                  <td>{{ trial.duration }} (Meses)</td>
+                  <td>{{ trial.clients.length }}</td>
+                  <td>Activo</td>
+                </tr>
               </tbody>
             </table>
           </div>

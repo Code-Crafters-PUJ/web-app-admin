@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PlanDTO } from '../../../DTO/sales.dto';
 import { environment } from '../../../../environments/environment';
 import { Service } from '../../../models/sales-models/service';
+import { Trials } from '../../../models/sales-models/trial';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,11 @@ export class SalesService {
     return this.http.post<PlanDTO>(`${this.apiUrl}/clients/plans/`, planData);
   }
 
-  getServices(): Observable<{services: Service[]}>{
+  getServices(): Observable<{services: Service[]}> {
     return this.http.get<{services: Service[]}>(`${this.apiUrl}/clients/services/all`);
+  }
+
+  getTrials(): Observable<{trials: Trials[]}> {
+    return this.http.get<{trials: Trials[]}>(`${this.apiUrl}/clients/trials/all`);
   }
 }
