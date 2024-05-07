@@ -45,7 +45,7 @@ export class BillingCompanyComponent implements OnInit {
           this.billings = data.sales;
           this.totalPages = Math.ceil(this.billings.length / 14);
           this.billings.forEach(element => {
-            element.suscription_status = new Date(element.finalDate).getTime() < new Date().getTime()
+            element.suscription_status = new Date(element.finalDate).getTime() > new Date().getTime()
               ? 'Activa'
               : 'Inactiva'
           });

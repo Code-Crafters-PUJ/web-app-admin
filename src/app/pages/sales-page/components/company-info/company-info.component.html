@@ -11,7 +11,7 @@
     <div class="info-item">{{ client?.contactName }}</div>
     <hr class="line">
     <div class="info-item">Plan actual</div>
-    <div class="info-item">{{plan}}</div>
+    <div class="info-item">{{client?.plan?.type || 'Sin Plan'}}</div>
     <hr class="line">
     <div class="info-item">Ganancias totales</div>
     <div class="info-item">{{total}}</div>

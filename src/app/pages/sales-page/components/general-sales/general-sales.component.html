@@ -130,11 +130,11 @@
               </thead>
               <tbody>
                 <ng-container
-                  *ngFor="let bill of billings.slice((actualpageSubscription - 1) * 5, actualpageSubscription * 5); let i = index">
+                  *ngFor="let client of clients">
                   <tr>
-                    <td>{{bill.client.companyName}}</td>
-                    <td>{{bill.client.email}}</td>
-                    <td>{{bill.plan.type}}</td>
+                    <td>{{client.companyName}}</td>
+                    <td>{{client.email}}</td>
+                    <td>{{client.plan?.type || 'Sin Plan'}}</td>
                     <!--<td>{{bill.usage.hours}}:{{bill.usage.minutes}}</td>-->
                   </tr>
                 </ng-container>

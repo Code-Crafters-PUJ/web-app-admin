@@ -12,7 +12,7 @@
           <span class="date">{{billing.initialDate|date:'shortDate'}}</span>
         </li>
         <li class="plan-section">{{billing.plan.type}}</li>
-        <li class="invoice">Factura:${{billing.plan.price}}</li>
+        <li class="invoice">Factura: ${{billing.amount}}</li>
       </ng-container>
     </ul>
     <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw" (click)="previousPage()"

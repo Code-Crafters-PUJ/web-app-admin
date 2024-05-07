@@ -1,4 +1,5 @@
 import { Billing } from "./billing";
+import { Plan } from "./plan";
 
 export interface Client {
     id: number;
@@ -9,5 +10,6 @@ export interface Client {
     nit: string;
     status: string;
     billings: Billing[];
+    plan: Plan | null;
 }
 

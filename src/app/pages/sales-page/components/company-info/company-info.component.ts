@@ -16,7 +16,7 @@ export class CompanyInfoComponent {
   companyId: number = 0
   client: Client | null = null;
   plan: string=''
-  total: number=0
+  total: number = 0
   constructor(
     private clientService: ClientService,
   ) { }
@@ -28,6 +28,9 @@ export class CompanyInfoComponent {
       this.clientService.getClientById(this.companyId).subscribe(
         (data) => {
           this.client = data.client;
+          this.client.billings.forEach(bill => {
+            this.total += bill.amount;
+          });
         },
         (error) => {
           console.error('Error al obtener los datos del cliente:', error);
