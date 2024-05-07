@@ -99,37 +99,21 @@
 
                 <thead>
                 <tr>
-                  <th style="padding-left: 1vw;">Nombre</th>
-                  <th>Actualizacion</th>
-                  <th>Usuarios</th>
-                  <th>Estado</th>
+                  <th style="padding-left: 1vw;">Código</th>
+                  <th>Empresa</th>
+                  <th>Descuento</th>
+                  <th>Duración</th>
+                  <th>Expiración</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Empresa S.A.</td>
-                  <td>Data 1</td>
-                  <td>Data 1</td>
-                  <td>Data 1</td>
-                </tr>
-                <tr>
-                  <td>Empresa S.A</td>
-                  <td>Data 2</td>
-                  <td>Data 1</td>
-                  <td>Data 1</td>
-                </tr>
-                <tr>
-                  <td>Empresa S.A</td>
-                  <td>Data 3</td>
-                  <td>Data 1</td>
-                  <td>Data 1</td>
-                </tr>
-                <tr>
-                  <td>Empresa S.A</td>
-                  <td>Data 3</td>
-                  <td>Data 1</td>
-                  <td>Data 1</td>
-                </tr>
+                  <tr *ngFor="let coupon of coupons">
+                    <td>{{ coupon.code }}</td>
+                    <td>{{ coupon.client.companyName }}</td>
+                    <td>{{ coupon.discount }}</td>
+                    <td>{{ coupon.duration }} (Meses)</td>
+                    <td>{{ coupon.expirationDate }}</td>
+                  </tr>
                 </tbody>
               </table>
             </div>

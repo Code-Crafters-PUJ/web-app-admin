@@ -34,6 +34,9 @@ export class SalesSettingsComponent implements OnInit {
     });
     this.salesService.getServices().subscribe((data) => {
       this.servicesData = data.services;
+      this.servicesData.forEach(data => {
+        data.updatedAt = new Date(data.updatedAt).toLocaleDateString()
+      })
     });
   
   }

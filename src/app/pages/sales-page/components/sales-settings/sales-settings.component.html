@@ -136,7 +136,7 @@
               <tbody>
                 <tr *ngFor="let service of servicesData">
                   <td>{{ service.name }}</td>
-                  <td></td>
+                  <td>{{ service.updatedAt }}</td>
                   <td>{{ service.users }} usuarios</td>
                   <td>{{ service.status ? 'activo' : 'inactivo' }}</td>
                 </tr>
