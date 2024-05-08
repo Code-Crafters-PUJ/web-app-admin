@@ -6,6 +6,8 @@ import { environment } from '../../../../environments/environment';
 import { Service } from '../../../models/sales-models/service';
 import { Trials } from '../../../models/sales-models/trial';
 import { Coupon } from '../../../models/sales-models/coupon';
+import { StorageService } from '../../login-services/storage.service';
+import { ServiceDto } from '../../../DTO/service.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +15,62 @@ import { Coupon } from '../../../models/sales-models/coupon';
 export class SalesService {
   private apiUrl = environment.baseURL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private storageService: StorageService) { }
+
+  getToken(): string {
+    const savedAccount = this.storageService.getSavedAccount();
+    var jwt = savedAccount?.jwt;
+    if (!jwt) {
+      throw new Error('JWT token is not defined.');
+    }
+    return jwt
+  }
 
   getSalesData(): Observable<{plans: PlanDTO[]}> {
-    return this.http.get<{plans: PlanDTO[]}>(`${this.apiUrl}/clients/plans/all`);
+    return this.http.get<{plans: PlanDTO[]}>(`${this.apiUrl}/clients/plans/all`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
   }
 
   createPlan(planData: PlanDTO): Observable<PlanDTO> {
-    return this.http.post<PlanDTO>(`${this.apiUrl}/clients/plans/`, planData);
+    return this.http.post<PlanDTO>(`${this.apiUrl}/clients/plans/`, planData, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
   }
 
   getServices(): Observable<{services: Service[]}> {
-    return this.http.get<{services: Service[]}>(`${this.apiUrl}/clients/services/all`);
+    return this.http.get<{services: Service[]}>(`${this.apiUrl}/clients/services/all`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  createService(service: ServiceDto): Observable<any> {
+    return this.http.post<Observable<any>>(`${this.apiUrl}/clients/services`, service, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
   }
 
   getTrials(): Observable<{trials: Trials[]}> {
-    return this.http.get<{trials: Trials[]}>(`${this.apiUrl}/clients/trials/all`);
+    return this.http.get<{trials: Trials[]}>(`${this.apiUrl}/clients/trials/all`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
   }
 
   getCoupons(): Observable<{coupons: Coupon[]}> {
-    return this.http.get<{coupons: Coupon[]}>(`${this.apiUrl}/clients/coupons/all`);
+    return this.http.get<{coupons: Coupon[]}>(`${this.apiUrl}/clients/coupons/all`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
   }
 }
