@@ -55,9 +55,10 @@ export class LoginComponent {
             var role = JSON.parse(value).role;
             var jwt = JSON.parse(value).jwt;
             var Permissions=JSON.parse(value).Permissions;
+            var id=JSON.parse(value).id;
             // Autenticación exitosa
             this.handleSuccessfulAuthentication(role);
-            this.storageService.saveAccount(role,jwt,Permissions);
+            this.storageService.saveAccount(role,jwt,Permissions,id);
           }
         } else {
           // Autenticación fallida

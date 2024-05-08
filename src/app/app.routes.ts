@@ -9,6 +9,8 @@ import { isAuthenticatedGuard } from './guards/is-authenticated.guard';
 import { SupportPageComponent } from "./pages/support-page/support-page.component";
 import { MarketingPageComponent } from "./pages/marketing-page/marketing-page.component";
 import { SidebarComponent } from './global/sidebar/sidebar.component';
+import { MenuComponent } from './pages/menu/menu.component';
+import {cambiarContraseniaComponent} from './pages/cambiar-contrasenia/cambiar-contrasenia.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -78,7 +80,10 @@ export const routes: Routes = [
     path:'home', canActivate:[isAuthenticatedGuard],
     children: [
     {
-      path:'all',component:SidebarComponent
+      path:'all',component:MenuComponent
+    },
+    {
+      path:'CambioContrasenia',component:cambiarContraseniaComponent
     }
   ]
   },
