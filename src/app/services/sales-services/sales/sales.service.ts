@@ -26,8 +26,8 @@ export class SalesService {
     return jwt
   }
 
-  getSalesData(): Observable<{plans: PlanDTO[]}> {
-    return this.http.get<{plans: PlanDTO[]}>(`${this.apiUrl}/clients/plans/all`, {
+  getSalesData(): Observable<{ plans: PlanDTO[] }> {
+    return this.http.get<{ plans: PlanDTO[] }>(`${this.apiUrl}/clients/plans/all`, {
       headers: {
         Authorization: this.getToken()
       }
@@ -42,8 +42,8 @@ export class SalesService {
     });
   }
 
-  getServices(): Observable<{services: Service[]}> {
-    return this.http.get<{services: Service[]}>(`${this.apiUrl}/clients/services/all`, {
+  getServices(): Observable<{ services: Service[] }> {
+    return this.http.get<{ services: Service[] }>(`${this.apiUrl}/clients/services/all`, {
       headers: {
         Authorization: this.getToken()
       }
@@ -58,16 +58,34 @@ export class SalesService {
     })
   }
 
-  getTrials(): Observable<{trials: Trials[]}> {
-    return this.http.get<{trials: Trials[]}>(`${this.apiUrl}/clients/trials/all`, {
+  updateService(name: string, state: boolean): Observable<any> {
+    return this.http.put<Observable<any>>(`${this.apiUrl}/clients/services/${name}`, {
+      state
+    }, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+
+  deleteService(name: string): Observable<any> {
+    return this.http.delete<Observable<any>>(`${this.apiUrl}/clients/services/${name}`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+
+  getTrials(): Observable<{ trials: Trials[] }> {
+    return this.http.get<{ trials: Trials[] }>(`${this.apiUrl}/clients/trials/all`, {
       headers: {
         Authorization: this.getToken()
       }
     });
   }
 
-  getCoupons(): Observable<{coupons: Coupon[]}> {
-    return this.http.get<{coupons: Coupon[]}>(`${this.apiUrl}/clients/coupons/all`, {
+  getCoupons(): Observable<{ coupons: Coupon[] }> {
+    return this.http.get<{ coupons: Coupon[] }>(`${this.apiUrl}/clients/coupons/all`, {
       headers: {
         Authorization: this.getToken()
       }

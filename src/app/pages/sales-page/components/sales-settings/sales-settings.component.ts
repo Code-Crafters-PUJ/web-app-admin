@@ -109,7 +109,7 @@ export class SalesSettingsComponent implements OnInit {
       return
     }
     console.log(id);
-    
+
     if (id == "crear") {
       this.createService()
     } else {
@@ -118,18 +118,37 @@ export class SalesSettingsComponent implements OnInit {
   }
 
   createService() {
-
-    console.log("holi");
-    this.salesService.createService({
-      name: this.serviceForm.value.name!,
-      state: this.serviceForm.value.state!
-    }).subscribe((data) => {
-      console.log(data);
-      this.getServices()
-    })
+    const name = this.serviceForm.value.name!
+    if (this.servicesData.find((service) => service.name === name)) {
+      this.salesService.updateService(name, this.serviceForm.value.state!).subscribe((data) => {
+        console.log(data);
+        this.getServices()
+      })
+    } else {
+      this.salesService.createService({
+        name,
+        state: this.serviceForm.value.state!
+      }).subscribe((data) => {
+        console.log(data);
+        this.getServices()
+      })
+    }
   }
 
   removeService() {
+    const name = this.serviceForm.value.name!
+    if (!this.servicesData.find((service) => service.name === name)) {
+      Swal.fire({
+        title: "Servicio",
+        text: "No existe un servicio con ese nombre",
+        icon: "error"
+      })
+      return
+    }
+    this.salesService.deleteService(name).subscribe((data) => {
+      console.log(data);
+      this.getServices()
+    })
 
   }
 }
