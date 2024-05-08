@@ -135,7 +135,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let service of servicesData">
-                  <td>{{ service.name }}</td>
+                  <td (click)="setCurrentService(service)" style="color: #5CAEFA; text-decoration: underline; cursor: pointer;">{{ service.name }}</td>
                   <td>{{ service.updatedAt }}</td>
                   <td>{{ service.users }} usuarios</td>
                   <td>{{ service.status ? 'activo' : 'inactivo' }}</td>
@@ -175,6 +175,7 @@
           <div class="container-btn">
             <button id="eliminar" type="submit" class="btn btn-primary btn-cancel px-5">Eliminar</button>
             <button id="crear" type="submit" class="btn btn-primary btn-submit px-5">Guardar</button>
+            <button type="button" (click)="removeCurrentService()" class="btn btn-primary btn-new px-5">Nuevo</button>
           </div>
 
         </form>

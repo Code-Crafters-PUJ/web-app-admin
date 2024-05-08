@@ -99,6 +99,20 @@ export class SalesSettingsComponent implements OnInit {
     });
   }
 
+  setCurrentService(service: Service) {
+    this.serviceForm.setValue({
+      name: service.name,
+      state: service.status
+    })
+  }
+
+  removeCurrentService() {
+    this.serviceForm.setValue({
+      name: '',
+      state: true
+    })
+  }
+
   submitService(id: string) {
     if (this.serviceForm.invalid) {
       Swal.fire({

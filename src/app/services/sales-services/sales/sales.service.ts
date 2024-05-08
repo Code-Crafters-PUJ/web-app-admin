@@ -8,6 +8,7 @@ import { Trials } from '../../../models/sales-models/trial';
 import { Coupon } from '../../../models/sales-models/coupon';
 import { StorageService } from '../../login-services/storage.service';
 import { ServiceDto } from '../../../DTO/service.dto';
+import { CouponDto } from '../../../DTO/coupon.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -90,5 +91,27 @@ export class SalesService {
         Authorization: this.getToken()
       }
     });
+  }
+
+  createCoupon(coupon: CouponDto): Observable<any> {
+    return this.http.post<Observable<any>>(`${this.apiUrl}/clients/coupons`, coupon, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+  updateCoupon(code: string, coupon: Partial<CouponDto>): Observable<any> {
+    return this.http.put<Observable<any>>(`${this.apiUrl}/clients/coupons/${code}`, coupon, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+  deleteCoupon(code: string): Observable<any> {
+    return this.http.delete<Observable<any>>(`${this.apiUrl}/clients/coupons/${code}`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
   }
 }
