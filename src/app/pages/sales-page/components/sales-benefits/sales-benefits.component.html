@@ -19,18 +19,18 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th style="padding-left: 1vw;">Tipo</th>
-                  <th>Duracion</th>
-                  <th>Usuarios</th>
+                  <th style="padding-left: 1vw;">Empresa</th>
+                  <th>Plan</th>
+                  <th>Duración</th>
                   <th>Estado</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let trial of trials">
-                  <td>{{ trial.type }}</td>
+                  <td (click)="setCurrentTrial(trial)" style="color: #5CAEFA; text-decoration: underline; cursor: pointer;">{{ trial.client.companyName }}</td>
+                  <td>{{ trial.planType }}</td>
                   <td>{{ trial.duration }} (Meses)</td>
-                  <td>{{ trial.clients.length }}</td>
-                  <td>Activo</td>
+                  <td>{{ trial.state }}</td>
                 </tr>
               </tbody>
             </table>
@@ -39,41 +39,52 @@
       </div>
     </div>
     <div class="col-lg-6 mb-3">
-      <div class="card">
+      <form class="card" [formGroup]="trialForm" (ngSubmit)="submitTrial($event.submitter.id)">
         <div class="card-body ">
           <h5 class="mb-3 text-center">Edicion de Trials</h5>
 
           <!-- Input 1 -->
           <div class="mb-3">
             <label for="empresaTrial" class="form-label">Empresa</label>
-            <input type="text" class="form-control" id="empresaTrial" placeholder="Empresa">
+            <!--<input type="text" class="form-control" id="empresaTrial" formControlName="name" placeholder="Empresa">-->
+            <select class="form-select" id="descuentoCupon" formControlName="name">
+              <option *ngFor="let client of clients" [ngValue]="client.companyName">{{ client.companyName }}</option>
+            </select>
           </div>
 
           <!-- Input 2 -->
           <div class="mb-3">
             <label for="planTrial" class="form-label">Plan</label>
-            <input type="text" class="form-control" id="planTrial" placeholder="Plan">
+            <!--<input type="text" class="form-control" id="planTrial" formControlName="plan" placeholder="Plan">-->
+            <select class="form-select" id="descuentoCupon" formControlName="plan">
+              <option *ngFor="let plans of plans" [ngValue]="plans.type">{{ plans.type }}</option>
+            </select>
           </div>
 
           <!-- Input 3 -->
           <div class="mb-3">
-            <label for="duracionTrial" class="form-label">Duracion </label>
-            <input type="text" class="form-control" id="duracionTrial" placeholder="Meses">
+            <label for="duracionTrial" class="form-label">Duración</label>
+            <input type="number" class="form-control" id="duracionTrial" formControlName="duration" placeholder="Meses">
           </div>
 
           <!-- Input 4 -->
           <div class="mb-3">
-            <label for="Estadotrial" class="form-label">Estado </label>
-            <input type="text" class="form-control" id="Estadotrial" placeholder="Estado ">
+            <label for="Estadotrial" class="form-label">Estado</label>
+            <!--<input type="text" class="form-control" id="Estadotrial" formControlName="state" placeholder="Estado ">-->
+            <select class="form-select" id="descuentoCupon" formControlName="state">
+              <option [ngValue]="'En uso'">En uso</option>
+              <option [ngValue]="'Sin uso'">Sin uso</option>
+            </select>
           </div>
 
           <div class="container-btn">
-            <button type="reset" class="btn btn-primary btn-cancel px-5">Eliminar</button>
-            <button type="submit" class="btn btn-primary btn-submit px-5">Guardar</button>
+            <button id="eliminarTrial" type="submit" class="btn btn-primary btn-cancel px-5">Eliminar</button>
+            <button id="crearTrial"  type="submit" class="btn btn-primary btn-submit px-5">Guardar</button>
+            <button type="button" (click)="removeCurrentTrial()" class="btn btn-primary btn-new px-5">Nuevo</button>
           </div>
 
         </div>
-      </div>
+      </form>
     </div>
 
 
@@ -133,8 +144,11 @@
 
             <!-- Input 2 -->
             <div class="mb-3">
-              <label for="empresaCupon" class="form-label">Empresa </label>
-              <input type="text" class="form-control" id="empresaCupon" placeholder="Empresa" formControlName="client">
+              <label for="empresaCupon" class="form-label">Empresa</label>
+              <!--<input type="text" class="form-control" id="empresaCupon" placeholder="Empresa" formControlName="client">-->
+              <select class="form-select" id="descuentoCupon" formControlName="client">
+                <option *ngFor="let client of clients" [ngValue]="client.companyName">{{ client.companyName }}</option>
+              </select>
             </div>
 
             <!-- Input 3 -->
@@ -160,8 +174,8 @@
             </div>
 
             <div class="container-btn">
-              <button id="eliminar" type="submit" class="btn btn-primary btn-cancel px-5">Eliminar</button>
-              <button id="crear" type="submit" class="btn btn-primary btn-submit px-5">Guardar</button>
+              <button id="eliminarCupon" type="submit" class="btn btn-primary btn-cancel px-5">Eliminar</button>
+              <button id="crearCupon" type="submit" class="btn btn-primary btn-submit px-5">Guardar</button>
               <button type="button" (click)="removeCurrentCoupon()" class="btn btn-primary btn-new px-5">Nuevo</button>
             </div>
 

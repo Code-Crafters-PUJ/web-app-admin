@@ -10,6 +10,7 @@ import { StorageService } from '../../login-services/storage.service';
 import { ServiceDto } from '../../../DTO/service.dto';
 import { CouponDto } from '../../../DTO/coupon.dto';
 import { Plan } from '../../../models/sales-models/plan';
+import { TrialDto } from '../../../DTO/trial.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,30 @@ export class SalesService {
 
   getTrials(): Observable<{ trials: Trials[] }> {
     return this.http.get<{ trials: Trials[] }>(`${this.apiUrl}/clients/trials/all`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  createTrials(trial: TrialDto): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/clients/trials/`, trial, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  updateTrials(trialId: number, trial: Partial<TrialDto>): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/clients/trials/${trialId}`, trial, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  deleteTrials(trialId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/clients/trials/${trialId}`, {
       headers: {
         Authorization: this.getToken()
       }
