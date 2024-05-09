@@ -43,6 +43,13 @@ export class SalesService {
       }
     });
   }
+  updatePlan(type: string, planData: Partial<PlanDTO>): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/clients/plans/${type}`, planData, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
 
   deletePlan(type: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/clients/plans/${type}`, {

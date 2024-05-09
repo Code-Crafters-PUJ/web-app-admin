@@ -136,6 +136,17 @@ export class SalesSettingsComponent implements OnInit {
   createPlan() {
     const type = this.planForm.value.name!
     if (this.plansData.find((plan) => plan.type === type)) {
+      this.salesService.updatePlan(type, {
+        anualPrice: this.planForm.value.anualPrice!,
+        mensualPrice: this.planForm.value.mensualPrice!,
+        semestralPrice: this.planForm.value.semestralPrice!,
+        state: this.planForm.value.state!,
+        numAccounts: this.planForm.value.hasAccountLimit!? this.planForm.value.accountLimit! : -1,
+        numServices: this.planForm.value.hasServiceLimit!? this.planForm.value.serviceLimit! : -1,
+      }).subscribe((data) => {
+        console.log(data);
+        this.getPlans()
+      })
     } else {
       if (this.planForm.invalid) {
         Swal.fire({
