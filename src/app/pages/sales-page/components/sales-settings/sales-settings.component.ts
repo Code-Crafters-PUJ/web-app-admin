@@ -25,15 +25,17 @@ export class SalesSettingsComponent implements OnInit {
   public plansData: Plan[] = [];
   public servicesData: Service[] = [];
 
-  planForm = this.formBuilder.group<any>({
+  accountLimit: boolean = false;
+
+  planForm = this.formBuilder.group({
     name: ['', Validators.required],
     mensualPrice: [0, Validators.required],
     semestralPrice: [0, Validators.required],
     anualPrice: [0, Validators.required],
     hasAccountLimit: [false, Validators.required],
-    accountLimit: [null, Validators.required],
+    accountLimit: [0, Validators.required],
     hasServiceLimit: [false, Validators.required],
-    serviceLimit: [null, Validators.required],
+    serviceLimit: [0, Validators.required],
     state: ['', Validators.required],
   });
   serviceForm = this.formBuilder.group({
@@ -61,19 +63,61 @@ export class SalesSettingsComponent implements OnInit {
       this.plansData = data.plans;
     });
     this.getServices()
+    this.setupCheckBoxes()
+  }
 
+  setupCheckBoxes() {
+    this.planForm.get('accountLimit')?.disable();
+    this.planForm.get('hasAccountLimit')?.valueChanges
+    .subscribe(value => {
+      if (value) {
+        this.planForm.get('accountLimit')?.enable();
+      } else {
+        this.planForm.get('accountLimit')?.disable();
+        this.planForm.patchValue({ accountLimit: null });
+      }
+    })
+    this.planForm.get('serviceLimit')?.disable();
+    this.planForm.get('hasServiceLimit')?.valueChanges
+    .subscribe(value => {
+      if (value) {
+        this.planForm.get('serviceLimit')?.enable();
+        } else {
+          this.planForm.get('serviceLimit')?.disable();
+          this.planForm.patchValue({ serviceLimit: null });
+        }
+      })
+      this.planForm.patchValue({
+        accountLimit: null,
+        serviceLimit: null,
+      })
   }
 
   setCurrentPlan(plan: Plan) {
     this.planForm.setValue({
       name: plan.type,
-      mensualPrice: plan.priceMensual,
-      semestralPrice: plan.priceSemestral,
-      anualPrice: plan.priceAnual,
+      mensualPrice: plan.mensualPrice,
+      semestralPrice: plan.semestralPrice,
+      anualPrice: plan.anualPrice,
       hasAccountLimit: plan.numAccounts !== -1,
-      accountLimit: plan.numAccounts !== -1? plan.numAccounts : null,
-      hasServiceLimit: plan.numservices !== -1,
-      state: plan.status
+      accountLimit: plan.numAccounts !== -1 ? plan.numAccounts : null,
+      hasServiceLimit: plan.numServices !== -1,
+      serviceLimit: plan.numServices !== -1 ? plan.numServices : null,
+      state: plan.state
+    })
+  }
+
+  removeCurrentPlan() {
+    this.planForm.setValue({
+      name: null,
+      mensualPrice: 0,
+      semestralPrice: 0,
+      anualPrice: 0,
+      hasAccountLimit: false,
+      accountLimit: null,
+      hasServiceLimit: false,
+      serviceLimit: null,
+      state: '',
     })
   }
 
@@ -81,24 +125,24 @@ export class SalesSettingsComponent implements OnInit {
     if (id === "crearPlan") {
 
     } else {
-      
+
     }
   }
 
   createPlan() {
-    
+
   }
 
   createPlanMensual(): void {
-    
+
   }
 
   createPlanSemestral(): void {
-    
+
   }
 
   createPlanAnual(): void {
-    
+
   }
 
   setCurrentService(service: Service) {

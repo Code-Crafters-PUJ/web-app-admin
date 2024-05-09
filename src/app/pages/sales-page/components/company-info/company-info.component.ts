@@ -43,7 +43,7 @@ export class CompanyInfoComponent {
           this.plan=this.client.billings[this.client.billings.length-1].plan.type
         }
         for (let i = 0; i < this.client.billings.length; i++) {
-          this.total+=this.client.billings[i].plan.price; 
+          this.total += this.client.billings[i].amount; 
         }
       }
     }

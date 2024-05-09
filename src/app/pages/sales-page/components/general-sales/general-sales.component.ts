@@ -64,7 +64,7 @@ export class GeneralSalesComponent {
       const nombre: String = this.clients[i].companyName
       let total: number = 0
       for (let j = 0; j < this.clients[i].billings.length; j++) {
-        total+=this.clients[i].billings[j].plan.price
+        total+=this.clients[i].billings[j].amount
       }
       const clienteAux: SalesAux = {
         nombre: nombre,

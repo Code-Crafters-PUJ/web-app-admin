@@ -2,13 +2,11 @@ export interface Plan {
     id: number;
     type: string;
     description: string;
-    price: number;
-    priceMensual: number;
-    priceSemestral: number;
-    priceAnual: number;
-    duration: number;
+    mensualPrice: number;
+    semestralPrice: number;
+    anualPrice: number;
     users: number;
-    status: boolean;
+    state: string;
     createdAt: string;
     updatedAt: string;
     createPlan: boolean;
@@ -16,6 +14,6 @@ export interface Plan {
     createService: boolean;
     serviceDescription: string;
     numAccounts: number;
-    numservices: number;
+    numServices: number;
 }
   

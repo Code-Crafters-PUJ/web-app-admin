@@ -26,9 +26,13 @@
               <tbody>
                 <tr *ngFor="let plan of plansData">
                   <td (click)="setCurrentPlan(plan)" style="color: #5CAEFA; text-decoration: underline; cursor: pointer;">{{ plan.type }}</td>
-                  <td>{{ plan.price }} USD, {{ plan.duration }} Meses</td>
+                  <td>
+                    {{ plan.mensualPrice }} USD, 1 Mes <br>
+                    {{ plan.semestralPrice }} USD, 6 Meses <br>
+                    {{ plan.anualPrice }} USD, 1 Año
+                  </td>
                   <td>{{ plan.users }} usuarios</td>
-                  <td>{{ plan.status ? 'Activo' : 'inactivo' }}</td>
+                  <td>{{ plan.state }}</td>
                 </tr>
               </tbody>
             </table>
@@ -71,10 +75,10 @@
             <label for="creacionCuentasPlan" class="form-label">Creacion Cuentas</label>
             <div class="input-group">
               <div class="input-group-text">
-                <span>Limite&emsp;</span>
+                <span>Límite&emsp;</span>
                 <input class="form-check-input mt-0" type="checkbox" id="creacionCuentasCheckbox" formControlName="hasAccountLimit">
-                </div>
-                <input type="text" class="form-control" id="creacionCuentasPlan" placeholder="Descripción de Creacion Cuentas" formControlName="accountLimit">
+              </div>
+              <input type="number" class="form-control" id="creacionCuentasPlan" placeholder="Límite de cuentas permitidas" formControlName="accountLimit">
             </div>
           </div>
   
@@ -83,10 +87,10 @@
             <label for="creacionServiciosPlan" class="form-label">Creacion Servicios</label>
             <div class="input-group">
                 <div class="input-group-text">
-                    <span>Limite&emsp;</span>
+                    <span>Límite&emsp;</span>
                     <input class="form-check-input mt-0" type="checkbox" id="creacionServiciosCheckbox" formControlName="hasServiceLimit">
                 </div>
-                <input type="text" class="form-control" id="creacionServiciosPlan" placeholder="Descripción de Creacion Servicios" formControlName="serviceLimit">
+                <input type="number" class="form-control" id="creacionServiciosPlan" placeholder="Límite de servicios permitidos" formControlName="serviceLimit" >
             </div>
           </div>
   
@@ -99,6 +103,7 @@
           <div class="container-btn">
             <button id="eliminarPlan" type="submit" class="btn btn-primary btn-cancel px-5">Eliminar</button>
             <button id="crearPlan" type="submit" class="btn btn-primary btn-submit px-5">Guardar</button>
+            <button type="button" (click)="removeCurrentService()" class="btn btn-primary btn-new px-5">Nuevo</button>
           </div>
   
         </form>
