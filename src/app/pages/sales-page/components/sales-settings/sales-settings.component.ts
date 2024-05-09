@@ -7,6 +7,7 @@ import { PlanDTO } from '../../../../DTO/sales.dto';
 import { Observable } from 'rxjs/internal/Observable';
 import { Service } from '../../../../models/sales-models/service';
 import Swal from 'sweetalert2';
+import { Plan } from '../../../../models/sales-models/plan';
 
 @Component({
   selector: 'app-sales-settings',
@@ -21,10 +22,20 @@ import Swal from 'sweetalert2';
   styleUrl: './sales-settings.component.css'
 })
 export class SalesSettingsComponent implements OnInit {
-  public salesData: PlanDTO[] = [];
-  public newPlan: PlanDTO = new PlanDTO({});
+  public plansData: Plan[] = [];
   public servicesData: Service[] = [];
 
+  planForm = this.formBuilder.group<any>({
+    name: ['', Validators.required],
+    mensualPrice: [0, Validators.required],
+    semestralPrice: [0, Validators.required],
+    anualPrice: [0, Validators.required],
+    hasAccountLimit: [false, Validators.required],
+    accountLimit: [null, Validators.required],
+    hasServiceLimit: [false, Validators.required],
+    serviceLimit: [null, Validators.required],
+    state: [true, Validators.required],
+  });
   serviceForm = this.formBuilder.group({
     name: ['', Validators.required],
     state: [true, Validators.required],
@@ -46,57 +57,48 @@ export class SalesSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.salesService.getSalesData().subscribe((data: { plans: PlanDTO[] }) => {
-      this.salesData = data.plans;
+    this.salesService.getSalesData().subscribe((data: { plans: Plan[] }) => {
+      this.plansData = data.plans;
     });
     this.getServices()
 
   }
 
-  createPlan(): Observable<PlanDTO> {
-    return this.salesService.createPlan(this.newPlan);
+  setCurrentPlan(plan: Plan) {
+    this.planForm.setValue({
+      name: plan.type,
+      mensualPrice: plan.priceMensual,
+      semestralPrice: plan.priceSemestral,
+      anualPrice: plan.priceAnual,
+      hasAccountLimit: plan.numAccounts !== -1,
+      accountLimit: plan.numAccounts !== -1? plan.numAccounts : null,
+      hasServiceLimit: plan.numservices !== -1,
+      state: plan.status
+    })
+  }
+
+  submitPlan(id: string) {
+    if (id === "crearPlan") {
+
+    } else {
+      
+    }
+  }
+
+  createPlan() {
+    
   }
 
   createPlanMensual(): void {
-    this.newPlan.price = this.newPlan.priceMensual;
-    this.newPlan.duration = 1;
-    this.createPlan().subscribe({
-      next: (response: PlanDTO) => {
-        console.log('Plan mensual creado', response);
-        this.salesData.push(response);
-      },
-      error: (error: any) => {
-        console.error('Error creando plan mensual', error);
-      }
-    });
+    
   }
 
   createPlanSemestral(): void {
-    this.newPlan.price = this.newPlan.priceSemestral;
-    this.newPlan.duration = 6;
-    this.createPlan().subscribe({
-      next: (response: PlanDTO) => {
-        console.log('Plan semestral creado', response);
-        this.salesData.push(response);
-      },
-      error: (error: any) => {
-        console.error('Error creando plan semestral', error);
-      }
-    });
+    
   }
 
   createPlanAnual(): void {
-    this.newPlan.price = this.newPlan.priceAnual;
-    this.newPlan.duration = 12;
-    this.createPlan().subscribe({
-      next: (response: PlanDTO) => {
-        console.log('Plan anual creado', response);
-        this.salesData.push(response);
-      },
-      error: (error: any) => {
-        console.error('Error creando plan anual', error);
-      }
-    });
+    
   }
 
   setCurrentService(service: Service) {
@@ -124,7 +126,7 @@ export class SalesSettingsComponent implements OnInit {
     }
     console.log(id);
 
-    if (id == "crear") {
+    if (id == "crearServicio") {
       this.createService()
     } else {
       this.removeService()

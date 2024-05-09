@@ -1,10 +1,21 @@
-import { Billing } from "./billing";
-
 export interface Plan {
     id: number;
     type: string;
+    description: string;
     price: number;
-    plan_description: string;
-    duration:string
-    billings: Billing[];
+    priceMensual: number;
+    priceSemestral: number;
+    priceAnual: number;
+    duration: number;
+    users: number;
+    status: boolean;
+    createdAt: string;
+    updatedAt: string;
+    createPlan: boolean;
+    planDescription: string;
+    createService: boolean;
+    serviceDescription: string;
+    numAccounts: number;
+    numservices: number;
 }
+  

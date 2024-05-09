@@ -9,6 +9,7 @@ import { Coupon } from '../../../models/sales-models/coupon';
 import { StorageService } from '../../login-services/storage.service';
 import { ServiceDto } from '../../../DTO/service.dto';
 import { CouponDto } from '../../../DTO/coupon.dto';
+import { Plan } from '../../../models/sales-models/plan';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,8 @@ export class SalesService {
     return jwt
   }
 
-  getSalesData(): Observable<{ plans: PlanDTO[] }> {
-    return this.http.get<{ plans: PlanDTO[] }>(`${this.apiUrl}/clients/plans/all`, {
+  getSalesData(): Observable<{ plans: Plan[] }> {
+    return this.http.get<{ plans: Plan[] }>(`${this.apiUrl}/clients/plans/all`, {
       headers: {
         Authorization: this.getToken()
       }
