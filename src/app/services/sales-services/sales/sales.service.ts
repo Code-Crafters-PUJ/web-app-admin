@@ -36,8 +36,16 @@ export class SalesService {
     });
   }
 
-  createPlan(planData: PlanDTO): Observable<PlanDTO> {
-    return this.http.post<PlanDTO>(`${this.apiUrl}/clients/plans/`, planData, {
+  createPlan(planData: PlanDTO): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/clients/plans/`, planData, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  deletePlan(type: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/clients/plans/${type}`, {
       headers: {
         Authorization: this.getToken()
       }

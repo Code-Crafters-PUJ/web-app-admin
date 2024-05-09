@@ -170,6 +170,10 @@ export class SalesSettingsComponent implements OnInit {
       })
       return
     }
+    this.salesService.deletePlan(type).subscribe((data) => {
+      console.log(data);
+      this.getPlans()
+    })
   }
 
   setCurrentService(service: Service) {
