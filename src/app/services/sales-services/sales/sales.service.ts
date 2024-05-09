@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PlanDTO } from '../../../DTO/sales.dto';
+import { PlanDTO } from '../../../DTO/plan.dto';
 import { environment } from '../../../../environments/environment';
 import { Service } from '../../../models/sales-models/service';
 import { Trials } from '../../../models/sales-models/trial';

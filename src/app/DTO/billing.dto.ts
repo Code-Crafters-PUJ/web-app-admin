@@ -40,7 +40,7 @@
     "updatedAt": "2024-05-01T16:05:04.380Z"
 }*/
 
-import { PlanDTO } from "./sales.dto";
+import { PlanDTO } from "./plan.dto";
 
 export class BillingDTO {
     constructor(

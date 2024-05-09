@@ -3,7 +3,7 @@ import { NgOptimizedImage } from "@angular/common";
 import { NgFor } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SalesService } from '../../../../services/sales-services/sales/sales.service';
-import { PlanDTO } from '../../../../DTO/sales.dto';
+import { PlanDTO } from '../../../../DTO/plan.dto';
 import { Observable } from 'rxjs/internal/Observable';
 import { Service } from '../../../../models/sales-models/service';
 import Swal from 'sweetalert2';
@@ -49,6 +49,12 @@ export class SalesSettingsComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) { }
 
+  getPlans() {
+    this.salesService.getSalesData().subscribe((data: { plans: Plan[] }) => {
+      this.plansData = data.plans;
+    });
+  }
+
   getServices() {
     this.salesService.getServices().subscribe((data) => {
       this.servicesData = data.services;
@@ -59,9 +65,7 @@ export class SalesSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.salesService.getSalesData().subscribe((data: { plans: Plan[] }) => {
-      this.plansData = data.plans;
-    });
+    this.getPlans()
     this.getServices()
     this.setupCheckBoxes()
   }
@@ -69,28 +73,28 @@ export class SalesSettingsComponent implements OnInit {
   setupCheckBoxes() {
     this.planForm.get('accountLimit')?.disable();
     this.planForm.get('hasAccountLimit')?.valueChanges
-    .subscribe(value => {
-      if (value) {
-        this.planForm.get('accountLimit')?.enable();
-      } else {
-        this.planForm.get('accountLimit')?.disable();
-        this.planForm.patchValue({ accountLimit: null });
-      }
-    })
+      .subscribe(value => {
+        if (value) {
+          this.planForm.get('accountLimit')?.enable();
+        } else {
+          this.planForm.get('accountLimit')?.disable();
+          this.planForm.patchValue({ accountLimit: null });
+        }
+      })
     this.planForm.get('serviceLimit')?.disable();
     this.planForm.get('hasServiceLimit')?.valueChanges
-    .subscribe(value => {
-      if (value) {
-        this.planForm.get('serviceLimit')?.enable();
+      .subscribe(value => {
+        if (value) {
+          this.planForm.get('serviceLimit')?.enable();
         } else {
           this.planForm.get('serviceLimit')?.disable();
           this.planForm.patchValue({ serviceLimit: null });
         }
       })
-      this.planForm.patchValue({
-        accountLimit: null,
-        serviceLimit: null,
-      })
+    this.planForm.patchValue({
+      accountLimit: null,
+      serviceLimit: null,
+    })
   }
 
   setCurrentPlan(plan: Plan) {
@@ -123,26 +127,49 @@ export class SalesSettingsComponent implements OnInit {
 
   submitPlan(id: string) {
     if (id === "crearPlan") {
-
+      this.createPlan()
     } else {
-
+      this.removePlan()
     }
   }
 
   createPlan() {
-
+    const type = this.planForm.value.name!
+    if (this.plansData.find((plan) => plan.type === type)) {
+    } else {
+      if (this.planForm.invalid) {
+        Swal.fire({
+          title: "Plan",
+          text: "Llene por favor todos los campos",
+          icon: "error"
+        });
+        return
+      }
+      this.salesService.createPlan({
+        type: this.planForm.value.name!,
+        anualPrice: this.planForm.value.anualPrice!,
+        mensualPrice: this.planForm.value.mensualPrice!,
+        semestralPrice: this.planForm.value.semestralPrice!,
+        state: this.planForm.value.state!,
+        numAccounts: this.planForm.value.hasAccountLimit!? this.planForm.value.accountLimit! : -1,
+        numServices: this.planForm.value.hasServiceLimit!? this.planForm.value.serviceLimit! : -1,
+      }).subscribe((data) => {
+        console.log(data);
+        this.getPlans()
+      })
+    }
   }
 
-  createPlanMensual(): void {
-
-  }
-
-  createPlanSemestral(): void {
-
-  }
-
-  createPlanAnual(): void {
-
+  removePlan() {
+    const type = this.planForm.value.name!
+    if (!this.plansData.find((plan) => plan.type === type)) {
+      Swal.fire({
+        title: "Plan",
+        text: "No existe un tipo de plan con ese nombre",
+        icon: "error"
+      })
+      return
+    }
   }
 
   setCurrentService(service: Service) {
@@ -160,16 +187,6 @@ export class SalesSettingsComponent implements OnInit {
   }
 
   submitService(id: string) {
-    if (this.serviceForm.invalid) {
-      Swal.fire({
-        title: "Servicio",
-        text: "Llene por favor todos los campos",
-        icon: "error"
-      });
-      return
-    }
-    console.log(id);
-
     if (id == "crearServicio") {
       this.createService()
     } else {
@@ -185,6 +202,14 @@ export class SalesSettingsComponent implements OnInit {
         this.getServices()
       })
     } else {
+      if (this.serviceForm.invalid) {
+        Swal.fire({
+          title: "Servicio",
+          text: "Llene por favor todos los campos",
+          icon: "error"
+        });
+        return
+      }
       this.salesService.createService({
         name,
         state: this.serviceForm.value.state!
@@ -209,6 +234,5 @@ export class SalesSettingsComponent implements OnInit {
       console.log(data);
       this.getServices()
     })
-
   }
 }
