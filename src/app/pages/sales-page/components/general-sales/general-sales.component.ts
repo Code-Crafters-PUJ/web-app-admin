@@ -79,7 +79,7 @@ export class GeneralSalesComponent {
     this.totalGolden = 0;
     this.totalSilver = 0;
     for (let i = 0; i < this.billings.length; i++) {
-      if (this.billings[i].plan.type === "Golden") {
+      if (this.billings[i].plan.type === "Gold") {
         this.totalGolden++;
       } else if (this.billings[i].plan.type === "Silver") {
         this.totalSilver++;

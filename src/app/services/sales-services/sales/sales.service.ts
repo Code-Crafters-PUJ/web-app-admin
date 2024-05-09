@@ -60,7 +60,7 @@ export class SalesService {
     })
   }
 
-  updateService(name: string, state: boolean): Observable<any> {
+  updateService(name: string, state: string): Observable<any> {
     return this.http.put<Observable<any>>(`${this.apiUrl}/clients/services/${name}`, {
       state
     }, {

@@ -140,7 +140,7 @@
                   <td (click)="setCurrentService(service)" style="color: #5CAEFA; text-decoration: underline; cursor: pointer;">{{ service.name }}</td>
                   <td>{{ service.updatedAt }}</td>
                   <td>{{ service.users }} usuarios</td>
-                  <td>{{ service.status ? 'Activo' : 'Inactivo' }}</td>
+                  <td>{{ service.state }}</td>
                 </tr>
               </tbody>
             </table>
@@ -163,8 +163,10 @@
           <div class="mb-3">
             <label for="estadoServicios" class="form-label">Estado</label>
             <select class="form-select" id="estadoServicios" formControlName="state">
-              <option [ngValue]="true">Activo</option>
-              <option [ngValue]="false">Inactivo</option>
+              <option [ngValue]="'Publicado'">Publicado</option>
+              <option [ngValue]="'Mantenimiento'">Mantenimiento</option>
+              <option [ngValue]="'Deshabilitado'">Deshabilitado</option>
+              <option [ngValue]="'Borrador'">Borrador</option>
             </select>
           </div>
 

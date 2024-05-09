@@ -2,6 +2,6 @@
 export interface Service {
     name: string;
     users: number;
-    status: boolean;
+    state: string;
     updatedAt: Date | string;
 }

@@ -34,11 +34,11 @@ export class SalesSettingsComponent implements OnInit {
     accountLimit: [null, Validators.required],
     hasServiceLimit: [false, Validators.required],
     serviceLimit: [null, Validators.required],
-    state: [true, Validators.required],
+    state: ['', Validators.required],
   });
   serviceForm = this.formBuilder.group({
     name: ['', Validators.required],
-    state: [true, Validators.required],
+    state: ['', Validators.required],
   });
 
   constructor(
@@ -104,14 +104,14 @@ export class SalesSettingsComponent implements OnInit {
   setCurrentService(service: Service) {
     this.serviceForm.setValue({
       name: service.name,
-      state: service.status
+      state: service.state
     })
   }
 
   removeCurrentService() {
     this.serviceForm.setValue({
       name: '',
-      state: true
+      state: ''
     })
   }
 
