@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Account } from '../../../../models/general-models/account';
-import { ActivatedRoute, Router, RouterLink} from '@angular/router';
-import { AccountService } from '../../../../services/general-services/account/account.service';
-import {NgOptimizedImage} from "@angular/common";
-import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { CredentialService } from '../../../../services/general-services/credential/credential.service';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AccountDTO } from '../../../../DTO/Accounts.dto';
+import { StorageService } from '../../../../services/login-services/storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-table-accounts',
@@ -21,33 +22,48 @@ import { FormsModule } from '@angular/forms';
 export class TableAccountsComponent {
   Actualpage: number = 1;
   totalPages: number = 0;
-  accounts: Account[] = [];
   filtroAplicado: boolean = false;
-  selectedEditAccount: Account | null = null;
-  searchText:string=""
-  accountsFiltered:Account[]=[]
+  selectedEditAccount: Credential | null = null;
+  searchText: string = ""
+  accounts: AccountDTO[] = [];
+  accountsFiltered: AccountDTO[] = [];
+  Permisos: any[] = []
+  Rol: String = ""
+  permiso: Boolean = false
+  isAdmin: boolean = false;
+
 
   constructor(
-    private accountService: AccountService,
+    private credentialService: CredentialService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
+    const currentRoute = this.route.snapshot.routeConfig?.path
+    if (currentRoute) {
+      this.isAdmin = currentRoute.startsWith('home/admin');
+    }
     this.route.queryParams.subscribe(params => {
       this.Actualpage = +params['pagina'] || 1;
-      if (this.filtroAplicado) {
-        this.accounts = this.accountsFiltered;
+      this.getCredentials()
+      this.Rol = (this.storageService.getSavedAccount()?.role) || "";
+      if (this.Rol == '"Admin"') {
+        this.permiso = true
       }
       else {
-        this.getAccounts();
+        this.Permisos = this.storageService.getPermissions()
+        if (this.Permisos[0].can_modify) {
+          this.permiso = true
+        }
       }
     });
   };
-  private getAccounts() {
-    this.accountService.getAccounts().subscribe(
+  private getCredentials() {
+    this.credentialService.getCredentials().subscribe(
       data => {
-        this.accounts = data;
+        this.accounts = data.collection
         this.totalPages = Math.ceil(this.accounts.length / 14);
       },
       error => {
@@ -56,7 +72,7 @@ export class TableAccountsComponent {
     );
   }
 
-  setSelectedEditAccount(optionalAccount: Account): void {
+  setSelectedEditAccount(optionalAccount: Credential): void {
     if (this.selectedEditAccount === optionalAccount) {
       this.selectedEditAccount = null;
       return;
@@ -84,31 +100,47 @@ export class TableAccountsComponent {
       this.updateURL();
     }
   }
-  
+
   deleteAccount(i: number) {
-    this.accountService.delete(i).subscribe(
-      data => {
-        this.accounts = data;
-        //location.reload();Once connected,back only use this
-      },
-      error => {
-      }
-    );
+    if (this.permiso) {
+      this.credentialService.delete(i).subscribe(
+        data => {
+
+        },
+        error => {
+        }
+      );
+    }
+    else
+    {
+      Swal.fire({
+        title: 'No tienes Permisos!',
+        text: "Habla con tu administrador para poder realizar esta acción",
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+    }
   }
   onInput(value: string) {
     this.searchText = value || '';
   }
-  searchByEmail() {
+  searchByName() {
+    if (this.filtroAplicado) {
+      this.accounts = this.accountsFiltered
+      this.filtroAplicado = false
+    }
     if (this.searchText.trim().length != 0) {
-      this.getAccounts();
-      this.accountsFiltered = this.accounts.filter(accounts => accounts.credential.email.toLowerCase().includes(this.searchText.toLowerCase()));
+      this.accountsFiltered = this.accounts
+      const searchTextLower = this.searchText.toLowerCase();
+      this.accounts = this.accounts.filter(account =>
+        account.first_name.toLowerCase().includes(searchTextLower) ||
+        account.last_name.toLowerCase().includes(searchTextLower)
+      );
       this.filtroAplicado = true;
-      this.accounts = this.accountsFiltered;
-      this.router.navigateByUrl('/home/admin/accounts/?pagina='+1)
     }
     else {
       this.filtroAplicado = false;
-      this.getAccounts();
+      this.getCredentials();
     }
   }
 }

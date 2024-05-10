@@ -1,0 +1,127 @@
+<div class="container container-content">
+
+  <div class="row align-items-center mb-5">
+    <div class="col-auto mb-2">
+      <img ngSrc="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
+    </div>
+    <div class="col-auto ps-0 mb-2">
+      <h1 class="font-weight-bold mb-2">{{client?.company_name}}</h1>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Primera card -->
+      <div class="row">
+        <div class="col-md-12 p-3">
+          <div class="card">
+            <div class="card-body">
+
+              <div class="mb-3">
+                <h6>N.I.T.</h6>
+                <span>{{ client?.nit }}</span>
+              </div>
+
+              <div class="mb-3">
+                <h6>Contacto</h6>
+                <span>{{ client?.telephone}}</span>
+              </div>
+
+              <div class="mb-3">
+                <h6>Cantidad total de solicitudes</h6>
+                <span>{{ pqrs.length}}</span>
+              </div>
+
+            </div>
+            <div class="text-center">
+              <div class="row">
+                <div class="col-sm-6 mb-2 ">
+                  <button type="submit" class="btn btn-primary btn-submit btn-block" (click)="deshabilitar()">Deshabilitar</button>
+                </div>
+                <div class="col-sm-6 mb-3  ">
+                  <button type="reset" class="btn btn-primary btn-cancel btn-block" (click)="Impersonalizar()">Impersonalizar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Segunda card -->
+      <div class="row">
+        <div class="col-md-12 p-3">
+          <div class="card">
+            <div class="card-body ">
+              <div class="row align-items-center mb-5 ">
+                <div class="col-auto mb-2">
+                  <img ngSrc="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413"
+                    width="412">
+                </div>
+                <div class="col-auto ps-0 mb-2">
+                  <h3 class="font-weight-bold mb-2">Respuestas Solicitud</h3>
+                </div>
+                <div class="col">
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-custom" (click)="Responder()">Enviar</button>
+                  </div>
+                </div>
+
+                <div class="bg-light py-3 ">
+                  <h6 class="mb-0">Asunto</h6>
+                  <input type="text" class="form-control" id="asuntoInput" placeholder="Escriba el asunto">
+                </div>
+
+                <div class="mt-3">
+                  <h6>Descripción</h6>
+                  <textarea class="form-control" id="descripcionInput" rows="3" placeholder="Escriba la descripción"></textarea>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="col-md-6 p-3">
+      <div class="card">
+        <div class="card-body" style="height: 675px; overflow-y: auto;">
+
+          <h5 class="mb-3 text-center">Historial de soporte</h5>
+
+          <!-- Mini Card que se repite-->
+          <div class="card mb-3" *ngFor="let pqr of pqrs">
+            <div class="card-body">
+              <div class="row  mb-3">
+                <div class="col-6">
+                  <span class="fw-bold">{{ client?.contact_name }}</span>
+                </div>
+                <div class="col-6 text-end">
+                  <input type="checkbox" (change)="toggleSelection(pqr.id)">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-6">
+                  <span class="fw-bold">{{ pqr.email }}</span>
+                </div>
+                <div class="col-6 text-end">
+                  <span>{{ pqr.petition_date| date:'short'}}</span>
+                </div>
+              </div>
+              <div class="row bg-light py-3 mb-3">
+                <div class="col">
+                  <span>{{ pqr.subject }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col" style="text-align: justify;">
+                  <span>{{ pqr.description }}</span>
+                </div>
+              </div>
+            </div>
+          </div>

@@ -1,40 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {NgIf, NgOptimizedImage} from "@angular/common";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { NgIf, NgOptimizedImage } from "@angular/common";
+import { StorageService } from '../../services/login-services/storage.service';
 declare var $: any;
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   standalone: true,
-    imports: [
-        RouterLink,
-        NgOptimizedImage,
-        NgIf
-    ],
+  imports: [
+    RouterLink,
+    NgOptimizedImage,
+    NgIf
+  ],
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
 
-  url: string = 'home';
+  Roles: String[] = []
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+
+
+  constructor(private route: ActivatedRoute, private router: Router, private storageService: StorageService) { }
 
   ngOnInit(): void {
-    const currentUrl = this.router.url;
-    const segments = currentUrl.split('/');
-    const segment = segments[2];
 
-    switch (segment) {
-      case 'admin':
-        this.url = 'admin';
-        break;
-      case 'sales':
-        this.url = 'sales';
-        break;
-      default:
-        this.url = 'home';
+    const isadmin = this.storageService.getSavedAccount()
+    if (isadmin) {
+      if (isadmin.role.replace(/"/g, '') == "Admin") {
+        this.Roles.push("Admin")
+      }
+      else {
+        const roles = this.storageService.getPermissions()
+        for (const rol of roles) {
+          if (rol.can_view) {
+            this.Roles.push(rol.module_name)
+          }
+        }
+      }
     }
+
     $(document).ready(() => {
       $(".sidebar-nav li a").click(function (this: HTMLElement) {
         $(".sidebar-nav li a").removeClass("active");
@@ -47,6 +52,7 @@ export class SidebarComponent implements OnInit {
       });
     });
 
-    
+
   }
+
 }

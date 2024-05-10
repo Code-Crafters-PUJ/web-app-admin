@@ -9,7 +9,7 @@
     <div class="col d-flex justify-content-start ">
       <form class="form-inline mb-2">
         <div class="input-group input-custom ">
-          <input type="text" class="form-control" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" (keydown.enter)="searchByEmail()" placeholder="Buscar en esta lista...">
+          <input type="text" class="form-control" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" (keydown.enter)="searchByName()" placeholder="Buscar en esta lista...">
           <div class="input-group-append">
             <button class="btn" type="submit"><i class="bi bi-search" style="color: #9A9A9A;"></i></button>
           </div>
@@ -17,7 +17,7 @@
       </form>
     </div>
     <div class="col-auto">
-      <button routerLink="/home/admin/accounts/new" class="btn btn-custom">Nuevo</button>
+      <button [routerLink]="isAdmin ? '/home/admin/accounts/new' : '/home/Monitoreo/accounts/new'" class="btn btn-custom">Nuevo</button>
     </div>
   </div>
 
@@ -28,7 +28,7 @@
           <th>Nombre</th>
           <th>Correo electrónico</th>
           <th>Roles</th>
-          <th>Última hora de creación</th>
+          <th>Última hora de conexión</th>
           <th>Último reporte</th>
           <th>Acciones</th>
         </tr>
@@ -36,22 +36,23 @@
       <tbody>
         <ng-container *ngFor="let account of accounts.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
           <tr>
-            <td>{{ account.name }}</td>
-            <td>{{ account.credential.email}}</td>
-            <td>{{ account.rol.description }}</td>
-            <td>{{ account.last_connection| date:'shortDate' }}</td>
-            <td>{{ account.last_report.activity}}</td>
+            <td>{{ account.first_name + " " +account.last_name}}</td>
+            <td>{{ account.credentials && account.credentials.length > 0 ? account.credentials[0].email : '' }}</td>
+            <td>{{ account.role}}</td>
+            <td>{{ account.last_login| date:'short'}}</td>
+            <td>
+              {{ account.reports.length > 0 ? account.reports[account.reports.length - 1].activity : '' }}
+            </td>
             <td class="dropdown">
               <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false"></button>
                 <ul class="dropdown-menu">
                   <li>
-                    <button routerLink="/home/admin/accounts/modify" class="dropdown-item" type="button">Modificar
-                    </button>
+                    <button [routerLink]="isAdmin ? '/home/admin/accounts/modify/' + account.idcuenta : '/home/Monitoreo/accounts/modify/' + account.idcuenta" class="dropdown-item" type="button">Modificar</button>
                   </li>
                   <li>
-                    <button class="dropdown-item" type="button" (click)="deleteAccount(i+1)">Eliminar</button>
+                    <button class="dropdown-item" type="button" (click)="deleteAccount(account.idcuenta)">Eliminar</button>
                   </li>
                 </ul>
               </div>

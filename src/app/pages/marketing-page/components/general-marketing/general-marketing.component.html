@@ -1,0 +1,42 @@
+<div class="container-content container">
+
+  <div class="row align-items-center mb-5">
+    <div class="col-auto mb-2">
+      <img ngSrc="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="413" width="412">
+    </div>
+    <div class="col-auto ps-0 mb-2">
+      <h1 class="font-weight-bold mb-2">Marketing General</h1>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-12 mb-3">
+      <div class="card">
+        <div class="card-body card-custom  text-center">
+          <h5 class="mb-3">Porcentaje de usuarios que visualizan los correos</h5>
+          <canvas  id="MyChart" style="max-width: 100%; max-height: 100%;">{{ doughnutChart }}</canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 mb-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="mb-3">Usuarios que visualizan la Landing Page</h5>
+          <canvas id="lineChart">{{ lineChart }}</canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 mb-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="mb-3">¿Cómo se enteran las personas de nuestro negocio?</h5>
+          <canvas id="barChart" >{{ barChart }}</canvas>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

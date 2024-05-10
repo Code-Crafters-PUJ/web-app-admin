@@ -54,7 +54,7 @@
                 </thead>
                 <tbody>
                   <ng-container
-                  *ngFor="let client of clientesAux.slice((actualpageClients - 1) * 5, actualpageClients * 5); let i = index">
+                  *ngFor="let client of clientesAux; let i = index">
                   <tr>
                     <td>{{client.nombre}}</td>
                     <td>{{client.total}}</td>
@@ -125,20 +125,20 @@
                   <th>Empresa</th>
                   <th>Correo</th>
                   <th>Plan</th>
-                  <th>Uso</th>
+                  <!--<th>Uso</th>-->
                 </tr>
               </thead>
               <tbody>
                 <ng-container
-                  *ngFor="let subscription of subscriptions.slice((actualpageSubscription - 1) * 5, actualpageSubscription * 5); let i = index">
+                  *ngFor="let client of clients">
                   <tr>
-                    <td>{{subscription.client.companyName}}</td>
-                    <td>{{subscription.client.email}}</td>
-                    <td>{{subscription.plan.type}}</td>
-                    <td>{{subscription.usage.hours}}:{{subscription.usage.minutes}}</td>
+                    <td>{{client.companyName}}</td>
+                    <td>{{client.email}}</td>
+                    <td>{{client.plan?.type || 'Sin Plan'}}</td>
+                    <!--<td>{{bill.usage.hours}}:{{bill.usage.minutes}}</td>-->
                   </tr>
                 </ng-container>
-                <tr style="border-bottom: 0vw" *ngIf="subscriptions.length > 5">
+                <tr style="border-bottom: 0vw" *ngIf="billings.length > 5">
                   <td></td>
                   <td>
                     <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw"

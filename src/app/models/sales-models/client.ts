@@ -1,12 +1,15 @@
-import { Subscription } from "./subscription";
+import { Billing } from "./billing";
+import { Plan } from "./plan";
 
 export interface Client {
     id: number;
     companyName: string;
     contactName: string;
     email: string;
-    phone: string;
-    NIT: string;
-    subscriptions: Subscription[];
+    telephone: string;
+    nit: string;
+    status: string;
+    billings: Billing[];
+    plan: Plan | null;
 }
 

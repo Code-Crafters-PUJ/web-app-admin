@@ -4,7 +4,7 @@ import { StorageService } from '../../../services/login-services/storage.service
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
-import { Account } from '../../../models/login-models/account';
+import { Account } from '../../../models/Accounts-Models/account';
 
 
 @Component({
@@ -54,17 +54,11 @@ export class LoginComponent {
           else {
             var role = JSON.parse(value).role;
             var jwt = JSON.parse(value).jwt;
+            var Permissions=JSON.parse(value).Permissions;
+            var id=JSON.parse(value).id;
             // Autenticación exitosa
             this.handleSuccessfulAuthentication(role);
-            this.storageService.saveAccount(new Account(
-              JSON.parse(value).name,
-              JSON.parse(value).lastName,
-              JSON.parse(value).documentNumber,
-              JSON.parse(value).role,
-              JSON.parse(value).lastConected,
-              JSON.parse(value).lastReport,
-              JSON.parse(value).jwt
-            ));
+            this.storageService.saveAccount(role,jwt,Permissions,id);
           }
         } else {
           // Autenticación fallida
@@ -80,11 +74,11 @@ export class LoginComponent {
       icon: 'success',
       confirmButtonText: 'OK'
     });
-    if (role === "ADMIN") {
+    if (role === "Admin") {
       this.router.navigate(['/home/admin']);
 
     } else {
-      this.router.navigate(['/home/sales']);
+      this.router.navigate(['/home/all']);
     }
   }
   private handleFailedAuthentication() {

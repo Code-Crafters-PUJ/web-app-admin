@@ -33,20 +33,16 @@
       </thead>
       <tbody>
         <ng-container
-          *ngFor="let subscription of subscriptions.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
+          *ngFor="let bill of billings.slice((Actualpage - 1) * 14, Actualpage * 14); let i = index">
           <tr>
-            <td routerLink="/home/sales/billing/company" (click)="saveCompanyId(subscription.client.id)" style="color: #5CAEFA; text-decoration: underline;cursor: pointer;">{{ subscription.client.companyName }}</td>
-            <td>{{ subscription.startDate| date:'shortDate' }}</td>
-            <td>{{ subscription.plan.type }}</td>
-            <td>
-              <span *ngIf="!subscription.status && subscription.endDate >= getCurrentDate()">Vencida</span>
-              <span *ngIf="!subscription.status && subscription.endDate < getCurrentDate()">Falta pago</span>
-              <span *ngIf="subscription.status">Activa</span>
-            </td>
-            <td>{{ subscription.payment.paymentMethod }}</td>
+            <td routerLink="/home/accounts/billing/company" (click)="saveCompanyId(bill.client.id)" style="color: #5CAEFA; text-decoration: underline;cursor: pointer;">{{ bill.client.companyName }}</td>
+            <td>{{ bill.initialDate| date:'shortDate' }}</td>
+            <td>{{ bill.plan.type }}</td>
+            <td>{{ bill.suscription_status }}</td>
+            <td>{{ bill.payment.method }}</td>
           </tr>
         </ng-container>
-        <tr style="border-bottom: 0vw" *ngIf="subscriptions.length > 14">
+        <tr style="border-bottom: 0vw" *ngIf="billings.length > 14">
           <td></td>
           <td>
             <img src="../../../../../assets/icons/flecha.png" style="cursor: pointer;width:1.5vw"

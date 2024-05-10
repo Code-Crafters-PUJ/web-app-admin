@@ -1,0 +1,158 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { PlanDTO } from '../../../DTO/plan.dto';
+import { environment } from '../../../../environments/environment';
+import { Service } from '../../../models/sales-models/service';
+import { Trials } from '../../../models/sales-models/trial';
+import { Coupon } from '../../../models/sales-models/coupon';
+import { StorageService } from '../../login-services/storage.service';
+import { ServiceDto } from '../../../DTO/service.dto';
+import { CouponDto } from '../../../DTO/coupon.dto';
+import { Plan } from '../../../models/sales-models/plan';
+import { TrialDto } from '../../../DTO/trial.dto';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SalesService {
+  private apiUrl = environment.baseURL;
+
+  constructor(private http: HttpClient, private storageService: StorageService) { }
+
+  getToken(): string {
+    const savedAccount = this.storageService.getSavedAccount();
+    var jwt = savedAccount?.jwt;
+    if (!jwt) {
+      throw new Error('JWT token is not defined.');
+    }
+    return jwt
+  }
+
+  getSalesData(): Observable<{ plans: Plan[] }> {
+    return this.http.get<{ plans: Plan[] }>(`${this.apiUrl}/clients/plans/all`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  createPlan(planData: PlanDTO): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/clients/plans/`, planData, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+  updatePlan(type: string, planData: Partial<PlanDTO>): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/clients/plans/${type}`, planData, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  deletePlan(type: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/clients/plans/${type}`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  getServices(): Observable<{ services: Service[] }> {
+    return this.http.get<{ services: Service[] }>(`${this.apiUrl}/clients/services/all`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  createService(service: ServiceDto): Observable<any> {
+    return this.http.post<Observable<any>>(`${this.apiUrl}/clients/services`, service, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+
+  updateService(name: string, state: string): Observable<any> {
+    return this.http.put<Observable<any>>(`${this.apiUrl}/clients/services/${name}`, {
+      state
+    }, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+
+  deleteService(name: string): Observable<any> {
+    return this.http.delete<Observable<any>>(`${this.apiUrl}/clients/services/${name}`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+
+  getTrials(): Observable<{ trials: Trials[] }> {
+    return this.http.get<{ trials: Trials[] }>(`${this.apiUrl}/clients/trials/all`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  createTrials(trial: TrialDto): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/clients/trials/`, trial, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  updateTrials(trialId: number, trial: Partial<TrialDto>): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/clients/trials/${trialId}`, trial, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  deleteTrials(trialId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/clients/trials/${trialId}`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  getCoupons(): Observable<{ coupons: Coupon[] }> {
+    return this.http.get<{ coupons: Coupon[] }>(`${this.apiUrl}/clients/coupons/all`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    });
+  }
+
+  createCoupon(coupon: CouponDto): Observable<any> {
+    return this.http.post<Observable<any>>(`${this.apiUrl}/clients/coupons`, coupon, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+  updateCoupon(code: string, coupon: Partial<CouponDto>): Observable<any> {
+    return this.http.put<Observable<any>>(`${this.apiUrl}/clients/coupons/${code}`, coupon, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+  deleteCoupon(code: string): Observable<any> {
+    return this.http.delete<Observable<any>>(`${this.apiUrl}/clients/coupons/${code}`, {
+      headers: {
+        Authorization: this.getToken()
+      }
+    })
+  }
+}

@@ -1,0 +1,22 @@
+<div>
+<div (ngSubmit)="guardarCambios()">
+    <div class="container card">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-3">Cambiar Contraseña</h2>
+        <h6 class="card-subtitle mb-2 text-muted" style="background-color: #D9D9D9; padding: 10px;">Ingresa tu nueva contraseña</h6>
+        <form>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="contraseña" placeholder="Ingrese nueva contraseña"
+                [(ngModel)]="passForm" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="container-btn">
+            <button [routerLink]="isAdmin ? '/home/admin/accounts' : '/home/Monitoreo/accounts'" type="reset" class="btn btn-primary btn-cancel">Cancelar</button>
+            <button type="button" (click)="guardarCambios()" class="btn btn-primary btn-submit">Actualizar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

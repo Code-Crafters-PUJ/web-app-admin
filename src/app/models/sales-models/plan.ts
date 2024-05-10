@@ -1,9 +1,19 @@
-import { Subscription } from "./subscription";
-
 export interface Plan {
     id: number;
     type: string;
-    price: number;
     description: string;
-    subscriptions: Subscription[];
+    mensualPrice: number;
+    semestralPrice: number;
+    anualPrice: number;
+    users: number;
+    state: string;
+    createdAt: string;
+    updatedAt: string;
+    createPlan: boolean;
+    planDescription: string;
+    createService: boolean;
+    serviceDescription: string;
+    numAccounts: number;
+    numServices: number;
 }
+  

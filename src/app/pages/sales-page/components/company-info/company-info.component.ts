@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ClientService } from '../../../../services/sales-services/client/client.service';
 import { CommonModule } from '@angular/common';
@@ -15,8 +15,8 @@ import { Client } from '../../../../models/sales-models/client';
 export class CompanyInfoComponent {
   companyId: number = 0
   client: Client | null = null;
-  plan:string=''
-  total:number=0
+  plan: string=''
+  total: number = 0
   constructor(
     private clientService: ClientService,
   ) { }
@@ -25,22 +25,25 @@ export class CompanyInfoComponent {
     const companyIdString = sessionStorage.getItem('companyId');
     if (companyIdString !== null) {
       this.companyId = parseInt(companyIdString, 10);
-      this.clientService.getClient(this.companyId).subscribe(
-        (client: Client) => {
-          this.client = client;
+      this.clientService.getClientById(this.companyId).subscribe(
+        (data) => {
+          this.client = data.client;
+          this.client.billings.forEach(bill => {
+            this.total += bill.amount;
+          });
         },
         (error) => {
           console.error('Error al obtener los datos del cliente:', error);
         }
       );
-      if(this.client!=null)
+      if (this.client!=null)
       {
-        if(this.client.subscriptions.length!=0)
+        if(this.client.billings.length!=0)
         {
-          this.plan=this.client.subscriptions[this.client.subscriptions.length-1].plan.type
+          this.plan=this.client.billings[this.client.billings.length-1].plan.type
         }
-        for (let i = 0; i < this.client.subscriptions.length; i++) {
-          this.total+=this.client.subscriptions[i].plan.price; 
+        for (let i = 0; i < this.client.billings.length; i++) {
+          this.total += this.client.billings[i].amount; 
         }
       }
     }

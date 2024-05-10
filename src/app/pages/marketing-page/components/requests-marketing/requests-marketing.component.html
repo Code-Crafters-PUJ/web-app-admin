@@ -1,0 +1,75 @@
+<div class="container container-content">
+  <div class="row align-items-center mb-5">
+    <div class="col-auto mb-2">
+      <img src="../../../../../assets/icons/User.png" alt="Icono" class="user-icon" height="45" width="45">
+    </div>
+    <div class="col-auto ps-0 mb-2">
+      <h1 class="font-weight-bold mb-2">Negocio S.A.</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <!-- Form Section -->
+          <form #f="ngForm" (ngSubmit)="sendMarketingData(f)" novalidate>
+            <h3 class="font-weight-bold mb-3">Respuestas Dudas</h3>
+            <div class="form-group mb-3">
+              <label for="subject">Asunto</label>
+              <input type="text" id="subject" class="form-control" placeholder="Asunto" name="subject" required ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <label for="recipient">Destinatario</label>
+              <input type="text" id="recipient" class="form-control" placeholder="Destinatario" name="recipient" required ngModel>
+            </div>
+            <div class="form-group mb-3">
+              <label for="description">Descripción</label>
+              <textarea id="description" class="form-control" placeholder="Descripción" name="description" rows="3" required ngModel></textarea>
+            </div>
+            <button type="submit" class="btn btn-custom">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 p-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="mb-3 text-center">Historial de Dudas</h5>
+          <!-- Iterar sobre userHistory para mostrar el historial de dudas -->
+          <div *ngFor="let historyItem of userHistory" class="card mb-3">
+            <div class="card-body">
+              <!-- Resto del contenido de la tarjeta -->
+              <div class="row mb-3">
+                <div class="col-6">
+                  <span class="fw-bold">{{ historyItem.sender.name }} ({{ historyItem.company }})</span>
+                </div>
+                <div class="col-6 text-end">
+                  <input type="checkbox">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-6">
+                  <span class="fw-bold">{{ historyItem.sender.email }}</span>
+                </div>
+                <div class="col-6 text-end">
+                  <span>{{ historyItem.sender.date }}</span>
+                </div>
+              </div>
+              <div class="row bg-light py-3 mb-3">
+                <div class="col">
+                  <span>{{ historyItem.subject }}</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col" style="text-align: justify;">
+                  <span>{{ historyItem.description }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fin de iteración -->
+        </div>
+      </div>
+    </div>

@@ -3,8 +3,8 @@ import { FormsModule } from "@angular/forms";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { ClientService } from '../../../../services/sales-services/client/client.service';
-import { SubscriptionService } from '../../../../services/sales-services/subscription/subscription.service';
-import { Subscription } from '../../../../models/sales-models/subscription';
+import { BillingService } from '../../../../services/sales-services/billing/billing.service';
+import { Billing } from '../../../../models/sales-models/billing';
 import { Client } from '../../../../models/sales-models/client';
 import { SalesAux } from './SalesAux'
 
@@ -21,9 +21,9 @@ import { SalesAux } from './SalesAux'
   styleUrl: './general-sales.component.css'
 })
 export class GeneralSalesComponent {
-  subscriptions: Subscription[] = []
-  subscriptionsFiltered: Subscription[] = []
-  subscriptionsData: Subscription[] = []
+  billings: Billing[] = []
+  billingsFiltered: Billing[] = []
+  billingsData: Billing[] = []
   clients: Client[] = []
   clientesAux: SalesAux[] = []
   filtroAplicado: boolean = false;
@@ -39,33 +39,32 @@ export class GeneralSalesComponent {
   totalGolden: number = 0
   totalSilver: number = 0
 
-  constructor(private subscriptionService: SubscriptionService,
+  constructor(private billingService: BillingService,
     private clientService: ClientService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,) {
   }
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.actualpageSubscription = +params['pagina'] || 1;
-      this.actualpageClients = +params['paginaClientes'] || 1;
+      this.actualpageSubscription = + params['pagina'] || 1;
+      this.actualpageClients = + params['paginaClientes'] || 1;
     });
 
+    this.getBillings();
     if (this.filtroAplicado) {
-      this.getSubscriptions();
-      this.subscriptionsData = this.subscriptions;
-      this.subscriptions = this.subscriptionsFiltered;
+      this.billingsData = this.billings;
+      this.billings = this.billingsFiltered;
     } else {
-      this.getSubscriptions();
-      this.subscriptionsData = this.subscriptions;
+      this.billingsData = this.billings;
     }
     this.calculateTotals();
     this.getClients();
 
     for (let i = 0; i < this.clients.length; i++) {
-      const nombre:String=this.clients[i].companyName
-      let total:number=0
-      for (let j = 0; j < this.clients[i].subscriptions.length; j++) {
-        total+=this.clients[i].subscriptions[j].plan.price
+      const nombre: String = this.clients[i].companyName
+      let total: number = 0
+      for (let j = 0; j < this.clients[i].billings.length; j++) {
+        total+=this.clients[i].billings[j].amount
       }
       const clienteAux: SalesAux = {
         nombre: nombre,
@@ -76,25 +75,31 @@ export class GeneralSalesComponent {
   }
 
   calculateTotals(): void {
-    for (let i = 0; i < this.subscriptions.length; i++) {
-      if (this.subscriptions[i].plan.type == "Golden") {
+    this.totalFree = 0;
+    this.totalGolden = 0;
+    this.totalSilver = 0;
+    for (let i = 0; i < this.billings.length; i++) {
+      if (this.billings[i].plan.type === "Gold") {
         this.totalGolden++;
-      }
-      if (this.subscriptions[i].plan.type == "Silver") {
+      } else if (this.billings[i].plan.type === "Silver") {
         this.totalSilver++;
-      }
-      if (this.subscriptions[i].plan.type == "Free") {
+      } else if (this.billings[i].plan.type === "Free") {
         this.totalFree++;
       }
-      if (this.isSameDateAsToday(this.subscriptions[i].startDate)) {
-        this.totalToday++;
-      }
-      if (this.isSameMonthAndYearAsToday(this.subscriptions[i].startDate)) {
-        this.totalMonth++;
-      }
-      if (this.isSameYearAsToday(this.subscriptions[i].startDate)) {
-        this.totalYear++;
-      }
+      // if (this.isSameDateAsToday(this.billings[i].initial_date)) {
+      //   this.totalToday++;
+      // }
+      // if (this.isSameMonthAndYearAsToday(this.billings[i].final_date)) {
+      //   this.totalMonth++;
+      // }
+      // if (this.isSameYearAsToday(this.billings[i].initial_date)) {
+      //   this.totalYear++;
+      // }
+      this.clientService.getStats().subscribe((data) => {
+        this.totalToday = data["today"];
+        this.totalMonth = data["lastMonth"];
+        this.totalYear = data["lastYear"];
+      })
     }
   }
   isSameDateAsToday(date: Date): boolean {
@@ -117,11 +122,30 @@ export class GeneralSalesComponent {
     return date.getFullYear() === today.getFullYear();
   }
 
-  private getSubscriptions() {
-    this.subscriptionService.getSubscriptions().subscribe(
+  private updateClientSales() {
+    this.billings.forEach(element => {
+      const index = this.clientesAux.map(c => c.nombre).indexOf(element.client.companyName);
+
+      if (index === -1) {
+        this.clientesAux.push({
+          nombre: element.client.companyName,
+          total: 1
+        })
+        return
+      }
+
+      this.clientesAux[index].total += 1
+      
+    });
+  }
+
+ private getBillings() {
+    this.billingService.getBillings().subscribe(
       data => {
-        this.subscriptions = data;
-        this.totalpagesSubscription = Math.ceil(this.subscriptions.length / 5);
+        this.billings = data.sales;
+        this.totalpagesSubscription = Math.ceil(this.billings.length / 5);
+        this.calculateTotals()
+        this.updateClientSales()
       },
       error => {
         console.error('Error al obtener subscripciones:', error);
@@ -131,8 +155,8 @@ export class GeneralSalesComponent {
   private getClients() {
     this.clientService.getClients().subscribe(
       data => {
-        this.clients = data;
-        this.totalpagesClients = Math.ceil(this.subscriptions.length / 5);
+        this.clients = data.clients;
+        this.totalpagesClients = Math.ceil(this.billings.length / 5);
       },
       error => {
         console.error('Error al obtener subscripciones:', error);
@@ -181,15 +205,15 @@ export class GeneralSalesComponent {
   }
   searchByCompany() {
     if (this.searchText.trim().length != 0) {
-      this.getSubscriptions();
-      this.subscriptionsFiltered = this.subscriptions.filter(subscription => subscription.client.companyName.toLowerCase().includes(this.searchText.toLowerCase()));
+      this.getBillings();
+      this.billingsFiltered = this.billings.filter(subscription => subscription.client.companyName.toLowerCase().includes(this.searchText.toLowerCase()));
       this.filtroAplicado = true;
-      this.subscriptions = this.subscriptionsFiltered;
-      this.router.navigateByUrl('/home/sales/billing/?pagina=' + 1)
+      this.billings = this.billingsFiltered;
+      this.router.navigateByUrl('/home/accounts/billing/?pagina=' + 1)
     }
     else {
       this.filtroAplicado = false;
-      this.getSubscriptions();
+      this.getBillings();
     }
   }
 }
