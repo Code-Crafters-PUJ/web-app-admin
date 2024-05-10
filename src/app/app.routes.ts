@@ -37,7 +37,12 @@ export const routes: Routes = [
       { path: 'generalMarketing', component: MarketingPageComponent },
       { path: 'requestsMarketing', component: MarketingPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
-    ]
+    ],
+
+    canActivate: [isAuthenticatedGuard, hasRoleGuard],
+    data: {
+      role: 'ADMIN',
+    }
   },
   {
     path: 'home/accounts', canActivate: [isAuthenticatedGuard, hasRoleGuard],
@@ -74,29 +79,10 @@ export const routes: Routes = [
       { path: 'general', component: MarketingPageComponent },
       { path: 'requestsMarketing', component: MarketingPageComponent },
       { path: '', redirectTo: 'general', pathMatch: 'full' }
-    ]
-  },
-  {
-    path:'home', canActivate:[isAuthenticatedGuard],
-    children: [
-    {
-      path:'all',component:MenuComponent
-    },
-    {
-      path:'CambioContrasenia',component:cambiarContraseniaComponent
-    }
-  ]
-  },
-  {
-    path: 'home/Monitoreo', canActivate: [isAuthenticatedGuard, hasRoleGuard],
+    ], canActivate: [isAuthenticatedGuard, hasRoleGuard],
     data: {
-      role: '"Monitoreo"',
-    },
-    children: [
-      { path: 'accounts', component: GeneralPageComponent },
-      { path: 'accounts/', component: GeneralPageComponent },
-      { path: 'accounts/new', component: GeneralPageComponent },
-      { path: 'accounts/modify/:accountId', component: GeneralPageComponent },
-    ]
-  }
+      role: 'VENTAS',
+    }
+  },
+  
 ];
