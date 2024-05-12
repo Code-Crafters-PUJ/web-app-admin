@@ -130,6 +130,7 @@ export class SalesBenefitsComponent implements OnInit {
       }).subscribe((data) => {
         console.log(data);
         this.getTrials();
+        this.removeCurrentTrial();
       })
     }
   }
@@ -148,6 +149,7 @@ export class SalesBenefitsComponent implements OnInit {
     this.salesService.deleteTrials(trial.id).subscribe((data) => {
       console.log(data);
       this.getTrials();
+      this.removeCurrentTrial();
     })
   }
 
@@ -215,6 +217,7 @@ export class SalesBenefitsComponent implements OnInit {
       }).subscribe((data) => {
         console.log(data);
         this.getCoupons();
+        this.removeCurrentCoupon();
       })
     }
   }
@@ -231,6 +234,7 @@ export class SalesBenefitsComponent implements OnInit {
     this.salesService.deleteCoupon(this.currentCoupon.code).subscribe((data) => {
       console.log(data);
       this.getCoupons();
+      this.removeCurrentCoupon();
     })
   }
 }

@@ -167,6 +167,7 @@ export class SalesSettingsComponent implements OnInit {
       }).subscribe((data) => {
         console.log(data);
         this.getPlans()
+        this.removeCurrentPlan()
       })
     }
   }
@@ -184,6 +185,7 @@ export class SalesSettingsComponent implements OnInit {
     this.salesService.deletePlan(type).subscribe((data) => {
       console.log(data);
       this.getPlans()
+      this.removeCurrentPlan()
     })
   }
 
@@ -231,6 +233,7 @@ export class SalesSettingsComponent implements OnInit {
       }).subscribe((data) => {
         console.log(data);
         this.getServices()
+        this.removeCurrentService()
       })
     }
   }
@@ -248,6 +251,7 @@ export class SalesSettingsComponent implements OnInit {
     this.salesService.deleteService(name).subscribe((data) => {
       console.log(data);
       this.getServices()
+      this.removeCurrentService()
     })
   }
 }
