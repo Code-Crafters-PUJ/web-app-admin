@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CredentialService } from '../../services/general-services/credential/credential.service';
 import Swal from 'sweetalert2';
 import { StorageService } from '../../services/login-services/storage.service';
+import { SidebarComponent } from '../../global/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-cambiar-contrasenia',
@@ -14,6 +15,7 @@ import { StorageService } from '../../services/login-services/storage.service';
     RouterLink,
     CommonModule,
     FormsModule,
+    SidebarComponent
   ],
   templateUrl: './cambiar-contrasenia.component.html',
   styleUrls: ['./cambiar-contrasenia.component.css']

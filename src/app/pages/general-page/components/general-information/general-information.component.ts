@@ -1,15 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {Credential} from '../../../../models/Accounts-Models/credential';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CredentialService} from '../../../../services/general-services/credential/credential.service';
-import {NgOptimizedImage} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Credential } from '../../../../models/Accounts-Models/credential';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CredentialService } from '../../../../services/general-services/credential/credential.service';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import Chart from 'chart.js/auto';
+import { ClientService } from '../../../../services/sales-services/client/client.service';
+import { Client } from '../../../../models/sales-models/client';
+import { Billing } from '../../../../models/sales-models/billing';
+import { PqrService } from '../../../../services/PQR-services/pqr.service';
 
 
 @Component({
   selector: 'app-general-information',
   standalone: true,
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, CommonModule],
   templateUrl: './general-information.component.html',
   styleUrl: './general-information.component.css'
 })
@@ -18,11 +22,21 @@ export class GeneralInformationComponent implements OnInit {
   selectedEditAccount: Credential | null = null;
   public doughnutChart: any;
   public lineChart: any;
+  clients: Client[] = []
+  active: number = 0
+  notActive: number = 0
+  totalMoneyAmount: number = 0
+  totalUserAmount: number = 0
+  percentage: number = 0
+  newUsers: number = 0
+  problems:number=0
 
 
 
   constructor(
     private credentialService: CredentialService,
+    private clientService: ClientService,
+    private pqrService:PqrService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -30,11 +44,26 @@ export class GeneralInformationComponent implements OnInit {
 
   ngOnInit() {
     this.getAccounts();
-    this.CreateDoughnutChart();
+    this.getProblems();
+    this.GetClientsinfo();
     this.createLineChart();
 
   };
 
+  private getProblems()
+  {
+    this.pqrService.getPQRS().subscribe(
+      data=>
+        {
+          this.problems=data.pqrs.length
+
+        },
+        error=>
+          {
+            console.error('Error al obtener PQRS:', error);
+          }
+    )
+  }
 
   private getAccounts() {
     this.credentialService.getCredentials().subscribe(
@@ -44,6 +73,40 @@ export class GeneralInformationComponent implements OnInit {
       error => {
         console.error('Error al obtener usuarios:', error);
       }
+    );
+  }
+  private GetClientsinfo() {
+    this.clientService.getClients().subscribe(
+      data => {
+        this.clients = data.clients
+        this.totalUserAmount = this.clients.length
+        this.clients.forEach(client => {
+          if (client.active) {
+            this.active++
+          }
+          else {
+            this.notActive++
+          }
+          client.billings.forEach(billing => {
+            this.totalMoneyAmount += billing.amount
+            const fecha = new Date(billing.initialDate);
+            if (billing.initialDate && this.fechaEnEsteMes(fecha)) {
+              this.newUsers++
+            }
+          });
+        });
+        this.percentage = this.active / this.totalUserAmount
+        this.CreateDoughnutChart();
+      }, error => {
+        console.error('Error al obtener usuarios:', error);
+      }
+    );
+  }
+  fechaEnEsteMes(fecha: Date): boolean {
+    const fechaActual = new Date();
+    return (
+      fecha.getFullYear() === fechaActual.getFullYear() &&
+      fecha.getMonth() === fechaActual.getMonth()
     );
   }
 
@@ -57,7 +120,7 @@ export class GeneralInformationComponent implements OnInit {
         ],
         datasets: [{
           label: 'Usuarios Activos',
-          data: [35, 90],
+          data: [this.notActive, this.active],
           backgroundColor: [
             'rgb(245,105,29)',
             'rgb(0, 74, 173)'
