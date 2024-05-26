@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgOptimizedImage } from "@angular/common";
 import { NgFor } from '@angular/common';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SalesService } from '../../../../services/sales-services/sales/sales.service';
-import { PlanDTO } from '../../../../DTO/plan.dto';
-import { Observable } from 'rxjs/internal/Observable';
 import { Service } from '../../../../models/sales-models/service';
 import Swal from 'sweetalert2';
 import { Plan } from '../../../../models/sales-models/plan';
@@ -24,6 +22,7 @@ import { Plan } from '../../../../models/sales-models/plan';
 export class SalesSettingsComponent implements OnInit {
   public plansData: Plan[] = [];
   public servicesData: Service[] = [];
+  public selectedPlanServices: string[] = [];
 
   accountLimit: boolean = false;
 
@@ -34,8 +33,6 @@ export class SalesSettingsComponent implements OnInit {
     anualPrice: [0, Validators.required],
     hasAccountLimit: [false, Validators.required],
     accountLimit: [0, Validators.required],
-    hasServiceLimit: [false, Validators.required],
-    serviceLimit: [0, Validators.required],
     state: ['', Validators.required],
   });
   serviceForm = this.formBuilder.group({
@@ -81,19 +78,8 @@ export class SalesSettingsComponent implements OnInit {
           this.planForm.patchValue({ accountLimit: null });
         }
       })
-    this.planForm.get('serviceLimit')?.disable();
-    this.planForm.get('hasServiceLimit')?.valueChanges
-      .subscribe(value => {
-        if (value) {
-          this.planForm.get('serviceLimit')?.enable();
-        } else {
-          this.planForm.get('serviceLimit')?.disable();
-          this.planForm.patchValue({ serviceLimit: null });
-        }
-      })
     this.planForm.patchValue({
       accountLimit: null,
-      serviceLimit: null,
     })
   }
 
@@ -105,10 +91,10 @@ export class SalesSettingsComponent implements OnInit {
       anualPrice: plan.anualPrice,
       hasAccountLimit: plan.numAccounts !== -1,
       accountLimit: plan.numAccounts !== -1 ? plan.numAccounts : null,
-      hasServiceLimit: plan.numServices !== -1,
-      serviceLimit: plan.numServices !== -1 ? plan.numServices : null,
       state: plan.state
     })
+    console.log(plan.services)
+    this.selectPlanServices(plan.services)
   }
 
   removeCurrentPlan() {
@@ -119,10 +105,9 @@ export class SalesSettingsComponent implements OnInit {
       anualPrice: 0,
       hasAccountLimit: false,
       accountLimit: null,
-      hasServiceLimit: false,
-      serviceLimit: null,
       state: '',
     })
+    this.clearSelectedPlanServices()
   }
 
   submitPlan(id: string) {
@@ -133,7 +118,36 @@ export class SalesSettingsComponent implements OnInit {
     }
   }
 
+  selectPlanServices(services: {service:Service}[]) {
+    this.clearSelectedPlanServices()
+    services.forEach(data => {
+      console.log(data.service.name)
+      const input: any = document.getElementById(data.service.name + 'input')
+      input.checked = true
+    })
+  }
+
+  clearSelectedPlanServices() {
+    this.servicesData.forEach(service => {
+      const input: any = document.getElementById(service.name + 'input')
+      input.checked = false
+    })
+  }
+
+  getSelectedPlanServices() {
+    this.selectedPlanServices = [];
+    this.servicesData.forEach(service => {
+      const input: any = document.getElementById(service.name + 'input')
+      if (input?.checked) {
+        this.selectedPlanServices.push(document.getElementById(service.name)?.textContent as string)
+      }
+    })
+  }
+
   createPlan() {
+    this.getSelectedPlanServices()
+    console.log(this.selectedPlanServices);
+    
     const type = this.planForm.value.name!
     if (this.plansData.find((plan) => plan.type === type)) {
       this.salesService.updatePlan(type, {
@@ -141,8 +155,8 @@ export class SalesSettingsComponent implements OnInit {
         mensualPrice: this.planForm.value.mensualPrice!,
         semestralPrice: this.planForm.value.semestralPrice!,
         state: this.planForm.value.state!,
-        numAccounts: this.planForm.value.hasAccountLimit!? this.planForm.value.accountLimit! : -1,
-        numServices: this.planForm.value.hasServiceLimit!? this.planForm.value.serviceLimit! : -1,
+        numAccounts: this.planForm.value.hasAccountLimit! ? this.planForm.value.accountLimit! : -1,
+        services: this.selectedPlanServices
       }).subscribe((data) => {
         console.log(data);
         this.getPlans()
@@ -162,8 +176,8 @@ export class SalesSettingsComponent implements OnInit {
         mensualPrice: this.planForm.value.mensualPrice!,
         semestralPrice: this.planForm.value.semestralPrice!,
         state: this.planForm.value.state!,
-        numAccounts: this.planForm.value.hasAccountLimit!? this.planForm.value.accountLimit! : -1,
-        numServices: this.planForm.value.hasServiceLimit!? this.planForm.value.serviceLimit! : -1,
+        numAccounts: this.planForm.value.hasAccountLimit! ? this.planForm.value.accountLimit! : -1,
+        services: this.selectedPlanServices
       }).subscribe((data) => {
         console.log(data);
         this.getPlans()

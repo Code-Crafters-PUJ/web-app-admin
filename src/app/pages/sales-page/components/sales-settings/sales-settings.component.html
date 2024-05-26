@@ -85,12 +85,12 @@
           <!-- Input 6 -->
           <div class="mb-3">
             <label for="creacionServiciosPlan" class="form-label">Creacion Servicios</label>
-            <div class="input-group">
+            <div class="input-group" *ngFor="let service of servicesData">
                 <div class="input-group-text">
-                    <span>Límite&emsp;</span>
-                    <input class="form-check-input mt-0" type="checkbox" id="creacionServiciosCheckbox" formControlName="hasServiceLimit">
+                    <span>&emsp;</span>
+                    <input class="form-check-input mt-0" type="checkbox" [id]="service.name + 'input'">
                 </div>
-                <input type="number" class="form-control" id="creacionServiciosPlan" placeholder="Límite de servicios permitidos" formControlName="serviceLimit" >
+              <span type="text" class="form-control" [id]="service.name">{{service.name}}</span>
             </div>
           </div>
   

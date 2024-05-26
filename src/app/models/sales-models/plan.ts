@@ -1,3 +1,5 @@
+import { Service } from "./service";
+
 export interface Plan {
     id: number;
     type: string;
@@ -15,5 +17,6 @@ export interface Plan {
     serviceDescription: string;
     numAccounts: number;
     numServices: number;
+    services: {service: Service}[]
 }
   

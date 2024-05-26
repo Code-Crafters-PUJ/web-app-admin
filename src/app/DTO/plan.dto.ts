@@ -5,5 +5,5 @@ export interface PlanDTO {
   anualPrice: number;
   state: string;
   numAccounts: number;
-  numServices: number;
+  services: string[];
 }
