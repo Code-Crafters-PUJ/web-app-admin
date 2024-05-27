@@ -31,7 +31,6 @@ export class SalesBenefitsComponent implements OnInit {
   public plans: Plan[] = [];
 
   trialForm = this.formBuilder.group({
-    name: ['', Validators.required],
     plan: ['', Validators.required],
     duration: [0, Validators.required],
     state: ['', Validators.required],
@@ -77,7 +76,6 @@ export class SalesBenefitsComponent implements OnInit {
 
   setCurrentTrial(trial: Trials) {
     this.trialForm.setValue({
-      name: trial.client.companyName,
       plan: trial.planType,
       duration: trial.duration,
       state: trial.state
@@ -86,7 +84,6 @@ export class SalesBenefitsComponent implements OnInit {
 
   removeCurrentTrial() {
     this.trialForm.setValue({
-      name: '',
       plan: '',
       duration: 0,
       state: ''
@@ -102,9 +99,9 @@ export class SalesBenefitsComponent implements OnInit {
   }
 
   createTrial() {
-    const client = this.trialForm.value.name!
-    if (this.trials.find((trial) => trial.client.companyName === client)) {
-      const trial = this.trials.find((trial) => trial.client.companyName === client)!
+    const plan = this.trialForm.value.plan!
+    if (this.trials.find((trial) => trial.planType === plan)) {
+      const trial = this.trials.find((trial) => trial.planType === plan)!
       this.salesService.updateTrials(trial.id, {
         plan: this.trialForm.value.plan!,
         duration: this.trialForm.value.duration!,
@@ -123,7 +120,6 @@ export class SalesBenefitsComponent implements OnInit {
         return
       }
       this.salesService.createTrials({
-        companyName: this.trialForm.value.name!,
         plan: this.trialForm.value.plan!,
         duration: this.trialForm.value.duration!,
         state: this.trialForm.value.state!
@@ -136,8 +132,8 @@ export class SalesBenefitsComponent implements OnInit {
   }
 
   removeTrial() {
-    const client = this.trialForm.value.name!
-    if (!this.trials.find((trial) => trial.client.companyName === client)) {
+    const plan = this.trialForm.value.plan!
+    if (!this.trials.find((trial) => trial.planType === plan)) {
       Swal.fire({
         title: "Trial",
         text: "No existe un trial con ese nombre de usuario asociado",
@@ -145,7 +141,7 @@ export class SalesBenefitsComponent implements OnInit {
       })
       return
     }
-    const trial = this.trials.find((trial) => trial.client.companyName === client)!
+    const trial = this.trials.find((trial) => trial.planType === plan)!
     this.salesService.deleteTrials(trial.id).subscribe((data) => {
       console.log(data);
       this.getTrials();
