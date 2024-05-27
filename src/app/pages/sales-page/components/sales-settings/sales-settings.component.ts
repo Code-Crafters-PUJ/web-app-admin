@@ -118,7 +118,7 @@ export class SalesSettingsComponent implements OnInit {
     }
   }
 
-  selectPlanServices(services: {service:Service}[]) {
+  selectPlanServices(services: {service: Service}[]) {
     this.clearSelectedPlanServices()
     services.forEach(data => {
       console.log(data.service.name)
@@ -146,7 +146,6 @@ export class SalesSettingsComponent implements OnInit {
 
   createPlan() {
     this.getSelectedPlanServices()
-    console.log(this.selectedPlanServices);
     
     const type = this.planForm.value.name!
     if (this.plansData.find((plan) => plan.type === type)) {
